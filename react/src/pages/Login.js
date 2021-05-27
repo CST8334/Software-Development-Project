@@ -1,53 +1,37 @@
-import React, { Component } from 'react'
-import Logo from '../img/logo.png';
+import React from 'react'
 import styled from 'styled-components';
+import Logo from '../img/logo.png';
 
 import { EyeFill } from '@styled-icons/bootstrap/EyeFill';
 
-class Login extends Component {
-
-    state = {
-        isPasswordShown: false
-    };
-
-    togglePasswordVisiblity = () => {
-        const { isPasswordShown } = this.state;
-        this.setState({ isPasswordShown: !isPasswordShown });
-    }
-
-    render = () => {
-        const { isPasswordShown } = this.state;
-        return (
-            <Container>
-                <div className="login">
-                    <Top>
-                        <img src={Logo} alt="" />
-                        <h3>Need an AetherWind Account? <a href="#">Create an account</a></h3>
-                    </Top>
-                    <Form action="">
-                        <label htmlFor="email">Username</label>
-                        <input type="text" id="email" />
-                        <label htmlFor="pass">Password</label>
-                        <input type={(isPasswordShown) ? "text" : "password"} />
-                        <StyledEyeFill onClick={this.togglePasswordVisiblity} />
-                        <label htmlFor="radio">Remember Me
-                        <input id="remember" type="checkbox" />
-                        </label>
-                        <button>Log In</button>
-                    </Form>
-                </div>
-            </Container >
-        )
-    }
+const Login = () => {
+    return (
+        <Container>
+            <Top>
+                <img src={Logo} alt="" />
+                <h3>Need an Aetherwind account? <span>Create an account</span></h3>
+            </Top>
+            <Form>
+                <label htmlFor="user">Username</label>
+                <input type="text" id="user" />
+                <label htmlFor="user">Password</label>
+                <input type="password" id="pass" />
+                {/* <StyledEyeFill /> */}
+                <input type="radio" />
+                <label htmlFor="remember">Remember Me</label>
+                <button>Login</button>
+            </Form>
+        </Container>
+    )
 }
 
-const StyledEyeFill = styled(EyeFill)`
-    position: absolute;
-    right: 50px;
-    top: 55%;
-    width: 20px;
-    cursor: pointer;
-`
+// const StyledEyeFill = styled(EyeFill)`
+//     position: absolute;
+//     right: 50px;
+//     top: 55%;
+//     width: 20px;
+//     cursor: pointer;
+// `
 
 const Container = styled.div`
     position: relative;
@@ -87,14 +71,18 @@ input{
   box-sizing: border-box;
 }
 
+input[type=radio]{
+    width: 20px;
+}
+
 label{
     margin-left: 20px;
 }
 
 button{
     position: relative;
-    left: 7vw;
-    top: 5vh;
+    left: -1vw;
+    top: 6vh;
     width: 50%;
     height: 50px;
     border: none;
@@ -108,7 +96,10 @@ button{
         background-color: #1988bb;
     }
 }
-    
+
 `
 
-export default Login
+
+
+
+export default Login;
