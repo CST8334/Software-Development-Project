@@ -16,7 +16,7 @@ function log(entry) {
     console.log(`${new Date().toLocaleString()} - aetherwind server - ${str}`);
 }
 
-// load the *secret* credentials file we use to authenticate admin users of the web app, as well as mongodb server information
+// load the *secret* credentials file we use to authenticate admin users of the web server, as well as mongodb server information
 const fs = require("fs");
 let creds;
 {
@@ -31,17 +31,44 @@ let creds;
     }
 }
 
+// setup the server itself
 const express = require("express");
 const expressBasicAuth = require("express-basic-auth");
-const path = require("path");
-const app = express();
-const PORT = process.env.PORT || 5555;
+const server = express();
 
-app.use(express.static(path.join(__dirname, "/react/build"))).listen(PORT, () => {
+// base authentication scheme, used for what little hardcoded authentication exists
+const authentication = (expressBasicAuth({
+    authorizer: (username, password) => {
+        return expressBasicAuth.safeCompare(username, creds.reactAppAdminUsername)
+            && expressBasicAuth.safeCompare(password, creds.reactAppAdminPassword);
+    },
+    unauthorizedResponse: (request) => {
+        return "HEY STOP IT!!!";
+    },
+    users: {
+        [creds.reactAppAdminUsername]: creds.reactAppAdminPassword
+    },
+}));
+
+const path = require("path");
+
+const PORT = process.env.PORT || 5555;
+server.use(express.static(path.join(__dirname, "/react/build"))).listen(PORT, () => {
     log(`Listening on port: ${PORT}`);
 });
 
-app.get("/", (request, response) => {
+server.get("/authenticate", authentication, (request, response) => {
+    if (request.auth.user === creds.reactserverAdminUsername) {
+        response.send("cool!");
+
+    } else {
+        // they aren't the admin, so we need to ask mongodb if they are a valid user or not.
+        // @TODO
+        response.send("nope");
+    }
+});
+
+server.get("/", (request, response) => {
     response.sendFile(path.join(__dirname, "/react/build/index.html"));
 });
 
