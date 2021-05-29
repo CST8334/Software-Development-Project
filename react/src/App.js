@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from './pages/Login';
+import LoginFormComponent from './pages/LoginFormComponent';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -9,7 +9,10 @@ function App() {
     <div className="App">
       <Switch>
         <Route path="/" exact>
-          <Login />
+          <LoginFormComponent />
+        </Route>
+        <Route path="/login" exact>
+          <LoginFormComponent />
         </Route>
         <Route path="/home" exact>
           <Home />
