@@ -23,8 +23,15 @@ let creds;
     const credentialsPath = "./credentials.json";
 
     try {
-        creds = fs.readFileSync(credentialsPath);
+        const jsonstring = fs.readFileSync(credentialsPath);
 
+        try {
+            creds = JSON.parse(jsonstring);
+
+        } catch (e) {
+            log("Bad JSON in your credentials file. You shouldn't ben editing that anyway.");
+            process.exit(1);
+        }
     } catch (e) {
         log(`Failed to read credentials file at ${credentialsPath}. Ask Nick.`);
         process.exit(1);
@@ -39,6 +46,7 @@ const server = express();
 // base authentication scheme, used for what little hardcoded authentication exists
 const authentication = (expressBasicAuth({
     authorizer: (username, password) => {
+        log(`${username} ${password} ${creds}`);
         return expressBasicAuth.safeCompare(username, creds.reactAppAdminUsername)
             && expressBasicAuth.safeCompare(password, creds.reactAppAdminPassword);
     },
@@ -58,7 +66,8 @@ server.use(express.static(path.join(__dirname, "/react/build"))).listen(PORT, ()
 });
 
 server.get("/authenticate", authentication, (request, response) => {
-    if (request.auth.user === creds.reactserverAdminUsername) {
+    console.log(request.auth);
+    if (request.auth.username === creds.reactAppAdminUsername) {
         response.send("cool!");
 
     } else {
