@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import Logo from '../img/logo.png';
 import { Link } from 'react-router-dom';
 
-import { EyeFill } from '@styled-icons/bootstrap/EyeFill';
-
 const Login = () => {
     return (
         <Container>
