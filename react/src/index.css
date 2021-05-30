@@ -1,10 +1,42 @@
+
+:root {
+  /* accent colors/hues */
+  --aw-blue: 1, 156, 223;
+  --aw-salmon: 255, 71, 71;
+
+  /* somewhere in between? */
+  --aw-lightest-red: 255, 246, 246;
+  --aw-lightest-green: 252, 255, 245;
+  --aw-lightest-blue: 229, 244, 251;
+  --aw-lightest-yellow: 255, 250, 243;
+
+  --aw-rust: 151, 57, 55;
+  --aw-brown: 122, 77, 5;
+  --aw-dark-green: 30, 86, 31;
+
+  /* tones */
+  --aw-black: 0, 0, 0;
+  --aw-grey: 51, 51, 51;
+  --aw-white: 255, 255, 255;
+  --aw-lightest-grey: 242, 242, 242;
+}
+
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: system-ui;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  height: 100%;
+  background-color: rgb(var(--aw-lightest-grey));
+}
+
+#root {
+  height: 100%;
 }
 
 code {
@@ -12,7 +44,18 @@ code {
     monospace;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+li, ul {
+  list-style: none;
 }
 

@@ -4,41 +4,53 @@ import Logo from '../img/logo.png';
 import Person from '../img/person.jpg';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import "../index.css";
 
-function Nav() {
+const NavComponent = () => {
     const { pathname } = useLocation();
+
     return (
-        <StyledNav>
-            <Link id="logo" to="/"><img src={Logo} alt="" /></Link>
-            <ul>
-                <li>
-                    <Link to="/home">Home</Link>
-                    <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/' ? '50%' : '0%' }} />
-                </li>
-                <li>
-                    <Link to="/products">Products</Link>
-                    <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/work' ? '50%' : '0%' }} />
-                </li>
-                <li>
-                    <h3>Name</h3>
-                    <img src={Person} alt="" id="person" />
-                </li>
-            </ul>
-        </StyledNav>
+      <StyledNav>
+        <Link id="logo" to="/"><img src={Logo} alt="" /></Link>
+        <ul>
+          <li>
+            <Link to="/home">Home</Link>
+            <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/' ? '50%' : '0%' }} />
+          </li>
+          <li>
+            <Link to="/products">Products</Link>
+            <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/work' ? '50%' : '0%' }} />
+          </li>
+          <li>
+            <h3>Name</h3>
+            <img src={Person} alt="" id="person" />
+          </li>
+        </ul>
+      </StyledNav>
     )
 }
 
 const StyledNav = styled.nav`
+<<<<<<< HEAD:react/src/components/Nav.js
     height: 5vh;
     margin: auto;
     justify-content: space-between;
     align-items:center;
     padding: 1rem 10rem;
     background-color: lightblue;
+=======
+>>>>>>> 651bb169126abe19558c503724b0926c35cf4220:react/src/components/NavComponent.js
     position: sticky;
     top: 0;
-    z-index: 10;
-    a{
+    height: 6vh;
+
+    background-color: rgb(var(--aw-white));
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
         color: black;
         text-decoration: none;
         font-size: 20px;
@@ -92,4 +104,4 @@ const Line = styled(motion.div)`
     }
 `
 
-export default Nav
+export default NavComponent;
