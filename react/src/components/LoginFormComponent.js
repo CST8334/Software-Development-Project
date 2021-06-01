@@ -47,42 +47,42 @@ class LoginFormComponent extends React.Component {
     render() {
         return (
             <Container>
-              <Top>
-                <img src={Logo} alt="" />
-                <h3 style={{ marginBottom: "20px" }}>Need an Aetherwind account?
+                <Top>
+                    <img src={Logo} alt="" />
+                    <h3 style={{ marginBottom: "20px" }}>Need an Aetherwind account?
                   <span
-                    style={{ marginLeft: "0.5rem", textDecoration: "underline", fontWeight: "bold" }}
-                  >
-                    Create an account
+                            style={{ marginLeft: "0.5rem", textDecoration: "underline", fontWeight: "bold", cursor: "pointer" }}
+                        >
+                            Create an account
                   </span>
-                </h3>
-              </Top>
-              <Form>
-                <label htmlFor="username">Username</label>
-                <input
-                  type="text"
-                  id="user"
-                  value={this.state.username}
-                  onChange={this.updateUsername}
-                />
+                    </h3>
+                </Top>
+                <Form>
+                    <label htmlFor="username">Username</label>
+                    <input
+                        type="text"
+                        id="user"
+                        value={this.state.username}
+                        onChange={this.updateUsername}
+                    />
 
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  value={this.state.password}
-                  onChange={this.updatePassword}
-                />
+                    <label htmlFor="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={this.state.password}
+                        onChange={this.updatePassword}
+                    />
 
-                <Footer>
-                  <FlexRow>
-                    <input type="checkbox" id="rememberMe" />
-                    <label htmlFor="rememberMe">Remember Me</label>
-                  </FlexRow>
-                  <a href="#">Forgot Password</a>
-                </Footer>
-                <input type="submit" value="Submit" onClick={this.handleSubmit} />
-              </Form>
+                    <Footer>
+                        <FlexRow>
+                            <input type="checkbox" id="rememberMe" />
+                            <label htmlFor="rememberMe">Remember Me</label>
+                        </FlexRow>
+                        <a href="#">Forgot Password</a>
+                    </Footer>
+                    <input type="submit" value="Submit" onClick={this.handleSubmit} />
+                </Form>
             </Container>
         )
     }

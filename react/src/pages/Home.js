@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components';
 import HomeChart from '../components/HomeChart';
+import TabNav from '../components/TabNav';
 
 function Home() {
     return (
         <Container>
             <h1>Here are the highlights of your account</h1>
-            <HomeChart />
+            <TabNav />
         </Container>
     )
 }

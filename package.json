@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/CST8334/team-project-300-team-2#readme",
   "dependencies": {
+    "chart.js": "^3.3.2",
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "react-chartjs-2": "^3.0.3"
   }
 }

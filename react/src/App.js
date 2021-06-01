@@ -10,8 +10,7 @@ import "./index.css";
 
 function App() {
   return (
-    <div className="App" style={{height: '100%'}}>
-      <NavComponent />
+    <div className="App" style={{ height: '100%' }}>
       <MainContent>
         <Switch>
           <Route path="/" exact>
@@ -21,9 +20,11 @@ function App() {
             <LoginPageComponent />
           </Route>
           <Route path="/home" exact>
+            <NavComponent />
             <Home />
           </Route>
           <Route path="/products">
+            <NavComponent />
             <Products />
           </Route>
         </Switch>
