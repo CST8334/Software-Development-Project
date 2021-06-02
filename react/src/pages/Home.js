@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import HomeChart from '../components/HomeChart';
+import TabNav from '../components/TabNav';
 
 function Home() {
     return (

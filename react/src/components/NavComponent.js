@@ -7,27 +7,27 @@ import { motion } from 'framer-motion';
 import "../index.css";
 
 const NavComponent = () => {
-    const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
-    return (
-      <StyledNav>
-        <Link id="logo" to="/"><img src={Logo} alt="" /></Link>
-        <ul>
-          <li>
-            <Link to="/home">Home</Link>
-            <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/' ? '50%' : '0%' }} />
-          </li>
-          <li>
-            <Link to="/products">Products</Link>
-            <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/work' ? '50%' : '0%' }} />
-          </li>
-          <li>
-            <h3>Name</h3>
-            <img src={Person} alt="" id="person" />
-          </li>
-        </ul>
-      </StyledNav>
-    )
+  return (
+    <StyledNav>
+      <Link id="logo" to="/"><img src={Logo} alt="" /></Link>
+      <ul>
+        <li>
+          <Link to="/home">Home</Link>
+          <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/' ? '50%' : '0%' }} />
+        </li>
+        <li>
+          <Link to="/products">Products</Link>
+          <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/work' ? '50%' : '0%' }} />
+        </li>
+        <li>
+          <Link id="profile" to="/profile">Name</Link>
+          <img src={Person} alt="" id="person" />
+        </li>
+      </ul>
+    </StyledNav>
+  )
 }
 
 const StyledNav = styled.nav`
@@ -72,21 +72,22 @@ const StyledNav = styled.nav`
     li{
         padding-left: 10rem;
         position: relative;
-        top: -50px;
+        top: 20px;
+        right: 50vw;
     }
 
     #person{
         position: relative;
         right: -40vw;
-        top: -5vw;
+        top: -20px;
         width: 50px;
         border-radius: 50%;
     }
 
-    h3{
+    #profile{
         position: relative;
-        right: -600px;
-        top: -40px;
+        top: -2rem;
+        right: -35vw;
     }
 
 `

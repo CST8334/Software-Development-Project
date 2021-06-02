@@ -13,7 +13,7 @@ class LoginPageComponent extends React.Component {
     render() {
         return (
             <Content>
-              <LoginFormComponent></LoginFormComponent>
+                <LoginFormComponent />
             </Content>
         );
     }
