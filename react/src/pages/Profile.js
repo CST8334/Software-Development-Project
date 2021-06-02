@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'; 
+import Select from 'react-select';
 
 class ExplainText extends React.Component{
   render(){
@@ -9,7 +10,16 @@ class ExplainText extends React.Component{
   }
 }
 
-class FNAME extends React.Component{
+const language=[
+  {value: 'English', label:'English'}
+]
+
+const country=[
+  {value:'Canada',label:'Canada'},
+  {value:'US',label:'United States'}
+]
+
+class INFORMATION extends React.Component{
   render(){
     return(
       <form>
@@ -18,6 +28,31 @@ class FNAME extends React.Component{
 
         <p>Last Name</p>
         <input type="text"/>
+
+        <p>Company</p>
+        <input type="text"/>
+
+        <p>Email</p>
+        <input type="text"/>
+
+        <p>Language</p>
+        <select>
+            {language.map((option) => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+        </select>
+
+        <p>Country</p>
+        <select>
+            {country.map((option) => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+        </select>
+
+        <p>
+          Select your country. This setting is saved to this browser.
+        </p>
+
       </form>
       
     );
@@ -32,7 +67,7 @@ class ProfilePage extends React.Component{
             Profile
           </h1>
           <ExplainText />
-          <FNAME />
+          <INFORMATION />
         </div>
       )
     }
