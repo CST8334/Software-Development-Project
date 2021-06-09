@@ -4,6 +4,7 @@ import Toggle from '../components/Toggle';
 import styled from 'styled-components';
 import Modal from '../components/Modal'
 
+
 const BUTTON_WRAPPER_STYLES = {
     position: 'relative',
     zIndex: 1
@@ -12,7 +13,10 @@ const BUTTON_WRAPPER_STYLES = {
 const Products = () => {
     const [ isOpen, setIsOpen ] = useState(false)
     return (
-        <div>
+        
+    <Container>
+        <Main>
+            
             <ProdSelec>
                 <div>
                     <h1>Products</h1>
@@ -49,54 +53,78 @@ const Products = () => {
                 </div>
             </ProdSelec>
                 
-            <div style={BUTTON_WRAPPER_STYLES}>
-                <button onClick={() => setIsOpen(true)}> CREATE PRODUCT </button>
-                <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-                    <form>
-                        <div>
-                            <p>Product Name</p>
-                            <input type="text" />
-                        </div>
-                        <div>
-                            <p>Model Name</p>
-                            <input type="text" />
-                        </div>
-                        <div>
-                            <p>Product Version</p>
-                            <input type="text" />
-                        </div>
-                        <button type="button">Submit</button> 
-                    </form>
-                </Modal>
-            </div>
+                
                 <div>
                     <Faq>
-                            <Toggle title="Languages">
+                            <Toggle title="Company 1">
                                 <div className="anwser">
-                                    <p>Proficient in HTML, CSS, Javascript, React, SQL, Linux, and Cobol but constantly expanding and learning new languages!</p>
+                                    <p>MODEL DOCUMENT - VERSION</p>
                                 </div>
                             </Toggle>
-                            <Toggle title="Education">
+                            <Toggle title="Company 2">
                                 <div className="anwser">
-                                    <p>Currently enrolled in the Computer Programming program at Algonquin College. Expected to graduate in August 2021.</p>
+                                    <p>MODEL DOCUMENT - VERSION</p>
                                 </div>
                             </Toggle>
-                            <Toggle title="Goals">
-                                <div className="anwser">
-                                    <p>Looking for a full-time position where able to contribute to the team and learn from other developers.</p>
-                                </div>
-                            </Toggle>
-                            <Toggle title="Other...">
-                                <div className="anwser">
-                                    <p>Other skills include knoledge of Photoshop and Figma. Both are very powerful tools and go hand in hand with web development.</p>
-                                </div>
-                            </Toggle>
+                            
                     </Faq>
                 </div>
-        </div> 
+                <div style={BUTTON_WRAPPER_STYLES}>
+                    <button className="CreateProd" onClick={() => setIsOpen(true)}> CREATE PRODUCT </button>
+                    <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                        <form>
+                            <div>
+                                <p>Product Name</p>
+                                <input type="text" />
+                            </div>
+                            <div>
+                                <p>Model Name</p>
+                                <input type="text" />
+                            </div>
+                            <div>
+                                <p>Product Version</p>
+                                <input type="text" />
+                            </div>
+                            <button type="button">Submit</button> 
+                        </form>
+                    </Modal>
+                </div>
+        </Main>
+    </Container>
+         
     )
 }
 
+const Container = styled.div`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    h1{
+        marginTop: '3em';
+    }
+    h2 {
+        margin: '4em 0em 2em';
+    }
+    h3 {
+        marginTop: '2em';
+        padding: '2em 0em';
+    }
+
+    last {
+        marginBottom: '300px';
+    }
+`
+const Main = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+`
 const ProdSelec = styled.div`
     width: 200px;
     height: 200px;
@@ -110,12 +138,12 @@ const ProdSelec = styled.div`
 
 const Faq = styled.div`
 
-width: 600px;
-height: 200px;
-margin: 20px;
-padding: 1px;
-display: flex;
-flex-direction: column;
+    width: 600px;
+    height: 200px;
+    margin: 20px;
+    padding: 1px;
+    display: flex;
+    flex-direction: column;
 
     display: block;
     span{
@@ -134,11 +162,6 @@ flex-direction: column;
         width: 100%;
     }
 
-    .question{
-        padding: 3rem 0rem;
-        cursor: pointer;
-    }
-
     .answer{
         padding: 2rem 0rem;
         p{
@@ -146,8 +169,5 @@ flex-direction: column;
         }
     }
 `
-
-
-
 
 export default Products
