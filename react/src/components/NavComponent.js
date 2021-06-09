@@ -22,7 +22,7 @@ const NavComponent = () => {
           <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/work' ? '50%' : '0%' }} />
         </li>
         <li>
-          <h3>Name</h3>
+          <Link id="profile" to="/profile">Name</Link>
           <img src={Person} alt="" id="person" />
         </li>
       </ul>
@@ -31,6 +31,15 @@ const NavComponent = () => {
 }
 
 const StyledNav = styled.nav`
+<<<<<<< HEAD:react/src/components/Nav.js
+    height: 5vh;
+    margin: auto;
+    justify-content: space-between;
+    align-items:center;
+    padding: 1rem 10rem;
+    background-color: lightblue;
+=======
+>>>>>>> 651bb169126abe19558c503724b0926c35cf4220:react/src/components/NavComponent.js
     position: sticky;
     top: 0;
     height: 6vh;
@@ -63,21 +72,22 @@ const StyledNav = styled.nav`
     li{
         padding-left: 10rem;
         position: relative;
-        top: -50px;
+        top: 20px;
+        right: 50vw;
     }
 
     #person{
         position: relative;
         right: -40vw;
-        top: -5vw;
+        top: -20px;
         width: 50px;
         border-radius: 50%;
     }
 
-    h3{
+    #profile{
         position: relative;
-        right: -600px;
-        top: -40px;
+        top: -2rem;
+        right: -35vw;
     }
 
 `

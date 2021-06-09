@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Profiler } from 'react';
 import LoginFormComponent from './components/LoginFormComponent';
 import LoginPageComponent from './components/LoginPageComponent';
 import { Switch, Route, useLocation } from 'react-router-dom';
@@ -7,6 +7,7 @@ import Products from './pages/Products';
 import styled from 'styled-components';
 import NavComponent from "./components/NavComponent";
 import "./index.css";
+import ProfilePage from './pages/Profile';
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
           <Route path="/products">
             <NavComponent />
             <Products />
+          </Route>
+          <Route path="/profile">
+            <NavComponent />
+            <ProfilePage />
           </Route>
         </Switch>
       </MainContent>
