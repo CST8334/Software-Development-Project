@@ -26,18 +26,25 @@ let creds;
 // setup the mongodb driver
 const mongo = require("mongodb");
 const MongoClient = mongo.MongoClient;
-//const mongoUrl = `mongodb://${creds.mongoUsersAdminUsername}:${creds.mongoUsersAdminPassword}@${creds.mongoIP}:${creds.mongoPort}/admin`;
-const mongoUrl = `mongodb://${creds.mongoIP}:${creds.mongoPort}`;
-log(mongoUrl);
+const mongoUrl = `mongodb://${creds.mongoUsersAdminUsername}:${creds.mongoUsersAdminPassword}@${creds.mongoIP}:${creds.mongoPort}`;
 
-let usersDb;
-let client = MongoClient.connect(mongoUrl, {});
-log('hi');
-log(client);
+// configure connection to db and convenient global vars
+let client;
+let users;
+let products;
+(async () => {
+    client = await MongoClient.connect(mongoUrl, {});
 
+    const usersDb = client.db("users");
+    users = usersDb.collection("users");
 
+    const productsDb = client.db("products");
+    products = productsDb.collection("products");
+})();
 
-function getUserByUsername(username) {}
+function getUserByUsername(username) {
+    return users.findOne({ name: username }).next();
+}
 
 module.exports = { getUserByUsername };
 

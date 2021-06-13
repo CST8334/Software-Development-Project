@@ -9,7 +9,8 @@ const server = express();
 
 // authentication scheme
 const authentication = (expressBasicAuth({
-    authorizer: (username, password) => {
+    authorizer: async (username, password) => {
+        log(await getUserByUsername(username));
         // @TODO open a mongodb connection
         // get a user with that username
         // compare passwords
