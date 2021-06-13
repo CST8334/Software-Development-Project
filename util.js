@@ -1,5 +1,5 @@
 
-// use this instead of console.log
+// use this instead of console.log @TODO varargs
 function log(entry) {
     let str;
     if (typeof entry === 'Object' && entry !== null) {

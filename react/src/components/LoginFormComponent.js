@@ -25,23 +25,21 @@ class LoginFormComponent extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log("submit?");
-        const auth = async () => {
+        event.preventDefault();
+
+        (async () => {
             try {
-                const res = await axios.get('/authenticate', {
+                const res = await axios.post('/login', {}, {
                     auth: {
                         username: this.state.username,
                         password: this.state.password
                     }
                 });
-                console.log(res.data);
 
             } catch (e) {
-                console.log(e);
+                console.error(e);
             }
-        };
-        auth();
-        event.preventDefault();
+        })();
     }
 
     render() {

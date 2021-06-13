@@ -43,7 +43,7 @@ let products;
 })();
 
 function getUserByUsername(username) {
-    return users.findOne({ name: username }).next();
+    return users.findOne({ name: username });
 }
 
 module.exports = { getUserByUsername };

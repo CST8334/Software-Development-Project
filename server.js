@@ -4,24 +4,7 @@ const { getUserByUsername } = require("./mongo");
 
 // setup the server itself
 const express = require("express");
-const expressBasicAuth = require("express-basic-auth");
 const server = express();
-
-// authentication scheme
-const authentication = (expressBasicAuth({
-    authorizer: async (username, password) => {
-        log(await getUserByUsername(username));
-        // @TODO open a mongodb connection
-        // get a user with that username
-        // compare passwords
-
-        return expressBasicAuth.safeCompare(username, creds.reactAppAdminUsername)
-            && expressBasicAuth.safeCompare(password, creds.reactAppAdminPassword);
-    },
-    unauthorizedResponse: (request) => {
-        return "HEY STOP IT!!!";
-    }
-}));
 
 const path = require("path");
 
@@ -30,8 +13,21 @@ server.use(express.static(path.join(__dirname, "/react/build"))).listen(PORT, ()
     log(`Listening on port: ${PORT}`);
 });
 
-server.get("/authenticate", authentication, (request, response) => {
+server.post("/login", (request, response) => {
+    const header = request.header("Authorization")
 
+    if (header) {
+        const splitHeader = header.split(/\s+/);
+        const scheme = splitHeader[0];
+        const auth = splitHeader[1];
+
+        if (auth) {
+            const creds = Buffer.from(auth, "base64").toString("utf-8").split(":");
+            log(creds);
+        }
+    }
+
+    response.status(200).send('cool!');
 });
 
 server.get("/", (request, response) => {
