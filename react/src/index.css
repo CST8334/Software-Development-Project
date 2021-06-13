@@ -59,4 +59,11 @@ li, ul {
   list-style: none;
 }
 
-
+.topnav input[type=text] {
+  
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
