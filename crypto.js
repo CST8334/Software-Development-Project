@@ -7,9 +7,11 @@ function safeCompare(a, b) {
     const lengthA = Buffer.byteLength(a);
     const lengthB = Buffer.byteLength(b);
 
-    const bufferA = Buffer.alloc(aLength, 0, "utf8");
+    // we could check if the lengths are different here and early exit,
+    // but the whole point is to make the runtime of this function constant, so don't
+    const bufferA = Buffer.alloc(lengthA, 0, "utf8");
     bufferA.write(a);
-    const bufferB = Buffer.alloc(aLength, 0, "utf8");
+    const bufferB = Buffer.alloc(lengthA, 0, "utf8");
     bufferB.write(b);
 
     return !!(crypto.timingSafeEqual(bufferA, bufferB) & lengthA === lengthB);
@@ -20,4 +22,6 @@ function hash(str, salt) {
     h.update(str);
     return h.digest("hex");
 }
+
+module.exports = { safeCompare, hash };
 

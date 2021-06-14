@@ -1,7 +1,7 @@
 
 const { log } = require("./util");
 
-// load the *secret* credentials file we use to authenticate admin users of the web server, as well as mongodb server information
+// load the *secret* credentials file
 const fs = require("fs");
 let creds;
 {
@@ -46,6 +46,20 @@ function getUserByUsername(username) {
     return users.findOne({ name: username });
 }
 
-module.exports = { getUserByUsername };
+async function registerNewUser(username, password) {
+    const alreadyExistingUser = await users.findOne({
+        username: username
+    });
 
+    if (alreadyExistingUser) {
+        return null;
+    }
+
+    return users.insertOne({
+        username: username,
+        pwd: password,
+    }, {});
+}
+
+module.exports = { getUserByUsername, registerNewUser };
 
