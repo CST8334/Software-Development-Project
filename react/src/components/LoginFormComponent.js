@@ -14,6 +14,7 @@ class LoginFormComponent extends React.Component {
         this.updateUsername = this.updateUsername.bind(this);
         this.updatePassword = this.updatePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.testRegister = this.testRegister.bind(this);
     }
 
     updateUsername(event) {
@@ -42,6 +43,34 @@ class LoginFormComponent extends React.Component {
         })();
     }
 
+    testRegister(event) {
+        event.preventDefault();
+
+        (async () => {
+            try {
+                const res = await axios.post("/register", {
+                    username: this.state.username,
+                    password: this.state.password,
+                });
+
+            } catch (e) {
+                console.error(e);
+            }         })();
+ 44     }
+ 45
+ 46     testRegister(event) {
+ 47         event.preventDefault();
+ 48
+ 49         (async () => {
+ 50             try {
+ 51                 const res = await axios.post("/register", {
+ 52                     username: this.state.username,
+ 53                     password: this.state.password,
+ 54                 });
+ 55
+        })();
+    }
+
     render() {
         return (
             <Container>
@@ -50,6 +79,7 @@ class LoginFormComponent extends React.Component {
                     <h3 style={{ marginBottom: "20px" }}>Need an Aetherwind account?
                   <span
                             style={{ marginLeft: "0.5rem", textDecoration: "underline", fontWeight: "bold", cursor: "pointer" }}
+                            onClick={this.testRegister}
                         >
                             Create an account
                   </span>

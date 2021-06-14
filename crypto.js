@@ -17,11 +17,16 @@ function safeCompare(a, b) {
     return !!(crypto.timingSafeEqual(bufferA, bufferB) & lengthA === lengthB);
 }
 
+function salt() {
+    // 32 is more or less arbitrary
+    return crypto.randomBytes(32).toString("hex");
+}
+
 function hash(str, salt) {
     const h = crypto.createHmac("sha512", salt);
     h.update(str);
     return h.digest("hex");
 }
 
-module.exports = { safeCompare, hash };
+module.exports = { safeCompare, hash, salt };
 

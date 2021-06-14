@@ -1,11 +1,14 @@
 
 const { log } = require("./util");
-const { getUserByUsername, registerNewUser } = require("./mongo");
-const { hash, safeCompare } = require("./crypto");
+const { getUserByUsername, insertNewUser } = require("./mongo");
+const { salt, hash, safeCompare } = require("./crypto");
 
 // setup the server itself
 const express = require("express");
 const server = express();
+
+server.use(express.json());
+server.use(express.urlencoded());
 
 const path = require("path");
 
@@ -15,11 +18,11 @@ server.use(express.static(path.join(__dirname, "/react/build"))).listen(PORT, ()
 });
 
 server.post("/login", async (request, response) => {
-    const header = request.header("Authorization")
+    const authorizationHeader = request.header("Authorization")
 
     // does that header even exist?
-    if (header) {
-        const splitHeader = header.split(/\s+/);
+    if (authorizationHeader) {
+        const splitHeader = authorizationHeader.split(/\s+/);
         const scheme = splitHeader[0]; // should be 'basic', unused though
         const auth = splitHeader[1];
 
@@ -37,7 +40,7 @@ server.post("/login", async (request, response) => {
             }
 
             // there is a user with that username. check if the passwords match
-            if (safeCompare(user.pwd, creds[1])) {
+            if (safeCompare(user.pwd, hash(creds[1], user.salt))) {
                 return response.status(200).json({
                     code: 0,
                     msg: "Succesfully logged in."
@@ -59,12 +62,22 @@ server.post("/login", async (request, response) => {
 });
 
 server.post("/register", async (request, response) => {
-    const status = registerNewUser(
-        request.body.username,
-        request.body.password
-    );
+    const alreadyExistingUser = await getUserByUsername(request.body.username);
 
-    log(status);
+    if (alreadyExistingUser) {
+        response.status(400).json({
+            code: -1,
+            msg: "There is already a user with the provided username."
+        });
+    }
+
+    const salt_ = salt();
+    const result = await insertNewUser(request.body.username, hash(request.body.password, salt_), salt_);
+
+    response.status(200).json({
+        code: 0,
+        msg: "OK"
+    });
 });
 
 server.get("/", (request, response) => {

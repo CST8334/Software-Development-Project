@@ -43,23 +43,16 @@ let products;
 })();
 
 function getUserByUsername(username) {
-    return users.findOne({ name: username });
+    return users.findOne({ username: username });
 }
 
-async function registerNewUser(username, password) {
-    const alreadyExistingUser = await users.findOne({
-        username: username
-    });
-
-    if (alreadyExistingUser) {
-        return null;
-    }
-
+function insertNewUser(username, hashedPassword, salt) {
     return users.insertOne({
         username: username,
-        pwd: password,
-    }, {});
+        pwd: hashedPassword,
+        salt: salt
+    });
 }
 
-module.exports = { getUserByUsername, registerNewUser };
+module.exports = { getUserByUsername, insertNewUser };
 
