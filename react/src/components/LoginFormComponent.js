@@ -55,19 +55,7 @@ class LoginFormComponent extends React.Component {
 
             } catch (e) {
                 console.error(e);
-            }         })();
- 44     }
- 45
- 46     testRegister(event) {
- 47         event.preventDefault();
- 48
- 49         (async () => {
- 50             try {
- 51                 const res = await axios.post("/register", {
- 52                     username: this.state.username,
- 53                     password: this.state.password,
- 54                 });
- 55
+            }
         })();
     }
 
