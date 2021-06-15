@@ -4,8 +4,10 @@ import styled from 'styled-components';
 import Logo from '../img/logo.png';
 import axios from "axios";
 import "../index.css";
+import { Link, Route, Redirect } from 'react-router-dom';
 
 class LoginFormComponent extends React.Component {
+
     constructor(props) {
         super(props);
 
@@ -21,13 +23,16 @@ class LoginFormComponent extends React.Component {
         this.setState({ username: event.target.value });
     }
 
+    updateUsername(event) {
+        this.setState({ username: event.target.value });
+    }
+
     updatePassword(event) {
         this.setState({ password: event.target.value });
     }
 
     handleSubmit(event) {
         event.preventDefault();
-
         (async () => {
             try {
                 const res = await axios.post('/login', {}, {
@@ -36,7 +41,14 @@ class LoginFormComponent extends React.Component {
                         password: this.state.password
                     }
                 });
-
+                if (res.data.code === 0) {
+                    window.sessionStorage.setItem("LoggedIn", true)
+                    window.location.href = '/home';
+                }
+                if (res.data.code === 99) {
+                    console.log('wrong password')
+                    alert(res.data.msg);
+                }
             } catch (e) {
                 console.error(e);
             }
@@ -65,15 +77,15 @@ class LoginFormComponent extends React.Component {
                 <Top>
                     <img src={Logo} alt="" />
                     <h3 style={{ marginBottom: "20px" }}>Need an Aetherwind account?
-                  <span
-                            style={{ marginLeft: "0.5rem", textDecoration: "underline", fontWeight: "bold", cursor: "pointer" }}
-                            onClick={this.testRegister}
+                        <Link
+                            style={{ marginLeft: "0.5rem", textDecoration: "underline", fontWeight: "bold", cursor: "pointer", color: "black" }}
+                            to="/register"
                         >
                             Create an account
-                  </span>
+                        </Link>
                     </h3>
                 </Top>
-                <Form>
+                <Form >
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
@@ -95,7 +107,7 @@ class LoginFormComponent extends React.Component {
                             <input type="checkbox" id="rememberMe" />
                             <label htmlFor="rememberMe">Remember Me</label>
                         </FlexRow>
-                        <a href="#">Forgot Password</a>
+                        <Link style={{ color: "black" }} to="/forgotPass" id="rememberMe">Forgot Password</Link>
                     </Footer>
                     <input type="submit" value="Submit" onClick={this.handleSubmit} />
                 </Form>

@@ -74,6 +74,14 @@ server.post("/register", async (request, response) => {
     const salt_ = salt();
     const result = await insertNewUser(request.body.username, hash(request.body.password, salt_), salt_);
 
+    if (result == true) {
+        response.status(200).json({
+            code: 1,
+            msg: "User created"
+        })
+        console.log('user created');
+    }
+
     response.status(200).json({
         code: 0,
         msg: "OK"
