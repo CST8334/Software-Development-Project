@@ -1,62 +1,14 @@
 
-// use this instead of console.log
-function log(entry) {
-    let str;
-    if (typeof entry === 'Object' && entry !== null) {
-        try {
-            str = JSON.stringify(entry);
-
-        } catch (e) {
-            str = "failed to stringify a self-referential object :(";
-        }
-    } else {
-        str = entry;
-    }
-
-    console.log(`${new Date().toLocaleString()} - aetherwind server - ${str}`);
-}
-
-// load the *secret* credentials file we use to authenticate admin users of the web server, as well as mongodb server information
-const fs = require("fs");
-let creds;
-{
-    const credentialsPath = "./credentials.json";
-
-    try {
-        const jsonstring = fs.readFileSync(credentialsPath);
-
-        try {
-            creds = JSON.parse(jsonstring);
-
-        } catch (e) {
-            log("Bad JSON in your credentials file. You shouldn't ben editing that anyway.");
-            process.exit(1);
-        }
-    } catch (e) {
-        log(`Failed to read credentials file at ${credentialsPath}. Ask Nick.`);
-        process.exit(1);
-    }
-}
+const { log } = require("./util");
+const { getUserByUsername, insertNewUser } = require("./mongo");
+const { salt, hash, safeCompare } = require("./crypto");
 
 // setup the server itself
 const express = require("express");
-const expressBasicAuth = require("express-basic-auth");
 const server = express();
 
-// base authentication scheme, used for what little hardcoded authentication exists
-const authentication = (expressBasicAuth({
-    authorizer: (username, password) => {
-        log(`${username} ${password} ${creds}`);
-        return expressBasicAuth.safeCompare(username, creds.reactAppAdminUsername)
-            && expressBasicAuth.safeCompare(password, creds.reactAppAdminPassword);
-    },
-    unauthorizedResponse: (request) => {
-        return "HEY STOP IT!!!";
-    },
-    users: {
-        [creds.reactAppAdminUsername]: creds.reactAppAdminPassword
-    },
-}));
+server.use(express.json());
+server.use(express.urlencoded());
 
 const path = require("path");
 
@@ -65,16 +17,75 @@ server.use(express.static(path.join(__dirname, "/react/build"))).listen(PORT, ()
     log(`Listening on port: ${PORT}`);
 });
 
-server.get("/authenticate", authentication, (request, response) => {
-    console.log(request.auth);
-    if (request.auth.username === creds.reactAppAdminUsername) {
-        response.send("cool!");
+server.post("/login", async (request, response) => {
+    const authorizationHeader = request.header("Authorization")
 
-    } else {
-        // they aren't the admin, so we need to ask mongodb if they are a valid user or not.
-        // @TODO
-        response.send("nope");
+    // does that header even exist?
+    if (authorizationHeader) {
+        const splitHeader = authorizationHeader.split(/\s+/);
+        const scheme = splitHeader[0]; // should be 'basic', unused though
+        const auth = splitHeader[1];
+
+        if (auth) {
+            const creds = Buffer.from(auth, "base64").toString("utf-8").split(":");
+
+            const user = await getUserByUsername(creds[0]);
+
+            // check to see if there is a user with that username
+            if (!user) {
+                return response.status(400).json({
+                    code: -1,
+                    msg: "No user with that Username."
+                });
+            }
+
+            // there is a user with that username. check if the passwords match
+            if (safeCompare(user.pwd, hash(creds[1], user.salt))) {
+                return response.status(200).json({
+                    code: 0,
+                    msg: "Succesfully logged in."
+                });
+
+            } else {
+                return response.status(400).json({
+                    code: -2,
+                    msg: "Wrong password."
+                });
+            }
+        }
     }
+
+    response.status(400).json({
+        code: -3,
+        msg: "Invalid authorization header."
+    });
+});
+
+server.post("/register", async (request, response) => {
+    const alreadyExistingUser = await getUserByUsername(request.body.username);
+
+    if (alreadyExistingUser) {
+        response.status(400).json({
+            code: -1,
+            msg: "There is already a user with the provided username."
+        });
+    }
+
+    const salt_ = salt();
+    const result = await insertNewUser(request.body.username, hash(request.body.password, salt_), salt_);
+
+    if (result == true) {
+        response.status(200).json({
+            code: 1,
+            msg: "User created"
+        })
+        console.log('user created');
+    }
+
+    response.status(200).json({
+        code: 0,
+        msg: "OK"
+    });
 });
 
 server.get("/", (request, response) => {

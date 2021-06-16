@@ -4,8 +4,10 @@ import styled from 'styled-components';
 import Logo from '../img/logo.png';
 import axios from "axios";
 import "../index.css";
+import { Link, Route, Redirect } from 'react-router-dom';
 
 class LoginFormComponent extends React.Component {
+
     constructor(props) {
         super(props);
 
@@ -14,6 +16,11 @@ class LoginFormComponent extends React.Component {
         this.updateUsername = this.updateUsername.bind(this);
         this.updatePassword = this.updatePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.testRegister = this.testRegister.bind(this);
+    }
+
+    updateUsername(event) {
+        this.setState({ username: event.target.value });
     }
 
     updateUsername(event) {
@@ -25,23 +32,43 @@ class LoginFormComponent extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log("submit?");
-        const auth = async () => {
+        event.preventDefault();
+        (async () => {
             try {
-                const res = await axios.get('/authenticate', {
+                const res = await axios.post('/login', {}, {
                     auth: {
                         username: this.state.username,
                         password: this.state.password
                     }
                 });
-                console.log(res.data);
+                if (res.data.code === 0) {
+                    window.sessionStorage.setItem("LoggedIn", true)
+                    window.location.href = '/home';
+                }
+                if (res.data.code === 99) {
+                    console.log('wrong password')
+                    alert(res.data.msg);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    }
+
+    testRegister(event) {
+        event.preventDefault();
+
+        (async () => {
+            try {
+                const res = await axios.post("/register", {
+                    username: this.state.username,
+                    password: this.state.password,
+                });
 
             } catch (e) {
-                console.log(e);
+                console.error(e);
             }
-        };
-        auth();
-        event.preventDefault();
+        })();
     }
 
     render() {
@@ -50,14 +77,15 @@ class LoginFormComponent extends React.Component {
                 <Top>
                     <img src={Logo} alt="" />
                     <h3 style={{ marginBottom: "20px" }}>Need an Aetherwind account?
-                  <span
-                            style={{ marginLeft: "0.5rem", textDecoration: "underline", fontWeight: "bold", cursor: "pointer" }}
+                        <Link
+                            style={{ marginLeft: "0.5rem", textDecoration: "underline", fontWeight: "bold", cursor: "pointer", color: "black" }}
+                            to="/register"
                         >
                             Create an account
-                  </span>
+                        </Link>
                     </h3>
                 </Top>
-                <Form>
+                <Form >
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
@@ -79,7 +107,7 @@ class LoginFormComponent extends React.Component {
                             <input type="checkbox" id="rememberMe" />
                             <label htmlFor="rememberMe">Remember Me</label>
                         </FlexRow>
-                        <a href="#">Forgot Password</a>
+                        <Link style={{ color: "black" }} to="/forgotPass" id="rememberMe">Forgot Password</Link>
                     </Footer>
                     <input type="submit" value="Submit" onClick={this.handleSubmit} />
                 </Form>
