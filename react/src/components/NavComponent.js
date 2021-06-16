@@ -6,7 +6,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import "../index.css";
 
-const NavComponent = () => {
+const handleLogout = history => () => {
+  console.log('you have been loged out.');
+  window.sessionStorage.removeItem('LoggedIn');
+}
+
+const NavComponent = ({ history }) => {
   const { pathname } = useLocation();
 
   return (
@@ -25,21 +30,21 @@ const NavComponent = () => {
           <Link id="profile" to="/profile">Name</Link>
           <img src={Person} alt="" id="person" />
         </li>
+        <li>
+          <Link id="profile" to="/profile" onClick={handleLogout(history)}>LogOut</Link>
+        </li>
       </ul>
     </StyledNav>
   )
 }
 
 const StyledNav = styled.nav`
-<<<<<<< HEAD:react/src/components/Nav.js
     height: 5vh;
     margin: auto;
     justify-content: space-between;
     align-items:center;
     padding: 1rem 10rem;
     background-color: lightblue;
-=======
->>>>>>> 651bb169126abe19558c503724b0926c35cf4220:react/src/components/NavComponent.js
     position: sticky;
     top: 0;
     height: 6vh;

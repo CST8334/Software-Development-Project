@@ -1,13 +1,25 @@
 import React, { Profiler } from 'react';
 import LoginFormComponent from './components/LoginFormComponent';
 import LoginPageComponent from './components/LoginPageComponent';
-import { Switch, Route, useLocation } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import styled from 'styled-components';
 import NavComponent from "./components/NavComponent";
 import "./index.css";
 import ProfilePage from './pages/Profile';
+import CreateAccount from './pages/CreateAccount';
+import ForgotPass from './pages/ForgotPass';
+
+function PrivateRoute({ children, ...rest }) {
+  return (
+    <Route{...rest} render={() => {
+      return window.sessionStorage.getItem("LoggedIn")
+        ? children
+        : <Redirect to='/login' />
+    }} />
+  )
+}
 
 function App() {
   return (
@@ -20,17 +32,23 @@ function App() {
           <Route path="/login" exact>
             <LoginPageComponent />
           </Route>
-          <Route path="/home" exact>
+          <PrivateRoute path="/home" exact>
             <NavComponent />
             <Home />
-          </Route>
-          <Route path="/products">
+          </PrivateRoute>
+          <PrivateRoute path="/products">
             <NavComponent />
             <Products />
-          </Route>
-          <Route path="/profile">
+          </PrivateRoute>
+          <PrivateRoute path="/profile">
             <NavComponent />
             <ProfilePage />
+          </PrivateRoute>
+          <Route path="/register">
+            <CreateAccount />
+          </Route>
+          <Route path="/forgotpass">
+            <ForgotPass />
           </Route>
         </Switch>
       </MainContent>
