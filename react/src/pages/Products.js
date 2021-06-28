@@ -10,24 +10,23 @@ const BUTTON_WRAPPER_STYLES = {
 }
 
 const Products = () => {
-    const [ isOpen, setIsOpen ] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
     return (
-        
-    <Container>
-        <FirstLine>
-            <h1>Products</h1>
-            <div class="input-field col s12">
-            <label>Sort by: </label>
-                <select>
-                    <option value="" disabled selected>Choose..</option>
-                    <option value="1">Status</option>
-                    <option value="2">Alphabetical</option>
-                </select>
-            </div>
-            <div class="topnav">
-                <input type="text" placeholder="Search.." />
-                <button onClick={() => setIsOpen(true)}> CREATE PRODUCT </button>
-                <div style={BUTTON_WRAPPER_STYLES}>
+
+        <Container>
+            <FirstLine>
+                <div class="input-field col s12">
+                    <label>Sort by: </label>
+                    <select>
+                        <option value="" disabled selected>Choose..</option>
+                        <option value="1">Status</option>
+                        <option value="2">Alphabetical</option>
+                    </select>
+                </div>
+                <div class="topnav">
+                    <input type="text" placeholder="Search.." />
+                    <button onClick={() => setIsOpen(true)}> CREATE PRODUCT </button>
+                    <div style={BUTTON_WRAPPER_STYLES}>
                         <Modal open={isOpen} onClose={() => setIsOpen(false)}>
                             <form>
                                 <div>
@@ -42,70 +41,70 @@ const Products = () => {
                                     <p>Product Version</p>
                                     <input type="text" />
                                 </div>
-                                <button type="button">Submit</button> 
+                                <button type="button">Submit</button>
                             </form>
                         </Modal>
+                    </div>
                 </div>
-            </div> 
-        </FirstLine>
-        
-        <Main>
-            <ProdSelec>
-                        <div>
-                            <label for="compliance">Compliance Status</label>
-                            <br/>
-                                <select id="compliance">
-                                    <option value="volvo">Compliant</option>
-                                    <option value="saab">Soon to Expire</option>
-                                    <option value="opel">Expired</option>
-                                </select>
-                        </div>    
-                        <div>
-                            <label for="country">Country</label>
-                            <br/>
-                                <select id="country">
-                                    <option value="volvo">United States</option>
-                                    <option value="saab">Brazil</option>
-                                    <option value="opel">Canada</option>
-                                    <option value="opel">Mexico</option>
-                                </select>
-                        </div>
-            
-                        <div>
-                            <label for="body">Issuing Body</label>
-                            <br/>
-                                <select id="body">
-                                    <option value="Option 1">Option 1</option>
-                                    <option value="Option 2">Option 2</option>
-                                    <option value="Option 3">Option 3</option>
-                                    <option value="Option 4">Option 4</option>
-                                </select>
-                        </div>
-                        <CheckBox>
-                                <label class="switch">
-                                    <input type="checkbox"/>
-                                    <span class="slider round"></span>
-                                </label><label className="Switch">Show products whose documents have unread comments </label>
-                        </CheckBox>     
-            </ProdSelec>
-            <Document>
+            </FirstLine>
+
+            <Main>
+                <ProdSelec>
+                    <div>
+                        <label for="compliance">Compliance Status</label>
+                        <br />
+                        <select id="compliance">
+                            <option value="volvo">Compliant</option>
+                            <option value="saab">Soon to Expire</option>
+                            <option value="opel">Expired</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="country">Country</label>
+                        <br />
+                        <select id="country">
+                            <option value="volvo">United States</option>
+                            <option value="saab">Brazil</option>
+                            <option value="opel">Canada</option>
+                            <option value="opel">Mexico</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="body">Issuing Body</label>
+                        <br />
+                        <select id="body">
+                            <option value="Option 1">Option 1</option>
+                            <option value="Option 2">Option 2</option>
+                            <option value="Option 3">Option 3</option>
+                            <option value="Option 4">Option 4</option>
+                        </select>
+                    </div>
+                    <CheckBox>
+                        <label class="switch">
+                            <input type="checkbox" />
+                            <span class="slider round"></span>
+                        </label><label className="Switch">Show products whose documents have unread comments </label>
+                    </CheckBox>
+                </ProdSelec>
+                <Document>
                     <Faq>
-                            <Toggle title="Company 1">
-                                <div className="anwser">
-                                    <p>MODEL DOCUMENT - VERSION</p>
-                                </div>
-                            </Toggle>
-                            <Toggle title="Company 2">
-                                <div className="anwser">
-                                    <p>MODEL DOCUMENT - VERSION</p>
-                                </div>
-                            </Toggle>    
+                        <Toggle title="Company 1">
+                            <div className="anwser">
+                                <p>MODEL DOCUMENT - VERSION</p>
+                            </div>
+                        </Toggle>
+                        <Toggle title="Company 2">
+                            <div className="anwser">
+                                <p>MODEL DOCUMENT - VERSION</p>
+                            </div>
+                        </Toggle>
                     </Faq>
-                    <button > LOAD MORE </button>           
-            </Document>
-        </Main>
-    </Container>
-         
+                    <button > LOAD MORE </button>
+                </Document>
+            </Main>
+        </Container>
+
     )
 }
 

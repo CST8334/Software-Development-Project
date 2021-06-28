@@ -1,7 +1,7 @@
 
 import React from 'react'
 import styled from 'styled-components';
-import Logo from '../img/logo.png';
+import Logo from '../img/Logo.png';
 import axios from "axios";
 import "../index.css";
 import { Link, Route, Redirect } from 'react-router-dom';

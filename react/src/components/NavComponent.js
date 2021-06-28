@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import Logo from '../img/logo.png';
+import Logo from '../img/Logo.png';
 import Person from '../img/person.jpg';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -31,7 +31,7 @@ const NavComponent = ({ history }) => {
           <img src={Person} alt="" id="person" />
         </li>
         <li>
-          <Link id="profile" to="/profile" onClick={handleLogout(history)}>LogOut</Link>
+          <Link id="logout" to="/profile" onClick={handleLogout(history)}>LogOut</Link>
         </li>
       </ul>
     </StyledNav>
@@ -78,12 +78,12 @@ const StyledNav = styled.nav`
         padding-left: 10rem;
         position: relative;
         top: 20px;
-        right: 50vw;
+        right: 25vw;
     }
 
     #person{
         position: relative;
-        right: -40vw;
+        right: -25vw;
         top: -20px;
         width: 50px;
         border-radius: 50%;
@@ -92,7 +92,11 @@ const StyledNav = styled.nav`
     #profile{
         position: relative;
         top: -2rem;
-        right: -35vw;
+        right: -23vw;
+    }
+    #logout{
+      position: relative;
+      right: -28vw;
     }
 
 `
