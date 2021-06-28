@@ -101,6 +101,7 @@ class LoginFormComponent extends React.Component {
                         id="user"
                         value={this.state.username}
                         onChange={this.updateUsername}
+                        autoComplete="off"
                     />
                     <p id="alreadyUser" style={{ color: "red" }}></p>
                     <label htmlFor="password">Password</label>

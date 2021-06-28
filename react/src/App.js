@@ -10,6 +10,7 @@ import "./index.css";
 import ProfilePage from './pages/Profile';
 import CreateAccount from './pages/CreateAccount';
 import ForgotPass from './pages/ForgotPass';
+import ForgotTwo from './pages/forgotTwo'
 
 function PrivateRoute({ children, ...rest }) {
   return (
@@ -49,6 +50,9 @@ function App() {
           </Route>
           <Route path="/forgotpass">
             <ForgotPass />
+          </Route>
+          <Route path="/forgot">
+            <ForgotTwo />
           </Route>
         </Switch>
       </MainContent>
