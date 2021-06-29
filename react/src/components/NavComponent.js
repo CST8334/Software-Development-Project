@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import Logo from '../img/Logo.png';
+import Logo from '../img/logo.png';
 import Person from '../img/person.jpg';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';

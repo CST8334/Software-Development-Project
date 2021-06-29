@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import axios from "axios";
 import { Link } from 'react-router-dom'
-import Logo from '../img/Logo.png'
+import Logo from '../img/logo.png'
 
 class CreateAccount extends React.Component {
 

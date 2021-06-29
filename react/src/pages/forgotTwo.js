@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import Logo from '../img/Logo.png'
+import Logo from '../img/logo.png'
 import Checked from '../img/unnamed.png'
 
 export class forgotTwo extends Component {
