@@ -3,7 +3,6 @@ import Toggle from '../components/Toggle';
 import styled from 'styled-components';
 import Modal from '../components/Modal'
 
-
 const BUTTON_WRAPPER_STYLES = {
     position: 'relative',
     zIndex: 1
@@ -14,60 +13,65 @@ const Products = () => {
     return (
         
     <Container>
-        <FirstLine>
-            <h1>Products</h1>
-            <div class="input-field col s12">
-            <label>Sort by: </label>
-                <select>
-                    <option value="" disabled selected>Choose..</option>
-                    <option value="1">Status</option>
-                    <option value="2">Alphabetical</option>
-                </select>
+        <header1>
+        <h1>Products</h1>
+        </header1>
+        <header2>    
+            <div class="sort">
+                <label>Sort by: </label>
+                    <select>
+                        <option value="" disabled selected>Choose..</option>
+                        <option value="1">Status</option>
+                        <option value="2">Alphabetical</option>
+                    </select>
             </div>
+        </header2>
+        <header3>
+            <input type="text" placeholder="Search.." />
+        </header3>
+        <header4>
             <div class="topnav">
-                <input type="text" placeholder="Search.." />
                 <button onClick={() => setIsOpen(true)}> CREATE PRODUCT </button>
-                <div style={BUTTON_WRAPPER_STYLES}>
-                        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-                            <form>
-                                <div>
-                                    <p>Product Name</p>
-                                    <input type="text" />
-                                </div>
-                                <div>
-                                    <p>Model Name</p>
-                                    <input type="text" />
-                                </div>
-                                <div>
-                                    <p>Product Version</p>
-                                    <input type="text" />
-                                </div>
-                                <button type="button">Submit</button> 
-                            </form>
-                        </Modal>
-                </div>
+                    <div style={BUTTON_WRAPPER_STYLES}>
+                            <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                                <form>
+                                    <div>
+                                        <p>Product Name</p>
+                                        <input type="text" />
+                                    </div>
+                                    <div>
+                                        <p>Model Name</p>
+                                        <input type="text" />
+                                    </div>
+                                    <div>
+                                        <p>Product Version</p>
+                                        <input type="text" />
+                                    </div>
+                                    <button type="button">Submit</button> 
+                                </form>
+                            </Modal>
+                    </div>
             </div> 
-        </FirstLine>
-        
-        <Main>
-            <ProdSelec>
+        </header4>
+        <sidebar>    
                         <div>
+                            <h2>Filter</h2>
                             <label for="compliance">Compliance Status</label>
                             <br/>
                                 <select id="compliance">
-                                    <option value="volvo">Compliant</option>
-                                    <option value="saab">Soon to Expire</option>
-                                    <option value="opel">Expired</option>
+                                    <option value="COM">Compliant</option>
+                                    <option value="STE">Soon to Expire</option>
+                                    <option value="EXP">Expired</option>
                                 </select>
                         </div>    
                         <div>
                             <label for="country">Country</label>
                             <br/>
                                 <select id="country">
-                                    <option value="volvo">United States</option>
-                                    <option value="saab">Brazil</option>
-                                    <option value="opel">Canada</option>
-                                    <option value="opel">Mexico</option>
+                                    <option value="USA">United States</option>
+                                    <option value="BRA">Brazil</option>
+                                    <option value="CAN">Canada</option>
+                                    <option value="MEX">Mexico</option>
                                 </select>
                         </div>
             
@@ -86,35 +90,144 @@ const Products = () => {
                                     <input type="checkbox"/>
                                     <span class="slider round"></span>
                                 </label><label className="Switch">Show products whose documents have unread comments </label>
-                        </CheckBox>     
-            </ProdSelec>
-            <Document>
-                    <Faq>
-                            <Toggle title="Company 1">
-                                <div className="anwser">
-                                    <p>MODEL DOCUMENT - VERSION</p>
-                                </div>
-                            </Toggle>
-                            <Toggle title="Company 2">
-                                <div className="anwser">
-                                    <p>MODEL DOCUMENT - VERSION</p>
-                                </div>
-                            </Toggle>    
-                    </Faq>
-                    <button > LOAD MORE </button>           
-            </Document>
-        </Main>
+                        </CheckBox>   
+        </sidebar>
+        <main>
+            <MainGrid>
+                <mg1>
+                        <Faq>
+                                <Toggle title="Company 1">
+                                    <div className="anwser">
+                                        <p>MODEL DOCUMENT - VERSION</p>
+                                    </div>
+                                </Toggle>
+                                <Toggle title="Company 2">
+                                    <div className="anwser">
+                                        <p>MODEL DOCUMENT - VERSION</p>
+                                    </div>
+                                </Toggle> 
+                        </Faq>   
+                </mg1>
+                <mg2>
+                <button>LOAD MORE</button>
+                </mg2>
+                    
+            </MainGrid>
+        </main>
     </Container>
-         
     )
 }
 
+const Container = styled.div`
+    display: grid;
+    grid-template-columns: 5% 20% 40% 10%;
+    grid-template-rows: 20px auto 20px;
+    grid-gap: 1rem;
 
-const Document = styled.div`
-    flex-direction: column;
+    header1{
+        
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+       
+    }
+    header2{
+        
+        grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        justify-self: start;
+    }
+    header3{
+        
+        grid-column-start: 4;
+        grid-column-end: 5;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        justify-self: end;
+           
+    }
+    header4{
+        
+        grid-column-start: 5;
+        grid-column-end: 6;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        justify-self: start;
+    }
+    main{
 
+        grid-column-start: 3;
+        grid-column-end: 6;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        align-self: start;
+        
+      }
+    sidebar{
+       
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        
+      }
+`
+const MainGrid = styled.div`
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: auto auto auto;
+    mg1{
+        grid-column-start: 1;
+        grid-column-end: 5;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        
+    }
+
+    mg2{
+        grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 3;
+        grid-row-end: 3;
+       
+        
+    }
+    
 `
 
+const Faq = styled.div`
+    width: 600px;
+    height: 200px;
+    margin: 20px;
+    padding: 1px;
+    display: flex;
+    background: white;
+    flex-direction: column;
+    border-radius: 20px;
+    display: block;
+    span{
+        display: block;
+    }
+    h2{
+        padding-bottom: 2rem;
+        font-weight: lighter;
+    }
+    .faq-line{
+        background: #cccccc;
+        height: 0.2rem;
+        margin: 2rem 0rem;
+        width: 100%;
+    }
+    .answer{
+        padding: 2rem 0rem;
+        p{
+            padding: 1rem 0rem;
+        }
+    }
+`
 const CheckBox = styled.div`
 .switch {
     position: relative;
@@ -184,99 +297,5 @@ const CheckBox = styled.div`
    }
 `
 
-const FirstLine = styled.div`
-    
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-
-    button {
-        background-color: #ccc;
-    }
-`
-
-const Container = styled.div`
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-
-    h1{
-        marginTop: '3em';
-    }
-    h2 {
-        margin: '4em 0em 2em';
-    }
-    h3 {
-        marginTop: '2em';
-        padding: '2em 0em';
-    }
-
-    last {
-        marginBottom: '300px';
-    }
-`
-const Main = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-`
-const ProdSelec = styled.div`
-    width: 200px;
-    height: 200px;
-    margin: 50px;
-    padding: 10px;
-    display: flex;
-    background: white;
-    flex-direction: column;
-    border-radius: 20px;
-
-    .Switch {
-        flex-direction: row;
-    }
-    
-`
-const Faq = styled.div`
-
-    width: 600px;
-    height: 200px;
-    margin: 20px;
-    padding: 1px;
-    display: flex;
-    background: white;
-    flex-direction: column;
-    border-radius: 20px;
-
-    display: block;
-    span{
-        display: block;
-    }
-
-    h2{
-        padding-bottom: 2rem;
-        font-weight: lighter;
-    }
-
-    .faq-line{
-        background: #cccccc;
-        height: 0.2rem;
-        margin: 2rem 0rem;
-        width: 100%;
-    }
-
-    .answer{
-        padding: 2rem 0rem;
-        p{
-            padding: 1rem 0rem;
-        }
-    }
-`
-
 export default Products
+
