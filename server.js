@@ -3,25 +3,20 @@ const { log } = require("./util");
 const { getUserByUsername, insertNewUser } = require("./mongo");
 const { salt, hash, safeCompare } = require("./crypto");
 
-// setup the server itself 
+// setup the server itself
 const express = require("express");
 const server = express();
 
-//express is a build in node package which helps us write web servers
 server.use(express.json());
 server.use(express.urlencoded());
 
 const path = require("path");
-
 
 const PORT = process.env.PORT || 5555;
 server.use(express.static(path.join(__dirname, "/react/build"))).listen(PORT, () => {
     log(`Listening on port: ${PORT}`);
 });
 
-//this the location for info reponse body that the server will send back with the tail url which
-//the response and the response can be either access granted or denied with info on what error
-//response is sent back 
 server.post("/login", async (request, response) => {
     const authorizationHeader = request.header("Authorization")
 
@@ -51,7 +46,6 @@ server.post("/login", async (request, response) => {
                     msg: "Succesfully logged in."
                 });
 
-
             } else {
                 return response.status(400).json({
                     code: -2,
@@ -77,6 +71,7 @@ server.post("/register", async (request, response) => {
         });
         return;
     }
+<<<<<<< HEAD
     if(!request.body.password || request.body.password.length === 0){
         response.status(400).json({
             code: -2,
@@ -112,6 +107,8 @@ server.post("/register", async (request, response) => {
         });
         return;
     }
+=======
+>>>>>>> c2500105165d3502e2c62c0c19aeba99e4e3dcb4
 
 
     const salt_ = salt();
@@ -124,8 +121,7 @@ server.post("/register", async (request, response) => {
     });
 });
 
-//sends the the index back to user 
-server.get("/*", (request, response) => {
+server.get("/", (request, response) => {
     response.sendFile(path.join(__dirname, "/react/build/index.html"));
 });
 

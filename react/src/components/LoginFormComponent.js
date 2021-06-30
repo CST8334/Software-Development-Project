@@ -33,35 +33,26 @@ class LoginFormComponent extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        axios.post('/login', {}, {
-            auth: {
-                username: this.state.username,
-                password: this.state.password
-            }
-        })
-            .then(response => {
-                console.log(response)
-                if (response.data.code === 0) {
+        (async () => {
+            try {
+                const res = await axios.post('/login', {}, {
+                    auth: {
+                        username: this.state.username,
+                        password: this.state.password
+                    }
+                });
+                if (res.data.code === 0) {
                     window.sessionStorage.setItem("LoggedIn", true)
                     window.location.href = '/home';
                 }
-
-            })
-            .catch(error => {
-                if (error.response) {
-                    console.log(error.response);
-                    if (error.response.data.code === -2) {
-                        document.getElementById("wrongpass").innerHTML = "Wrong password!"
-                    }
-                    if (error.response.data.code === -1) {
-                        document.getElementById("alreadyUser").innerHTML = "There is no user with that username!"
-                    }
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log(error);
+                if (res.data.code === 99) {
+                    console.log('wrong password')
+                    alert(res.data.msg);
                 }
-            });
+            } catch (e) {
+                console.error(e);
+            }
+        })();
     }
 
     testRegister(event) {
@@ -102,7 +93,7 @@ class LoginFormComponent extends React.Component {
                         value={this.state.username}
                         onChange={this.updateUsername}
                     />
-                    <p id="alreadyUser" style={{ color: "red" }}></p>
+
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
@@ -110,7 +101,7 @@ class LoginFormComponent extends React.Component {
                         value={this.state.password}
                         onChange={this.updatePassword}
                     />
-                    <p id="wrongpass" style={{ color: "red" }}></p>
+
                     <Footer>
                         <FlexRow>
                             <input type="checkbox" id="rememberMe" />

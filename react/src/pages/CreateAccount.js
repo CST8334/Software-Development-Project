@@ -11,7 +11,6 @@ class CreateAccount extends React.Component {
         this.testRegister = this.testRegister.bind(this);
         this.updateUsername = this.updateUsername.bind(this);
         this.updatePassword = this.updatePassword.bind(this);
-
     }
 
     updateUsername(event) {
@@ -31,6 +30,7 @@ class CreateAccount extends React.Component {
                     username: this.state.username,
                     password: this.state.password,
                 });
+<<<<<<< HEAD
                 if (res.data.code === 0) {
                     document.getElementById("accountCreated").innerHTML = "Account Created!"
                     setTimeout(() => { window.location.href = '/login'; }, 1500)
@@ -53,6 +53,8 @@ class CreateAccount extends React.Component {
                 if (res.data.code === -6) {
                     document.getElementById("alreadyUser").innerHTML = "your password must have a length of at least 8 characters"
                 }
+=======
+>>>>>>> c2500105165d3502e2c62c0c19aeba99e4e3dcb4
 
             } catch (e) {
                 console.error(e);
@@ -68,21 +70,22 @@ class CreateAccount extends React.Component {
                 <Title>Create Account</Title>
                 <Form>
                     <input id="email"
-                        ref="email"
                         type="text"
-                        placeholder="Email"
+                        placeholder="Name"
                         value={this.state.username}
                         onChange={this.updateUsername} />
                     <input type="text"
-                        ref="password"
                         placeholder="Password"
                         value={this.state.password}
                         onChange={this.updatePassword} />
                 </Form>
                 <input type="submit" value="Sign Up" onClick={this.testRegister} />
+<<<<<<< HEAD
                 <p id="accountCreated" style={{ color: "green" }}></p>
                 <p id="alreadyUser" style={{ color: "red" }}></p>
                 <p id="badPassword" style={{ color: "red" }}></p>
+=======
+>>>>>>> c2500105165d3502e2c62c0c19aeba99e4e3dcb4
             </Container>
         )
     }
