@@ -17,17 +17,20 @@ const NavComponent = ({ history }) => {
   return (
     <StyledNav>
       <Link id="logo" to="/"><img src={Logo} alt="" /></Link>
-      <ul>
+      <ul id="listOne">
         <li>
           <Link to="/home">Home</Link>
-          <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/' ? '50%' : '0%' }} />
+          <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/home' ? '3%' : '0%' }} />
         </li>
         <li>
           <Link to="/products">Products</Link>
-          <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/work' ? '50%' : '0%' }} />
+          <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/products' ? '4%' : '0%' }} />
         </li>
+      </ul>
+      <ul id="listTwo">
         <li>
           <Link id="profile" to="/profile">Name</Link>
+          <Line id="personLine" transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/profile' ? '3%' : '0%' }} />
           <img src={Person} alt="" id="person" />
         </li>
         <li>
@@ -39,75 +42,58 @@ const NavComponent = ({ history }) => {
 }
 
 const StyledNav = styled.nav`
-    height: 5vh;
     margin: auto;
-    justify-content: space-between;
-    align-items:center;
-    padding: 1rem 10rem;
-    background-color: lightblue;
+    background-color: white;
     position: sticky;
     top: 0;
-    height: 6vh;
-
-    background-color: rgb(var(--aw-white));
-
+    height: 10vh;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+    justify-content: center;
     a {
         color: black;
         text-decoration: none;
         font-size: 20px;
         font-weight: bold;
     }
-
-    ul{
+    #listOne{
         display: flex;
         list-style: none;
-        margin-left: 100px;
+        justify-content: space-evenly;
+        margin-right: 40rem;
     }
-
-    #logo{
+    #listTwo, li{
+        display: flex;
+        list-style: none;
+        justify-content: flex-end;
+        align-items: center;
+        margin-right: 8rem;
+        margin-top: -0.8rem;
         img{
-            width: 200px;
+          margin-left: 30px;
         }
     }
-
-    li{
-        padding-left: 10rem;
-        position: relative;
-        top: 20px;
-        right: 50vw;
+    #logo{
+        img{
+            width: 350px;
+        }
     }
-
     #person{
-        position: relative;
-        right: -40vw;
-        top: -20px;
         width: 50px;
         border-radius: 50%;
     }
-
-    #profile{
-        position: relative;
-        top: -2rem;
-        right: -35vw;
+    #personLine{
+      right: 26vw;
     }
 
 `
 
 const Line = styled(motion.div)`
     height: 0.3rem;
-    background: #8ecae6;
+    background: #12a0e0;
     width: 0%;
     position: absolute;
-    bottom: -80%;
-    left: 60%;
-    @media (max-width: 1300px){
-        left: 0%;
-        top: 99%;
-    }
+    bottom: 30px;
+    
 `
 
 export default NavComponent;
