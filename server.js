@@ -71,7 +71,7 @@ server.post("/register", async (request, response) => {
         });
         return;
     }
-<<<<<<< HEAD
+
     if(!request.body.password || request.body.password.length === 0){
         response.status(400).json({
             code: -2,
@@ -107,8 +107,6 @@ server.post("/register", async (request, response) => {
         });
         return;
     }
-=======
->>>>>>> c2500105165d3502e2c62c0c19aeba99e4e3dcb4
 
 
     const salt_ = salt();
