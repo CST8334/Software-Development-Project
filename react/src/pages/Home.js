@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import HomeChart from '../components/HomeChart';
 import TabNav from '../components/TabNav';
+import SampleGraph from '../img/SampleGraph.png'
 //recat has setup test
 function Home() {
     return (
@@ -23,7 +24,7 @@ function Home() {
                             <h3>this is comments tab</h3>
                         </Tabcontent>
                     </Tabs>
-                    <img src= "react/src/img/SampleGraph.png"/> 
+                    <img src={SampleGraph} alt="" />
                 </Port>
                 <Starboard>
                     <label>What's New</label>
@@ -33,6 +34,7 @@ function Home() {
                         <p>
                         <Button>Secondary</Button>
                         <a href="#">Dismiss</a>
+
                         </p>
                         </div>
                     </NoticeBars>
@@ -123,7 +125,6 @@ const NoticeBars = styled.div`
     padding: 10px;
     margin: 10px;
 
-
     button{
         padding: 15px 32px;
         background-color: white;
@@ -135,29 +136,30 @@ const NoticeBars = styled.div`
     button:hover {
         background-color: #ccc;
     }
-    a:href{
-        margin: 4px 2px;
-        font-size: 10px;
+    a{
+        padding-left: 30px;
+        margin-top: 15px;
+        margin-right: 110px;
+        float: right;
+        font-size: 12px;
         text-decoration: underline;
         text-color: #56bbe7;
-        
     }
 `
 //The margins that make the split section for the middle of the page
 
-// const Dismisser = style.a`
-//     text-size: 12px;
-
-// `
 
 const Tabs = styled.div`
+    display: flex;
     overflow: hidden;
+    justify-content: space-evenly;
     boarder: 1px solid #ccc;
     background-color: white;
     border-radius: 20px;
+    float: center;
     button{
         background-color: white;
-        float: left;
+        float: center;
         border: none;
         outline: none;
         cursor: pointer;
