@@ -2,7 +2,9 @@ import React from 'react'
 import styled from 'styled-components';
 import HomeChart from '../components/HomeChart';
 import TabNav from '../components/TabNav';
-import SampleGraph from '../img/SampleGraph.png'
+import HomeBar from "../components/HomeBar"
+import "../index.css"
+
 //recat has setup test
 function Home() {
     return (
@@ -10,21 +12,17 @@ function Home() {
             <label>Here are the highlights of your account</label>
             <Main>
                 <Port>
-                    <Tabs>
-                        <button>Compliance</button>
-                        <button>Product</button>
-                        <button>Comments</button>
-                        <Tabcontent>
+                    <HomeBar>
+                        <HomeTab label="Compliance">
                             <HomeChart/>
-                        </Tabcontent>
-                        <Tabcontent>
+                        </HomeTab>
+                        <HomeTab label="Product">
                             <h3>this is product tab</h3>
-                        </Tabcontent>
-                        <Tabcontent>
+                        </HomeTab>
+                        <HomeTab label="Comments">
                             <h3>this is comments tab</h3>
-                        </Tabcontent>
-                    </Tabs>
-                    <img src={SampleGraph} alt="" />
+                        </HomeTab>
+                    </HomeBar>
                 </Port>
                 <Starboard>
                     <label>What's New</label>
@@ -86,6 +84,7 @@ const Container = styled.div`
         marginBottom: '300px';
     }
 `
+//The margins that make the split section for the middle of the page
 const Main = styled.div`
     width: 100%;
     display: flex;
@@ -106,12 +105,13 @@ const Starboard = styled.div`
 // Port means left
 const Port = styled.div`
     width: 40%;
+    flex-direction: row;
     height: 400px;
-    margin: 20px;
-    padding: 1px;
+    padding: 10px;
     display: flex;
+    flex-wrap: wrap;
     background: white;
-    flex-direction: column;
+    justify-content: space-evenly;
     border-radius: 20px;
 `
 const Button = styled.button`
@@ -146,50 +146,9 @@ const NoticeBars = styled.div`
         text-color: #56bbe7;
     }
 `
-//The margins that make the split section for the middle of the page
 
 
-const Tabs = styled.div`
-    display: flex;
-    overflow: hidden;
-    justify-content: space-evenly;
-    boarder: 1px solid #ccc;
-    background-color: white;
-    border-radius: 20px;
-    float: center;
-    button{
-        background-color: white;
-        float: center;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 14px 16px;
-        transition: 0.3s;
-    }
-
-    button:hover {
-        background-color: #ccc;
-    }
-
-    h3{
-        display: none;
-        padding: 6px 12px;
-        border: 1px solid #ccc;
-        border-top: none;
-        
-    }
-
-    button.active {
-        background-color: #ccc;
-        border: 1px solid red;
-    }
-`
-//Stuff thats in the complience, product, and comments tabs
-const Tabcontent = styled.div`
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
-    border: 1px solid red;
+//Stuff thats in the complience, product, and comments HomeBar
+const HomeTab = styled.div`
 `
 export default Home

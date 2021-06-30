@@ -67,3 +67,24 @@ li, ul {
   margin-right: 16px;
   font-size: 17px;
 }
+.tab-list {
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding-left: 0;
+  display: flex;
+  justify-content: space-evenly;
+  float: center;
+}
+
+.hometab-list-item {
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  padding: 0.5rem 0.75rem;
+}
+
+.hometab-list-active {
+  background-color: white;
+  border: solid #ccc;
+  border-width: 1px 1px 0 1px;
+}

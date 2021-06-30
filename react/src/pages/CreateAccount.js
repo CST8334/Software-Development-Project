@@ -31,10 +31,7 @@ class CreateAccount extends React.Component {
                     username: this.state.username,
                     password: this.state.password,
                 });
-<<<<<<< HEAD
 
-=======
->>>>>>> 3d079f9446a6f2f2d208ec51a982d0962162b51d
                 if (res.data.code === 0) {
                     document.getElementById("accountCreated").innerHTML = "Account Created!"
                     setTimeout(() => { window.location.href = '/login'; }, 1500)
@@ -42,7 +39,7 @@ class CreateAccount extends React.Component {
                 if (res.data.code === -1) {
                     document.getElementById("alreadyUser").innerHTML = "There is already a user with that username!"
                 }
-<<<<<<< HEAD
+
                 if (res.data.code === -2) {
                     document.getElementById("alreadyUser").innerHTML = "You can not have a blank password!"
                 }
@@ -59,8 +56,7 @@ class CreateAccount extends React.Component {
                     document.getElementById("alreadyUser").innerHTML = "your password must have a length of at least 8 characters"
                 }
 
-=======
->>>>>>> 3d079f9446a6f2f2d208ec51a982d0962162b51d
+
 
             } catch (e) {
                 console.error(e);
@@ -154,14 +150,14 @@ class CreateAccount extends React.Component {
                     <p id="accountCreated" style={{ color: "green" }}></p>
                     <p id="alreadyUser" style={{ color: "red" }}></p>
                 </Form>
-<<<<<<< HEAD
+
                 <input type="submit" value="Sign Up" onClick={this.testRegister} />
 
                 <p id="accountCreated" style={{ color: "green" }}></p>
                 <p id="alreadyUser" style={{ color: "red" }}></p>
                 <p id="badPassword" style={{ color: "red" }}></p>
 
-=======
+
                 <div id="message">
                     <h3>Password must contain the following:</h3>
                     <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
@@ -169,7 +165,7 @@ class CreateAccount extends React.Component {
                     <p id="number" class="invalid">A <b>number</b></p>
                     <p id="length" class="invalid">Minimum <b>8 characters</b></p>
                 </div>
->>>>>>> 3d079f9446a6f2f2d208ec51a982d0962162b51d
+
             </Container>
         )
 
