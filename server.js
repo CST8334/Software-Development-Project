@@ -75,21 +75,48 @@ server.post("/register", async (request, response) => {
             code: -1,
             msg: "There is already a user with the provided username."
         });
+        return;
     }
-    if(request.body.password){
-        log(typeof request.body.password)
+    if(!request.body.password || request.body.password.length === 0){
+        response.status(400).json({
+            code: -2,
+            msg: "you must enter a password"
+        });
+        return;
     }
+    if(!request.body.password.match(/[A-z]/)){
+        response.status(400).json({
+            code: -3,
+            msg: "your password must contain at least one capital letter"
+        });
+        return;
+    }
+    if(!request.body.password.match(/[0-9]/)){
+        response.status(400).json({
+            code: -4,
+            msg: "your password must contain at least one digit number"
+        });
+        return;
+    }
+    if(!request.body.password.match(/[!@#$%^&*()_\-=+|<>`~]/)){
+        response.status(400).json({
+            code: -5,
+            msg: "your password must contain at least one special character such as !@#$%^&*()_-=+|<>`~ "
+        });
+        return;
+    }
+    if(request.body.password.length < 7){
+        response.status(400).json({
+            code: -6,
+            msg: "your password must have a length of at least 8 characters"
+        });
+        return;
+    }
+
 
     const salt_ = salt();
     const result = await insertNewUser(request.body.username, hash(request.body.password, salt_), salt_);
 
-    if (result == true) {
-        response.status(200).json({
-            code: 1,
-            msg: "User created"
-        })
-        console.log('user created');
-    }
 
     response.status(200).json({
         code: 0,
