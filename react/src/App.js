@@ -10,6 +10,7 @@ import "./index.css";
 import ProfilePage from './pages/Profile';
 import CreateAccount from './pages/CreateAccount';
 import ForgotPass from './pages/ForgotPass';
+import ForgotTwo from './pages/forgotTwo';
 
 //this is the component that uses the server response and with the react librarys
 //determains what will be shown to the user
@@ -56,6 +57,9 @@ function App() {
           </Route>
           <Route path="/forgotpass">
             <ForgotPass />
+          </Route>
+          <Route path="/forgottwo">
+            <ForgotTwo />
           </Route>
         </Switch>
       </MainContent>

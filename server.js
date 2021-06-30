@@ -71,6 +71,7 @@ server.post("/register", async (request, response) => {
         });
         return;
     }
+<<<<<<< HEAD
 
     if(!request.body.password || request.body.password.length === 0){
         response.status(400).json({
@@ -108,6 +109,8 @@ server.post("/register", async (request, response) => {
         return;
     }
 
+=======
+>>>>>>> 3d079f9446a6f2f2d208ec51a982d0962162b51d
 
     const salt_ = salt();
     const result = await insertNewUser(request.body.username, hash(request.body.password, salt_), salt_);
