@@ -38,6 +38,21 @@ class CreateAccount extends React.Component {
                 if (res.data.code === -1) {
                     document.getElementById("alreadyUser").innerHTML = "There is already a user with that username!"
                 }
+                if (res.data.code === -2) {
+                    document.getElementById("alreadyUser").innerHTML = "You can not have a blank password!"
+                }
+                if (res.data.code === -3) {
+                    document.getElementById("alreadyUser").innerHTML = "your password must contain at least one capital letter"
+                }
+                if (res.data.code === -4) {
+                    document.getElementById("alreadyUser").innerHTML = "your password must contain at least one digit number"
+                }
+                if (res.data.code === -5) {
+                    document.getElementById("alreadyUser").innerHTML = "your password must contain at least one special character such as !@#$%^&*()_-=+|<>`~ "
+                }
+                if (res.data.code === -6) {
+                    document.getElementById("alreadyUser").innerHTML = "your password must have a length of at least 8 characters"
+                }
 
             } catch (e) {
                 console.error(e);
@@ -67,6 +82,7 @@ class CreateAccount extends React.Component {
                 <input type="submit" value="Sign Up" onClick={this.testRegister} />
                 <p id="accountCreated" style={{ color: "green" }}></p>
                 <p id="alreadyUser" style={{ color: "red" }}></p>
+                <p id="badPassword" style={{ color: "red" }}></p>
             </Container>
         )
     }
