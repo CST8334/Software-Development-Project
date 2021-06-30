@@ -3,6 +3,7 @@
 const crypto = require("crypto");
 
 // compare two buffers for equality, but use crypto.timingSafeEqual for safety
+//this is to protect against timming attacks
 function safeCompare(a, b) {
     const lengthA = Buffer.byteLength(a);
     const lengthB = Buffer.byteLength(b);
@@ -21,7 +22,7 @@ function salt() {
     // 32 is more or less arbitrary
     return crypto.randomBytes(32).toString("hex");
 }
-
+//creates hashcode
 function hash(str, salt) {
     const h = crypto.createHmac("sha512", salt);
     h.update(str);

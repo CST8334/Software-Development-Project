@@ -27,15 +27,11 @@ const NavComponent = ({ history }) => {
           <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/work' ? '50%' : '0%' }} />
         </li>
         <li>
-          <Link to="/companies">Companies</Link>
-          <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/work' ? '50%' : '0%' }} />
-        </li>
-        <li>
           <Link id="profile" to="/profile">Name</Link>
           <img src={Person} alt="" id="person" />
         </li>
         <li>
-          <Link id="logout" to="/profile" onClick={handleLogout(history)}>LogOut</Link>
+          <Link id="profile" to="/profile" onClick={handleLogout(history)}>LogOut</Link>
         </li>
       </ul>
     </StyledNav>
@@ -82,12 +78,12 @@ const StyledNav = styled.nav`
         padding-left: 10rem;
         position: relative;
         top: 20px;
-        right: 25vw;
+        right: 50vw;
     }
 
     #person{
         position: relative;
-        right: -25vw;
+        right: -40vw;
         top: -20px;
         width: 50px;
         border-radius: 50%;
@@ -96,11 +92,7 @@ const StyledNav = styled.nav`
     #profile{
         position: relative;
         top: -2rem;
-        right: -23vw;
-    }
-    #logout{
-      position: relative;
-      right: -28vw;
+        right: -35vw;
     }
 
 `

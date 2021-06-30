@@ -43,7 +43,7 @@ export class ForgotPass extends Component {
                     // onChange={this.updateUsername}
                     />
                     <p id="alreadyUser" style={{ color: "red" }}></p>
-                    <Link to="/forgot"><input type="submit" value="Next" onClick={this.testRegister} /></Link>
+                    <Link to="/forgottwo"><input type="submit" value="Next" onClick={this.testRegister} /></Link>
                     <p id="accountCreated" style={{ color: "green" }}></p>
                     <p id="alreadyUser" style={{ color: "red" }}></p>
                 </Form>

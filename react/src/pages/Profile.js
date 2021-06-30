@@ -58,16 +58,6 @@ class INFORMATION extends React.Component {
   }
 }
 
-class PHOTO extends React.Component{
-    render(){        
-        return (
-            <div style={{float: 'right'}}>
-                <button>Upload Image</button>
-            </div>
-        );
-    }
-}
-
 class ProfilePage extends React.Component {
   render() {
     return (
@@ -75,10 +65,8 @@ class ProfilePage extends React.Component {
         <h1>
           Profile
           </h1>
-        <PHOTO />
         <ExplainText />
         <INFORMATION />
-        
       </div>
     )
   }
