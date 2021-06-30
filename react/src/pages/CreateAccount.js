@@ -70,6 +70,8 @@ class CreateAccount extends React.Component {
         var capital = document.getElementById("capital");
         var number = document.getElementById("number");
         var length = document.getElementById("length");
+        var symbol = document.getElementById("symbol");
+
         document.getElementById("message").style.display = "block";
         // When the user clicks outside of the password field, hide the message box
         myInput.onblur = function () {
@@ -114,6 +116,16 @@ class CreateAccount extends React.Component {
                 length.classList.remove("valid");
                 length.classList.add("invalid");
             }
+
+            // Validate special characters
+            var symbols = /\W/g;
+            if (myInput.value.match(symbols)) {
+                symbol.classList.remove("invalid");
+                symbol.classList.add("valid");
+            } else {
+                symbol.classList.remove("valid");
+                symbol.classList.remove("invalid");
+            }
         }
     }
 
@@ -143,7 +155,7 @@ class CreateAccount extends React.Component {
                         id="password"
                         value={this.state.password}
                         onChange={this.updatePassword}
-                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required
                         onClick={this.password}
                     />
                     <input type="submit" value="Submit" onClick={this.testRegister} />
@@ -164,6 +176,7 @@ class CreateAccount extends React.Component {
                     <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
                     <p id="number" class="invalid">A <b>number</b></p>
                     <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                    <p id="symbol" class="invalid">A <b>symbol character</b> such as <b>!@#$%^* .etc</b></p>
                 </div>
 
             </Container>
