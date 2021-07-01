@@ -14,7 +14,7 @@ const Products = () => {
         
     <Container>
         <header1>
-        <h1>Products</h1>
+        <h1><b>Products</b></h1>
         </header1>
         <header2>    
             <div class="sort">
@@ -53,10 +53,11 @@ const Products = () => {
                     </div>
             </div> 
         </header4>
-        <sidebar>    
+        <sidebar> 
+            <div class="sidebarchild">   
                         <div>
                             <h2>Filter</h2>
-                            <label for="compliance">Compliance Status</label>
+                            <label id="label" for="compliance">Compliance Status</label>
                             <br/>
                                 <select id="compliance">
                                     <option value="COM">Compliant</option>
@@ -65,7 +66,7 @@ const Products = () => {
                                 </select>
                         </div>    
                         <div>
-                            <label for="country">Country</label>
+                            <label id="label" for="country">Country</label>
                             <br/>
                                 <select id="country">
                                     <option value="USA">United States</option>
@@ -76,7 +77,7 @@ const Products = () => {
                         </div>
             
                         <div>
-                            <label for="body">Issuing Body</label>
+                            <label id="label" for="body">Issuing Body</label>
                             <br/>
                                 <select id="body">
                                     <option value="Option 1">Option 1</option>
@@ -90,7 +91,8 @@ const Products = () => {
                                     <input type="checkbox"/>
                                     <span class="slider round"></span>
                                 </label><label className="Switch">Show products whose documents have unread comments </label>
-                        </CheckBox>   
+                        </CheckBox>  
+            </div> 
         </sidebar>
         <main>
             <MainGrid>
@@ -130,6 +132,7 @@ const Container = styled.div`
         grid-column-end: 3;
         grid-row-start: 2;
         grid-row-end: 3;
+        
        
     }
     header2{
@@ -166,15 +169,36 @@ const Container = styled.div`
         align-self: start;
         
       }
+
     sidebar{
        
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 3;
-        grid-row-end: 4;
-        
+        grid-row-end: 6;
+
+        height: 70vh;
+       
+
       }
+      
+    .sidebarchild{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        h2 {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            padding-top: 1px;
+        }
+    }
+      
+      
 `
+
 const MainGrid = styled.div`
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
@@ -195,7 +219,7 @@ const MainGrid = styled.div`
        
         
     }
-    
+   
 `
 
 const Faq = styled.div`
