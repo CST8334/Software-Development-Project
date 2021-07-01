@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import Logo from '../img/logo.png'
+import Checked from '../img/unnamed.png'
 
-export class ForgotPass extends Component {
+export class forgotTwo extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
@@ -31,19 +32,14 @@ export class ForgotPass extends Component {
                 <Top>
                     <Link id="arrow" to="/login">➜</Link>
                     <img src={Logo} alt="" />
-                    <h1>Forgot Password</h1>
                 </Top>
                 <Form >
-                    <label htmlFor="username">Username</label>
-                    <input
-                        type="text"
-                        id="user"
-                        autoComplete="off"
-                    // value={this.state.username}
-                    // onChange={this.updateUsername}
-                    />
-                    <p id="alreadyUser" style={{ color: "red" }}></p>
-                    <Link to="/forgottwo"><input type="submit" value="Next" onClick={this.testRegister} /></Link>
+                    <CheckMark>
+                        <img src={Checked} alt="" />
+                    </CheckMark>
+                    <Buttons>
+                        <Link to="/forgot"><input type="submit" value="Submit" onClick={this.testRegister} /></Link>
+                    </Buttons>
                     <p id="accountCreated" style={{ color: "green" }}></p>
                     <p id="alreadyUser" style={{ color: "red" }}></p>
                 </Form>
@@ -51,6 +47,16 @@ export class ForgotPass extends Component {
         )
     }
 }
+
+const CheckMark = styled.div`
+    img{
+        width: 200px;
+    }
+`
+
+const Buttons = styled.div`
+    display: flex;
+`
 
 const Container = styled.div`
     padding: 1rem;
@@ -107,17 +113,12 @@ const Form = styled.div`
         box-sizing: border-box;
     }
 
-    input[type=checkbox] {
-        width: 20px;
-    }
-
     input[type=submit] {
-        width: 90%;
+        width: 200%;
         border: none;
         border-radius: 15px;
         cursor: pointer;
         margin-bottom: 40px;
-
         transition: 0.3s ease-in-out;
         &:hover{
             background-color: #1988bb;
@@ -125,4 +126,4 @@ const Form = styled.div`
     }
 `
 
-export default ForgotPass
+export default forgotTwo
