@@ -9,116 +9,132 @@ const BUTTON_WRAPPER_STYLES = {
 }
 
 const Products = () => {
-    const [ isOpen, setIsOpen ] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
     return (
-        
-    <Container>
-        <header1>
-        <h1><b>Products</b></h1>
-        </header1>
-        <header2>    
-            <div class="sort">
-                <label>Sort by: </label>
+
+        <Container>
+            <header1>
+                <h1><b>Products</b></h1>
+            </header1>
+            <header2>
+                <div class="sort">
+                    <label>Sort by: </label>
                     <select>
                         <option value="" disabled selected>Choose..</option>
                         <option value="1">Status</option>
                         <option value="2">Alphabetical</option>
                     </select>
-            </div>
-        </header2>
-        <header3>
-            <input type="text" placeholder="Search.." />
-        </header3>
-        <header4>
-            <div class="topnav">
-                <button onClick={() => setIsOpen(true)}> Create Product </button>
+                </div>
+            </header2>
+            <header3>
+                <input id="search" type="text" placeholder="Search.." />
+            </header3>
+            <header4>
+                <div class="topnav">
+                    <button onClick={() => setIsOpen(true)}> Create Product </button>
                     <div style={BUTTON_WRAPPER_STYLES}>
-                            <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-                                <form>
-                                    <div>
-                                        <p>Product Name</p>
-                                        <input type="text" />
-                                    </div>
-                                    <div>
-                                        <p>Model Name</p>
-                                        <input type="text" />
-                                    </div>
-                                    <div>
-                                        <p>Product Version</p>
-                                        <input type="text" />
-                                    </div>
-                                    <button type="button">Submit</button> 
-                                </form>
-                            </Modal>
+                        <Modal open={isOpen} onClose={() => setIsOpen(false)} />
+
                     </div>
-            </div> 
-        </header4>
-        <sidebar> 
-            <div class="sidebarchild">   
-                        <div>
-                            <h2>Filter</h2>
-                            <label id="label" for="compliance">Compliance Status</label>
-                            <br/>
-                                <select id="compliance">
-                                    <option value="COM">Compliant</option>
-                                    <option value="STE">Soon to Expire</option>
-                                    <option value="EXP">Expired</option>
-                                </select>
-                        </div>    
-                        <div>
-                            <label id="label" for="country">Country</label>
-                            <br/>
-                                <select id="country">
-                                    <option value="USA">United States</option>
-                                    <option value="BRA">Brazil</option>
-                                    <option value="CAN">Canada</option>
-                                    <option value="MEX">Mexico</option>
-                                </select>
-                        </div>
-            
-                        <div>
-                            <label id="label" for="body">Issuing Body</label>
-                            <br/>
-                                <select id="body">
-                                    <option value="Option 1">Option 1</option>
-                                    <option value="Option 2">Option 2</option>
-                                    <option value="Option 3">Option 3</option>
-                                    <option value="Option 4">Option 4</option>
-                                </select>
-                        </div>
-                        <CheckBox>
-                                <label class="switch">
-                                    <input type="checkbox"/>
-                                    <span class="slider round"></span>
-                                </label><label className="Switch">Show products whose documents have unread comments </label>
-                        </CheckBox>  
-            </div> 
-        </sidebar>
-        <main>
-            <MainGrid>
-                <mg1>
+                </div>
+            </header4>
+            <sidebar>
+                <div class="sidebarchild">
+                    <div>
+                        <h2>Filter</h2>
+                        <label id="label" for="compliance">Compliance Status</label>
+                        <br />
+                        <select id="compliance">
+                            <option value="COM">Compliant</option>
+                            <option value="STE">Soon to Expire</option>
+                            <option value="EXP">Expired</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label id="label" for="country">Country</label>
+                        <br />
+                        <select id="country">
+                            <option value="USA">United States</option>
+                            <option value="BRA">Brazil</option>
+                            <option value="CAN">Canada</option>
+                            <option value="MEX">Mexico</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label id="label" for="body">Issuing Body</label>
+                        <br />
+                        <select id="body">
+                            <option value="Option 1">Option 1</option>
+                            <option value="Option 2">Option 2</option>
+                            <option value="Option 3">Option 3</option>
+                            <option value="Option 4">Option 4</option>
+                        </select>
+                    </div>
+                    <CheckBox>
+                        <label class="switch">
+                            <input type="checkbox" />
+                            <span class="slider round"></span>
+                        </label><label className="Switch">Show products whose documents have unread comments </label>
+                    </CheckBox>
+                </div>
+            </sidebar>
+            <main>
+                <MainGrid>
+                    <mg1>
                         <Faq>
-                                <Toggle title="Company 1">
-                                    <div className="anwser">
-                                        <p>MODEL DOCUMENT - VERSION</p>
-                                    </div>
-                                </Toggle>
-                                <Toggle title="Company 2">
-                                    <div className="anwser">
-                                        <p>MODEL DOCUMENT - VERSION</p>
-                                    </div>
-                                </Toggle> 
-                        </Faq>   
-                </mg1>
-                <mg2>
-                    <button>LOAD MORE</button>
-                </mg2>
-                    
-            </MainGrid>
-        </main>
-    </Container>
+                            <Toggle title="<Company Name>">
+                                <div className="anwser">
+                                    <p>MODEL DOCUMENT - VERSION</p>
+                                </div>
+                            </Toggle>
+                            <Toggle title="<Company Name>">
+                                <div className="anwser">
+                                    <p>MODEL DOCUMENT - VERSION</p>
+                                </div>
+                            </Toggle>
+                        </Faq>
+                    </mg1>
+                    <mg2>
+                        <button>LOAD MORE</button>
+                    </mg2>
+
+                </MainGrid>
+            </main>
+        </Container>
     )
 }
+
+const Faq = styled.div`
+    width: 55vw;
+    height: 200px;
+    margin: 20px;
+    padding: 1px;
+    display: flex;
+    background: white;
+    flex-direction: column;
+    border-radius: 20px;
+    display: block;
+    span{
+        display: block;
+    }
+    h2{
+        padding-bottom: 2rem;
+        font-weight: lighter;
+    }
+    .faq-line{
+        background: #cccccc;
+        height: 0.2rem;
+        margin: 2rem 0rem;
+        width: 100%;
+    }
+    .answer{
+        padding: 2rem 0rem;
+        p{
+            padding: 1rem 0rem;
+        }
+    }
+`
 
 const Container = styled.div`
     display: grid;
@@ -126,12 +142,43 @@ const Container = styled.div`
     grid-template-rows: 20px auto 20px;
     grid-gap: 1rem;
 
+    .sort{
+        select{
+            width: 150px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+        }
+        option{
+            border-radius: 8px;
+        }
+    }
+
+    #search{
+        height: 40px;
+        width: 13vw;
+        border: none;
+        border-radius: 30px;
+        &::placeholder{
+            padding-left: 15px;
+        }
+
+        &::focus{
+            outline: none;
+        }
+    }
+
     header1{
         
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 2;
         grid-row-end: 3;
+
+        h1{
+            font-size: 30px;
+            font-weight: 100;
+        }
         
        
     }
@@ -164,12 +211,21 @@ const Container = styled.div`
         grid-row-start: 2;
         grid-row-end: 3;
         justify-self: start;
+
+        .topnav{
+            form{
+                width: 40vw;
+            }
+        }
         
 
         button{
-            width: 100px;
+            width: 150px;
+            height: 40px;
             background-color: #2196F3;
             color: white;
+            border: none;
+            border-radius: 8px;
         }
     }
     main{
@@ -208,7 +264,9 @@ const Container = styled.div`
         }
         select {
              width: 200px;
-             height: 30px;
+             height: 40px;
+             border: none;
+             border-radius: 8px;
         }
 
         option {
@@ -243,37 +301,6 @@ const MainGrid = styled.div`
         }
     }
    
-`
-
-const Faq = styled.div`
-    width: 600px;
-    height: 200px;
-    margin: 20px;
-    padding: 1px;
-    display: flex;
-    background: white;
-    flex-direction: column;
-    border-radius: 20px;
-    display: block;
-    span{
-        display: block;
-    }
-    h2{
-        padding-bottom: 2rem;
-        font-weight: lighter;
-    }
-    .faq-line{
-        background: #cccccc;
-        height: 0.2rem;
-        margin: 2rem 0rem;
-        width: 100%;
-    }
-    .answer{
-        padding: 2rem 0rem;
-        p{
-            padding: 1rem 0rem;
-        }
-    }
 `
 const CheckBox = styled.div`
 .switch {
