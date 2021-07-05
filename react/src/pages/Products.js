@@ -31,7 +31,7 @@ const Products = () => {
         </header3>
         <header4>
             <div class="topnav">
-                <button onClick={() => setIsOpen(true)}> CREATE PRODUCT </button>
+                <button onClick={() => setIsOpen(true)}> Create Product </button>
                     <div style={BUTTON_WRAPPER_STYLES}>
                             <Modal open={isOpen} onClose={() => setIsOpen(false)}>
                                 <form>
@@ -111,7 +111,7 @@ const Products = () => {
                         </Faq>   
                 </mg1>
                 <mg2>
-                <button>LOAD MORE</button>
+                    <button>LOAD MORE</button>
                 </mg2>
                     
             </MainGrid>
@@ -142,6 +142,10 @@ const Container = styled.div`
         grid-row-start: 2;
         grid-row-end: 3;
         justify-self: start;
+
+        select{
+            height: 30px;
+        }
     }
     header3{
         
@@ -150,6 +154,7 @@ const Container = styled.div`
         grid-row-start: 2;
         grid-row-end: 3;
         justify-self: end;
+        
            
     }
     header4{
@@ -159,6 +164,13 @@ const Container = styled.div`
         grid-row-start: 2;
         grid-row-end: 3;
         justify-self: start;
+        
+
+        button{
+            width: 100px;
+            background-color: #2196F3;
+            color: white;
+        }
     }
     main{
 
@@ -194,6 +206,14 @@ const Container = styled.div`
             margin-top: 10px;
             padding-top: 1px;
         }
+        select {
+             width: 200px;
+             height: 30px;
+        }
+
+        option {
+            width: 200px;
+        }
     }
       
       
@@ -208,7 +228,7 @@ const MainGrid = styled.div`
         grid-column-end: 5;
         grid-row-start: 1;
         grid-row-end: 3;
-        
+ 
     }
 
     mg2{
@@ -216,8 +236,11 @@ const MainGrid = styled.div`
         grid-column-end: 4;
         grid-row-start: 3;
         grid-row-end: 3;
-       
         
+        button{
+            width: 100px;
+            height: 30px;
+        }
     }
    
 `
