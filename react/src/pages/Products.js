@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Toggle from '../components/Toggle';
 import styled from 'styled-components';
 import Modal from '../components/Modal'
+import ProductsAdd from '../components/ProductsAdd'
 
 const BUTTON_WRAPPER_STYLES = {
     position: 'relative',
@@ -82,59 +82,18 @@ const Products = () => {
             <main>
                 <MainGrid>
                     <mg1>
-                        <Faq>
-                            <Toggle title="<Company Name>">
-                                <div className="anwser">
-                                    <p>MODEL DOCUMENT - VERSION</p>
-                                </div>
-                            </Toggle>
-                            <Toggle title="<Company Name>">
-                                <div className="anwser">
-                                    <p>MODEL DOCUMENT - VERSION</p>
-                                </div>
-                            </Toggle>
-                        </Faq>
+                        <ProductsAdd />
                     </mg1>
                     <mg2>
                         <button>LOAD MORE</button>
                     </mg2>
-
                 </MainGrid>
             </main>
         </Container>
     )
 }
 
-const Faq = styled.div`
-    width: 55vw;
-    height: 200px;
-    margin: 20px;
-    padding: 1px;
-    display: flex;
-    background: white;
-    flex-direction: column;
-    border-radius: 20px;
-    display: block;
-    span{
-        display: block;
-    }
-    h2{
-        padding-bottom: 2rem;
-        font-weight: lighter;
-    }
-    .faq-line{
-        background: #cccccc;
-        height: 0.2rem;
-        margin: 2rem 0rem;
-        width: 100%;
-    }
-    .answer{
-        padding: 2rem 0rem;
-        p{
-            padding: 1rem 0rem;
-        }
-    }
-`
+
 
 const Container = styled.div`
     display: grid;
@@ -294,8 +253,9 @@ const MainGrid = styled.div`
         grid-column-end: 4;
         grid-row-start: 3;
         grid-row-end: 3;
-        
         button{
+            position: fixed;
+            bottom: 5vw;
             width: 100px;
             height: 30px;
         }
