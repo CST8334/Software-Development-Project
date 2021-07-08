@@ -245,7 +245,6 @@ const MainGrid = styled.div`
         grid-column-end: 5;
         grid-row-start: 1;
         grid-row-end: 3;
- 
     }
 
     mg2{

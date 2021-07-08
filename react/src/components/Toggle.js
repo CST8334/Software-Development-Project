@@ -27,6 +27,8 @@ const Container = styled.div`
     .question{
         display: grid;
         grid-template-columns: 11vw 11vw 11vw 11vw 11vw;
+        margin-top: 1rem;
+        margin-left: 5rem;
     }
 `
 
