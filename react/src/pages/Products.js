@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from '../components/Modal'
-<<<<<<< Updated upstream
 import ProductsAdd from '../components/ProductsAdd'
-=======
-import {Link} from 'react-router-dom'
-
-
-
-
->>>>>>> Stashed changes
 
 const BUTTON_WRAPPER_STYLES = {
     position: 'relative',
@@ -19,7 +11,6 @@ const BUTTON_WRAPPER_STYLES = {
 const Products = () => {
     const [isOpen, setIsOpen] = useState(false)
     return (
-<<<<<<< Updated upstream
 
         <Container>
             <header1>
@@ -33,42 +24,6 @@ const Products = () => {
                         <option value="1">Status</option>
                         <option value="2">Alphabetical</option>
                     </select>
-=======
-        
-    <Container>
-        <FirstLine>
-            <h1>Products</h1>
-            <div class="input-field col s12">
-            <label>Sort by: </label>
-                <select>
-                    <option value="" disabled selected>Choose..</option>
-                    <option value="1">Status</option>
-                    <option value="2">Alphabetical</option>
-                </select>
-            </div>
-            <div class="topnav">
-                <input type="text" placeholder="Search.." />
-                <Link to="/FormAddDocument"><button type="button">ADD DOCUMENT</button></Link>&nbsp;&nbsp;
-                <button onClick={() => setIsOpen(true)}> CREATE PRODUCT </button>
-                <div style={BUTTON_WRAPPER_STYLES}>
-                        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-                            <form>
-                                <div>
-                                    <p>Product Name</p>
-                                    <input type="text" />
-                                </div>
-                                <div>
-                                    <p>Model Name</p>
-                                    <input type="text" />
-                                </div>
-                                <div>
-                                    <p>Product Version</p>
-                                    <input type="text" />
-                                </div>
-                                <button type="button">Submit</button> 
-                            </form>
-                        </Modal>
->>>>>>> Stashed changes
                 </div>
             </header2>
             <header3>

@@ -64,17 +64,18 @@ function App() {
           </Route>
           <Route path="/forgottwo">
             <ForgotTwo />
+          </Route>
           <Route path="/FormAddDetails">
-            <FormAddDetails/>
+            <FormAddDetails />
           </Route>
           <Route path="/FormAddDocument">
-            <FormAddDocument/>
+            <FormAddDocument />
           </Route>
           <Route path="/AddDates">
-            <AddDates/>
+            <AddDates />
           </Route>
           <Route path="/MoreInfo">
-            <MoreInfo/>
+            <MoreInfo />
           </Route>
           <Route path="/FormAddDetails">
             <FormAddDetails />
