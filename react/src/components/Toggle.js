@@ -17,11 +17,6 @@ const Toggle = ({ children, title }) => {
     )
 }
 
-// const ChildContainer = styled.div`
-//     display: flex;
-//     flex-direction: column;
-// `
-
 const Container = styled.div`
     height: 5vh;
     .question{

@@ -41,6 +41,7 @@ const Faq = styled.div`
     background: white;
     border-radius: 2px;
     box-shadow: 2px 5px 10px #dfdfdf;
+    cursor: pointer;
     .title{
         .first, .second{
             display: flex;
@@ -75,6 +76,7 @@ const Faq = styled.div`
                 width: 8vw;
                 color: white;
                 height: 40px;
+                cursor: pointer;
             }
             #two{
                 background: #d1d1d1;
@@ -86,6 +88,7 @@ const Faq = styled.div`
                 height: 30px;
                 border: none;
                 border-radius: 5px;
+                cursor: pointer;
             }
         }
     }

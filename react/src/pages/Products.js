@@ -100,7 +100,6 @@ const Container = styled.div`
     grid-template-columns: 5% 20% 40% 10%;
     grid-template-rows: 20px auto 20px;
     grid-gap: 1rem;
-
     .sort{
         select{
             width: 150px;
@@ -112,7 +111,6 @@ const Container = styled.div`
             border-radius: 8px;
         }
     }
-
     #search{
         height: 40px;
         width: 13vw;
@@ -121,19 +119,16 @@ const Container = styled.div`
         &::placeholder{
             padding-left: 15px;
         }
-
         &::focus{
             outline: none;
         }
     }
-
     header1{
         
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 2;
         grid-row-end: 3;
-
         h1{
             font-size: 30px;
             font-weight: 100;
@@ -148,7 +143,6 @@ const Container = styled.div`
         grid-row-start: 2;
         grid-row-end: 3;
         justify-self: start;
-
         select{
             height: 30px;
         }
@@ -170,14 +164,12 @@ const Container = styled.div`
         grid-row-start: 2;
         grid-row-end: 3;
         justify-self: start;
-
         .topnav{
             form{
                 width: 40vw;
             }
         }
         
-
         button{
             width: 150px;
             height: 40px;
@@ -188,7 +180,6 @@ const Container = styled.div`
         }
     }
     main{
-
         grid-column-start: 3;
         grid-column-end: 6;
         grid-row-start: 3;
@@ -196,17 +187,14 @@ const Container = styled.div`
         align-self: start;
         
       }
-
     sidebar{
        
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 3;
         grid-row-end: 6;
-
         height: 70vh;
        
-
       }
       
     .sidebarchild{
@@ -227,7 +215,6 @@ const Container = styled.div`
              border: none;
              border-radius: 8px;
         }
-
         option {
             width: 200px;
         }
@@ -246,7 +233,6 @@ const MainGrid = styled.div`
         grid-row-start: 1;
         grid-row-end: 3;
     }
-
     mg2{
         grid-column-start: 3;
         grid-column-end: 4;
@@ -331,4 +317,3 @@ const CheckBox = styled.div`
 `
 
 export default Products
-
