@@ -1,6 +1,10 @@
 import React, { Profiler } from 'react';
 import LoginFormComponent from './components/LoginFormComponent';
 import LoginPageComponent from './components/LoginPageComponent';
+import FormAddDocument from './components/FormAddDocument';
+import FormAddDetails from './components/FormAddDetails';
+import AddDates from './components/AddDates';
+import MoreInfo from './components/MoreInfo';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -40,18 +44,18 @@ function App() {
           <Route path="/login" exact>
             <LoginPageComponent />
           </Route>
-          <PrivateRoute path="/home" exact>
+          <Route path="/home" exact>
             <NavComponent />
             <Home />
-          </PrivateRoute>
-          <PrivateRoute path="/products">
+          </Route>
+          <Route path="/products">
             <NavComponent />
             <Products />
-          </PrivateRoute>
-          <PrivateRoute path="/profile">
+          </Route>
+          <Route path="/profile">
             <NavComponent />
             <ProfilePage />
-          </PrivateRoute>
+          </Route>
           <Route path="/register">
             <CreateAccount />
           </Route>
@@ -60,6 +64,17 @@ function App() {
           </Route>
           <Route path="/forgottwo">
             <ForgotTwo />
+          <Route path="/FormAddDetails">
+            <FormAddDetails/>
+          </Route>
+          <Route path="/FormAddDocument">
+            <FormAddDocument/>
+          </Route>
+          <Route path="/AddDates">
+            <AddDates/>
+          </Route>
+          <Route path="/MoreInfo">
+            <MoreInfo/>
           </Route>
         </Switch>
       </MainContent>
