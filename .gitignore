@@ -1,4 +1,6 @@
 
+.DS_Store
+
 # server
 /node_modules
 /log.txt
