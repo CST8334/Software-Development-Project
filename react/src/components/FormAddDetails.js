@@ -12,11 +12,18 @@ return(
     <React.Fragment>  
     <AppBar title="Step 2: Add Details"/>
     <br></br>
-    <label>Document Type</label>&nbsp;&nbsp;
+    <label>Certificate Type</label>&nbsp;&nbsp;
                     <select>
-                    <option value=""disabled selected> Select Type..</option>
-                    <option value="Certificate">Certificate</option> 
-                    <option value="Report">Report</option>
+                    <option value=""disabled selected> Select Certificate Type..</option>
+                    <option value="None">None</option> 
+                    <option value="EMC">EMC</option>
+                    <option value="RF">RF</option>
+                    <option value="Safety">Safety</option>
+                    <option value="DoC">DoC</option>
+                    <option value="CB">CB</option>
+                    <option value="LoA">LoA</option>
+                    <option value="CoC">CoC</option>
+                    <option value="NoA">NoA</option>
                     </select>
                     <br></br>
                     <br></br>
