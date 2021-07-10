@@ -1,6 +1,10 @@
 import React, { Profiler } from 'react';
 import LoginFormComponent from './components/LoginFormComponent';
 import LoginPageComponent from './components/LoginPageComponent';
+import FormAddDocument from './components/FormAddDocument';
+import FormAddDetails from './components/FormAddDetails';
+import AddDates from './components/AddDates';
+import MoreInfo from './components/MoreInfo';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -10,7 +14,13 @@ import "./index.css";
 import ProfilePage from './pages/Profile';
 import CreateAccount from './pages/CreateAccount';
 import ForgotPass from './pages/ForgotPass';
+import ForgotTwo from './pages/forgotTwo';
 
+//this is the component that uses the server response and with the react librarys
+//determains what will be shown to the user
+
+//component that does something when it loads and what it loads is 
+//the children arrgument refers to 
 function PrivateRoute({ children, ...rest }) {
   return (
     <Route{...rest} render={() => {
@@ -21,6 +31,8 @@ function PrivateRoute({ children, ...rest }) {
   )
 }
 
+//this is the component that uses the server response and with the react librarys
+//determains what will be shown to the user
 function App() {
   return (
     <div className="App" style={{ height: '100%' }}>
@@ -32,23 +44,50 @@ function App() {
           <Route path="/login" exact>
             <LoginPageComponent />
           </Route>
-          <PrivateRoute path="/home" exact>
+          <Route path="/home" exact>
             <NavComponent />
             <Home />
-          </PrivateRoute>
-          <PrivateRoute path="/products">
+          </Route>
+          <Route path="/products">
             <NavComponent />
             <Products />
-          </PrivateRoute>
-          <PrivateRoute path="/profile">
+          </Route>
+          <Route path="/profile">
             <NavComponent />
             <ProfilePage />
-          </PrivateRoute>
+          </Route>
           <Route path="/register">
             <CreateAccount />
           </Route>
           <Route path="/forgotpass">
             <ForgotPass />
+          </Route>
+          <Route path="/forgottwo">
+            <ForgotTwo />
+          </Route>
+          <Route path="/FormAddDetails">
+            <FormAddDetails />
+          </Route>
+          <Route path="/FormAddDocument">
+            <FormAddDocument />
+          </Route>
+          <Route path="/AddDates">
+            <AddDates />
+          </Route>
+          <Route path="/MoreInfo">
+            <MoreInfo />
+          </Route>
+          <Route path="/FormAddDetails">
+            <FormAddDetails />
+          </Route>
+          <Route path="/FormAddDocument">
+            <FormAddDocument />
+          </Route>
+          <Route path="/AddDates">
+            <AddDates />
+          </Route>
+          <Route path="/MoreInfo">
+            <MoreInfo />
           </Route>
         </Switch>
       </MainContent>
