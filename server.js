@@ -120,7 +120,7 @@ server.post("/register", async (request, response) => {
     });
 });
 
-server.get("/", (request, response) => {
+server.get("/*", (request, response) => {
     response.sendFile(path.join(__dirname, "/react/build/index.html"));
 });
 

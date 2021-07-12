@@ -46,8 +46,6 @@ function getUserByUsername(username) {
     return users.findOne({ username: username });
 }
 
-
-
 function insertNewUser(username, hashedPassword, salt) {
     return users.insertOne({
         username: username,
