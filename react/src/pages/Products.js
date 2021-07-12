@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from '../components/Modal'
 import ProductsAdd from '../components/ProductsAdd'
+import {Link} from 'react-router-dom'
 
 const BUTTON_WRAPPER_STYLES = {
     position: 'relative',
@@ -28,9 +29,11 @@ const Products = () => {
             </header2>
             <header3>
                 <input id="search" type="text" placeholder="Search.." />
+                
             </header3>
             <header4>
                 <div class="topnav">
+                <Link to="/FormAddDocument"><button type="button">ADD DOCUMENT</button></Link>&nbsp;&nbsp;
                     <button onClick={() => setIsOpen(true)}> Create Product </button>
                     <div style={BUTTON_WRAPPER_STYLES}>
                         <Modal open={isOpen} onClose={() => setIsOpen(false)} />
@@ -245,7 +248,6 @@ const MainGrid = styled.div`
         grid-column-end: 5;
         grid-row-start: 1;
         grid-row-end: 3;
- 
     }
 
     mg2{

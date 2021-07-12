@@ -17,16 +17,13 @@ const Toggle = ({ children, title }) => {
     )
 }
 
-// const ChildContainer = styled.div`
-//     display: flex;
-//     flex-direction: column;
-// `
-
 const Container = styled.div`
     height: 5vh;
     .question{
         display: grid;
         grid-template-columns: 11vw 11vw 11vw 11vw 11vw;
+        margin-top: 1rem;
+        margin-left: 5rem;
     }
 `
 
