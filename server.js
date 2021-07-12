@@ -30,6 +30,12 @@ server.use(session({
     })
 }));
 
+function authorizationMiddleware(request, response, next) {
+    // @TODO check auth.
+
+    next(request, response);
+}
+
 const path = require("path");
 
 const PORT = process.env.PORT || 5555;
@@ -135,6 +141,11 @@ server.post("/register", async (request, response) => {
         code: 0,
         msg: "OK"
     });
+});
+
+server.post("/products", authorizationMiddleware, (request, response) => {
+    log(request.body);
+
 });
 
 server.get("/*", (request, response) => {
