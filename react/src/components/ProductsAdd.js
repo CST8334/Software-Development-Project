@@ -35,17 +35,24 @@ const ProductsAdd = () => {
 }
 
 const Faq = styled.div`
-    width: 55vw;
+    width: 58.5vw;
     margin: 20px;
     padding: 1px;
     background: white;
-    border-radius: 8px;
+    border-radius: 2px;
+    box-shadow: 2px 5px 10px #dfdfdf;
+    cursor: pointer;
     .title{
+        .first, .second{
+            display: flex;
+            align-items: center;
+        }
         .first{
             display: flex;
             justify-content: flex-start;
             p{
                 margin-right: 35px;
+                margin-left: 10px;
             }
             #expired{
                 background: red;
@@ -68,6 +75,8 @@ const Faq = styled.div`
                 border-radius: 5px;
                 width: 8vw;
                 color: white;
+                height: 40px;
+                cursor: pointer;
             }
             #two{
                 background: #d1d1d1;
@@ -79,30 +88,38 @@ const Faq = styled.div`
                 height: 30px;
                 border: none;
                 border-radius: 5px;
+                cursor: pointer;
             }
         }
     }
     .parent{
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 297px 297px 297px;
     }
     .country{
         display: flex;
         width: 15vw;
         justify-content: space-evenly;
+        align-items: flex-start;
     }
     .exp{
         display: flex;
         width: 25vw;
+        height: 70px;
         justify-content: space-evenly;
-        background-color: #f1b3b3;
+        background-color: #FFECEC;
         border-radius: 8px;
+        align-items: flex-start;
     }
+
     .answer{
-        
         background-color: #f7f7f7;
         height: 132px;
-        width: 55vw;
+        width: 58.5vw;
+        margin-left: -5rem;
+        margin-top: 50px;
+        position: absolute;
+        z-index: -1;
         p{
             padding: 1rem 0rem;
         }
