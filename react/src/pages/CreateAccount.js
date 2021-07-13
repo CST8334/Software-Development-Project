@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import Logo from '../img/logo.png'
 
 class CreateAccount extends React.Component {
-
+    /*setting username and password fields*/
     constructor(props) {
         super(props);
         this.state = { username: "", password: "" };
@@ -13,25 +13,26 @@ class CreateAccount extends React.Component {
         this.updateUsername = this.updateUsername.bind(this);
         this.updatePassword = this.updatePassword.bind(this);
     }
-
+    /*updating username*/
     updateUsername(event) {
         this.setState({ username: event.target.value });
     }
-
+    /*updating password*/
     updatePassword(event) {
         this.setState({ password: event.target.value });
     }
-
+    /*regestering new user*/
     testRegister(event) {
         event.preventDefault();
-
+        /*connecting to database for creating an account*/
         (async () => {
+            /*try catch connecting to database*/
             try {
                 const res = await axios.post("/register", {
                     username: this.state.username,
                     password: this.state.password,
                 });
-
+                /*compairing "codes" from server.js to give error message when wrong*/
                 if (res.data.code === 0) {
                     document.getElementById("accountCreated").innerHTML = "Account Created!"
                     setTimeout(() => { window.location.href = '/login'; }, 1500)
@@ -63,7 +64,7 @@ class CreateAccount extends React.Component {
             }
         })();
     }
-
+    /*varifying password fields to make sure user has a strong password*/
     password() {
         var myInput = document.getElementById("password");
         var letter = document.getElementById("letter");
@@ -128,7 +129,7 @@ class CreateAccount extends React.Component {
             }
         }
     }
-
+    /*render create acount page*/
     render() {
 
         return (
@@ -184,7 +185,7 @@ class CreateAccount extends React.Component {
 
     }
 }
-
+/*style create account page*/
 const Container = styled.div`
     padding: 1rem;
     width: 35rem;

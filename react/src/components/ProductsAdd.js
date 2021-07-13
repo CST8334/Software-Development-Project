@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Toggle from '../components/Toggle';
 import styled from 'styled-components'
 
-const ProductsAdd = () => {
+const AddProduct = () => {
     return (
         <Faq>
             <Toggle title="<Company Name>">
@@ -31,6 +31,23 @@ const ProductsAdd = () => {
                 </div>
             </Toggle>
         </Faq>
+    )
+}
+
+const ProductsAdd = () => {
+    const [productList, setProductList] = useState([]);
+    const buttonClick = event => {
+        setProductList(productList.concat(<AddProduct key={productList.length} />));
+        console.log(setProductList);
+    }
+    const resetButton = event => {
+        setProductList([]);
+    }
+    return (
+        <div>
+
+            {productList}
+        </div>
     )
 }
 

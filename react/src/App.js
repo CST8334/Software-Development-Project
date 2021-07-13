@@ -35,7 +35,7 @@ function PrivateRoute({ children, ...rest }) {
 //this is the component that uses the server response and with the react librarys
 //determains what will be shown to the user
 function App() {
-    const todos = [ //added
+  const todos = [ //added
     { id: 1, title: 'wash dishes', completed: false, }, //added
   ] //added
   return (

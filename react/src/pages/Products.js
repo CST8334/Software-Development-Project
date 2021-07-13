@@ -2,15 +2,61 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from '../components/Modal'
 import ProductsAdd from '../components/ProductsAdd'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import Toggle from '../components/Toggle';
 
+/*couple of stlyes*/
 const BUTTON_WRAPPER_STYLES = {
     position: 'relative',
     zIndex: 1
 }
-
+/*returning a set of html which will render when button clicked*/
+const AddProduct = (props) => {
+    console.log(props);
+    return (
+        <Faq>
+            <Toggle title="<Company Name>" data={props.data}>
+                <div className="answer">
+                    <div className="title">
+                        <div className="first">
+                            <p>Certificate Name</p>
+                            <button id="expired">Expired</button>
+                        </div>
+                        <div className="second">
+                            <button id="one">Submit Request</button>
+                            <button id="two">⋮</button>
+                        </div>
+                    </div>
+                    <div className="parent">
+                        <div className="country">
+                            <p>Country</p>
+                            <p>Issuing Body</p>
+                        </div>
+                        <div className="exp">
+                            <p>Issued On:</p>
+                            <p>Renewal Start On:</p>
+                            <p>Exp Date:</p>
+                        </div>
+                    </div>
+                </div>
+            </Toggle>
+        </Faq>
+    )
+}
+/*getting text from input and replacing tags based on input*/
 const Products = () => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
+
+    const [productList, setProductList] = useState([]);
+    const buttonClick = (event, state) => {
+        setProductList(productList.concat(<AddProduct key={productList.length} data={state} />));
+        setIsOpen(false)
+        console.log(setProductList);
+    }
+    const resetButton = event => {
+        setProductList([]);
+    }
+    /*rendering products page*/
     return (
 
         <Container>
@@ -29,15 +75,15 @@ const Products = () => {
             </header2>
             <header3>
                 <input id="search" type="text" placeholder="Search.." />
-                
+
             </header3>
             <header4>
                 <div class="topnav">
-                <Link to="/FormAddDocument"><button type="button">ADD DOCUMENT</button></Link>&nbsp;&nbsp;
+                    <Link to="/FormAddDocument"><button type="button">ADD DOCUMENT</button></Link>&nbsp;&nbsp;
                     <button onClick={() => setIsOpen(true)}> Create Product </button>
                     <div style={BUTTON_WRAPPER_STYLES}>
-                        <Modal open={isOpen} onClose={() => setIsOpen(false)} />
-
+                        <Modal addProduct={buttonClick} open={isOpen} onClose={() => setIsOpen(false)} />
+                        <button onClick={resetButton}>Clear</button>
                     </div>
                 </div>
             </header4>
@@ -86,6 +132,7 @@ const Products = () => {
                 <MainGrid>
                     <mg1>
                         <ProductsAdd />
+                        {productList}
                     </mg1>
                     <mg2>
                         <button>LOAD MORE</button>
@@ -95,6 +142,98 @@ const Products = () => {
         </Container>
     )
 }
+/*styling products page*/
+const Faq = styled.div`
+    width: 58.5vw;
+    margin: 20px;
+    padding: 1px;
+    background: white;
+    border-radius: 2px;
+    box-shadow: 2px 5px 10px #dfdfdf;
+    cursor: pointer;
+    .title{
+        .first, .second{
+            display: flex;
+            align-items: center;
+        }
+        .first{
+            display: flex;
+            justify-content: flex-start;
+            p{
+                margin-right: 35px;
+                margin-left: 10px;
+            }
+            #expired{
+                background: red;
+                height: 1rem;
+                width: 3rem;
+                border: none;
+                color: white;
+                border-radius: 20px;
+                font-size: 10px;
+            }
+        }
+        .second{
+            display: flex;
+            justify-content: flex-end;
+            margin-top: -35px;
+            #one{
+                background-color: #2196f3;
+                border: none;
+                margin-right: 20px;
+                border-radius: 5px;
+                width: 8vw;
+                color: white;
+                height: 40px;
+                cursor: pointer;
+            }
+            #two{
+                background: #d1d1d1;
+                color: black;
+                font-size: 25px;
+                font-weight: bold;
+                margin-right: 10px;
+                width: 30px;
+                height: 30px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        }
+    }
+    .parent{
+        display: grid;
+        grid-template-columns: 297px 297px 297px;
+    }
+    .country{
+        display: flex;
+        width: 15vw;
+        justify-content: space-evenly;
+        align-items: flex-start;
+    }
+    .exp{
+        display: flex;
+        width: 25vw;
+        height: 70px;
+        justify-content: space-evenly;
+        background-color: #FFECEC;
+        border-radius: 8px;
+        align-items: flex-start;
+    }
+
+    .answer{
+        background-color: #f7f7f7;
+        height: 132px;
+        width: 58.5vw;
+        margin-left: -5rem;
+        margin-top: 50px;
+        position: absolute;
+        z-index: -1;
+        p{
+            padding: 1rem 0rem;
+        }
+    }
+`
 
 
 

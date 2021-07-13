@@ -5,7 +5,9 @@ import styled from 'styled-components';
 
 const HomeChart = () => {
     return <Container>
+        {/*Bar is chartjs Bar graph*/}
         <Bar
+            /*Setting data for graph such as colors and labels*/
             data={{
                 labels: ['Compliant', 'Soon to Expire', 'Expired'],
                 datasets: [{
@@ -24,6 +26,7 @@ const HomeChart = () => {
                     borderWidth: 1
                 }]
             }}
+            /*Setting dimentions for graph*/
             height={100}
             width={100}
         />
