@@ -5,20 +5,18 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Clip from '../img/clip.jpg';
 import {Link} from 'react-router-dom';
 import axios from 'axios'
+import { FormComponent } from "./FormComponent.js";
 
+export class FormAddDocument extends FormComponent {
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            value: "Certificate",
+            selectedFile: null
+        };
+    }
 
-
-
-
-
-export class FormAddDocument extends React.Component{
-
-    //the state value for the radio button and selectedFile
-    state = {
-        value: "Certificate",
-        selectedFile: null
-    };
       // OnChange method that allows for selection of only one of the radio buttons
     onChange = e => {
         this.setState({value : e.target.value})
@@ -27,69 +25,69 @@ export class FormAddDocument extends React.Component{
     // A method for selecting a file and saving it to the state.
     fileSelectedHandler = event => {
         this.setState({
-        selectedFile: event.target.files[0]
-    })
-}
-//A method for uploading a file to our back end.
-fileUploadHandler = () => {
-    const fd = new FormData();
-    fd.append('image',this.state.selectedFile, this.state.selectedFile.name);
-    axios.post('/products',fd); //An address for the back end needs to go inside of axios.post('address here',fd);
+            selectedFile: event.target.files[0]
+        })
+    }
 
+    // A method for uploading a file to our back end.
+    fileUploadHandler = () => {
+        if (this.state.selectedFile) {
+            const fileReader = new FileReader();
+            fileReader.readAsArrayBuffer(this.state.selectedFile);
+            fileReader.onload = () => {
+                const body = {
+                    blob: fileReader.result,
+                    name: this.state.selectedFile.name
+                };
 
-}
+                axios.post('/products', body); //An address for the back end needs to go inside of axios.post('address here',fd);
+            };
+        }
+    }
 
-    render(){
+    render() {
         //this gets the value out the state.
-        const {value} = this.state;
+        const { value } = this.state;
 
+        // Below is a form using MuiThememProvider from material-ui.
+        return(
+  <MuiThemeProvider>
+  <React.Fragment>
+  <AppBar title="Step 1: Add a Document"/>
+  <div style={this.formSectionStyle}>
+    <h1 style={{marginBottom: "10px"}}>What are you Registering?</h1>
+    <div style={this.inputRowStyle}>
+      <label for="Certificate">
+        <input style={this.inputElementStyle} type="radio" value="Certificate" checked={value === "Certificate"} onChange={this.onChange}/>
+        Certificate
+      </label>
+      <label for="Report">
+        <input style={this.inputElementStyle} type="radio" value="Report" checked={value === "Report"} onChange={this.onChange}/>
+        Report
+      </label>
+    </div>
+    <div style={this.inputRowStyle}>
+      <label>Country:</label>
+      <select style={this.inputElementStyle}>
+        <option value="" disabled selected>Choose a Country...</option>
+        <option value="Canada">Canada</option>
+        <option value="USA">USA</option>
+      </select>
+    </div>
+    <div style={this.inputRowStyle}>
+      <img style={{height:"1.5em"}} src={Clip} alt="paperclip" id="paperclip"/><label>Attach Files pdf,docx,jpg. size limit 15mb.</label>
+      <input style={this.inputElementStyle} type="file" onChange={this.fileSelectedHandler}></input>
+    </div>
 
-//Below is a form using MuiThememProvider from material-ui.
-return(
-    <MuiThemeProvider>
-    <React.Fragment>
-    <AppBar  title="Step 1: Add a Document"/>
-
-    <br></br>
-                    <h1>What are you Registering?</h1>
-                <br></br>
-                    <input type="radio" value="Certificate" checked={value === "Certificate"} onChange={this.onChange}/>
-                    <label for="Certificate">Certificate</label>&nbsp;&nbsp;
-                    <input type="radio" value="Report"  checked={value === "Report"} onChange={this.onChange}/>
-                    <label for="Report">Report</label>
-
-
-                <div>
-                <br></br>
-                    <label>County</label>&nbsp;&nbsp;
-                    <select>
-                    <option value=""disabled selected> Choose a Country..</option>
-                    <option value="Canada">Canada</option>
-                    <option value="USA">USA</option>
-                    </select>
-                    </div>
-
-                    <br></br>
-                       <img src={Clip} alt="paperclip" id="paperclip"/><label>Attach Files pdf,docx,jpg. size limit 15mb.</label>
-                    <br></br>
-                    <br></br>
-                       <input type="file" onChange={this.fileSelectedHandler}></input>
-                       <RaisedButton onClick={this.fileUploadHandler} label="Attach" primary={true}/>
-                    <br></br>
-                    <br></br>
-                    <Link to="/Products"><RaisedButton label="Cancel" primary={true}></RaisedButton></Link>
-
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <Link to="/FormAddDetails"><RaisedButton label="Next" primary={true}></RaisedButton></Link>
-
-
-
-                    </React.Fragment>
-                    </MuiThemeProvider>
-);
+    <div style={this.inputRowStyle}>
+      <RaisedButton style={this.inputElementStyle} onClick={this.fileUploadHandler} label="Attach" primary={true}/>
+      <Link style={this.inputElementStyle} to={{ pathname: "/Products", state: { formData: this.state } }}><RaisedButton label="Cancel" primary={true}></RaisedButton></Link>
+      <Link style={this.inputElementStyle} to={{ pathname: "/FormAddDetails", state: { formData: this.state } }}><RaisedButton label="Next" primary={true}></RaisedButton></Link>
+    </div>
+  </div>
+  </React.Fragment>
+  </MuiThemeProvider>
+        );
     }
 }
 
-
-  //exports the page
-export default FormAddDocument;
