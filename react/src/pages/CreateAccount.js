@@ -163,7 +163,7 @@ class CreateAccount extends React.Component {
                     <p id="alreadyUser" style={{ color: "red" }}></p>
                 </Form>
 
-                <input type="submit" value="Sign Up" onClick={this.testRegister} />
+
 
                 <p id="accountCreated" style={{ color: "green" }}></p>
                 <p id="alreadyUser" style={{ color: "red" }}></p>
