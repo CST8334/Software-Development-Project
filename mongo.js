@@ -54,5 +54,12 @@ function insertNewUser(username, hashedPassword, salt) {
     });
 }
 
-module.exports = { getUserByUsername, insertNewUser };
+function insertNewProduct(name, blob) {
+    return products.insertOne({
+        name: name,
+        blob: blob
+    });
+}
+
+module.exports = { getUserByUsername, insertNewUser, insertNewProduct };
 

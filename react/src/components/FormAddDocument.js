@@ -32,16 +32,27 @@ export class FormAddDocument extends FormComponent {
     // A method for uploading a file to our back end.
     fileUploadHandler = () => {
         if (this.state.selectedFile) {
-            const fileReader = new FileReader();
-            fileReader.readAsArrayBuffer(this.state.selectedFile);
-            fileReader.onload = () => {
-                const body = {
-                    blob: fileReader.result,
-                    name: this.state.selectedFile.name
-                };
+            const gb = (fileData) => {
+                return resolve => {
+                    const reader = new FileReader();
+                    reader.readAsArrayBuffer(fileData);
+                    reader.onload = () => {
+                        const arrayBuffer = reader.result;
+                        resolve(new Uint8Array(arrayBuffer));
+                    }
+                }
+            }
 
-                axios.post('/products', body); //An address for the back end needs to go inside of axios.post('address here',fd);
-            };
+            new Promise(gb(this.state.selectedFile)).then(
+                data => {
+                    const body = {
+                        blob: data,
+                        name: this.state.selectedFile.name
+                    };
+
+                    axios.post('/products', body); //An address for the back end needs to go inside of axios.post('address here',fd);
+                }
+            );
         }
     }
 

@@ -1,14 +1,14 @@
 
 const { log } = require("./util");
-const { getUserByUsername, insertNewUser } = require("./mongo");
+const { insertNewProduct, getUserByUsername, insertNewUser } = require("./mongo");
 const { salt, hash, safeCompare } = require("./crypto");
 
 // setup the server itself
 const express = require("express");
 const server = express();
 
-server.use(express.json());
-server.use(express.urlencoded());
+server.use(express.json({ limit: "25mb" }));
+server.use(express.urlencoded({ limit: "25mb" }));
 
 const session = require("express-session");
 const MemoryStore = require("memorystore")(session);
@@ -32,8 +32,7 @@ server.use(session({
 
 function authorizationMiddleware(request, response, next) {
     // @TODO check auth.
-
-    next(request, response);
+    next();
 }
 
 const path = require("path");
@@ -143,9 +142,15 @@ server.post("/register", async (request, response) => {
     });
 });
 
-server.post("/products", authorizationMiddleware, (request, response) => {
-    log(request.body);
+server.post("/products", async (request, response) => {
+    const result = await insertNewProduct(request.body.name, request.body.blob);
 
+    log(result);
+
+    response.status(200).json({
+        code: 0,
+        msg: "OK"
+    });
 });
 
 server.get("/*", (request, response) => {
