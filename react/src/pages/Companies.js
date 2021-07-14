@@ -44,7 +44,7 @@ const AddProduct = (props) => {
     )
 }
 /*getting text from input and replacing tags based on input*/
-const Products = () => {
+const Companies = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const [productList, setProductList] = useState([]);
@@ -75,7 +75,20 @@ const Products = () => {
             </header2>
             <header3>
                 <input id="search" type="text" placeholder="Search.." />
-
+                <button id="invite">Invite a user</button>
+                {/* <Modal
+                    isOpen={isOpen}
+                    onRequestClose={toggleModal}
+                    contentLabel="My dialog"
+                >
+                    <label for="invite">Invite to Aetherwind</label>
+                    <br/>
+                    <input type="text" />
+                    <br/>
+                    <button onClick={toggleModal}>Add user</button>
+                    <br/>
+                    <button onClick={toggleModal}>Send invite</button>
+                </Modal> */}
             </header3>
             
             <sidebar>
@@ -204,6 +217,18 @@ const Container = styled.div`
     grid-template-rows: 20px auto 20px;
     grid-gap: 1rem;
 
+    header3{
+        display: flex;
+        #invite{
+            width: 150px;
+            height: 40px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+        }
+    }
+
     .sort{
         select{
             width: 150px;
@@ -281,14 +306,7 @@ const Container = styled.div`
         }
         
 
-        button{
-            width: 150px;
-            height: 40px;
-            background-color: #2196F3;
-            color: white;
-            border: none;
-            border-radius: 8px;
-        }
+        
     }
     main{
 
@@ -343,14 +361,9 @@ const MainGrid = styled.div`
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
     grid-template-rows: auto auto auto;
-    mg1{
-        grid-column-start: 1;
-        grid-column-end: 5;
-        grid-row-start: 1;
-        grid-row-end: 3;
-    }
+    
 
-    mg2{
+    mg1{
         grid-column-start: 3;
         grid-column-end: 4;
         grid-row-start: 3;
