@@ -16,6 +16,7 @@ import ProfilePage from './pages/Profile';
 import CreateAccount from './pages/CreateAccount';
 import ForgotPass from './pages/ForgotPass';
 import ForgotTwo from './pages/forgotTwo';
+import Companies from './pages/Companies';
 
 //this is the component that uses the server response and with the react librarys
 //determains what will be shown to the user
@@ -89,6 +90,10 @@ function App() {
           </Route>
           <Route path="/MoreInfo">
             <MoreInfo />
+          </Route>
+          <Route path="/companies">
+            <NavComponent/>
+            <Companies/>
           </Route>
         </Switch>
       </MainContent>
