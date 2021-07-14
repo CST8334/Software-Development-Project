@@ -3,7 +3,6 @@ import { render, screen, cleanup } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import React from 'react';
 // import Canvas from 'react-canvas';
-import Todo from '../todo';
 // import LoginFormComponent from '../LoginFormComponent.js';
 // import LoginPageComponent from '../LoginPageComponent.js';
 // import HomeChart from '../HomeChart.js';
@@ -16,27 +15,24 @@ afterEach(() => {
     cleanup();
 });
 
-test('should render non-completed  todo component', () => {
-    const toduo = {id: 1, title: 'wash dishes', completed: false, };
-    render(<Todo toodo={toduo}/>);
-    const todoElement = screen.getByTestId('todo-1');
-    expect(todoElement).toBeInTheDocument();
-    // expect(todoElement).toHaveTextContent('Hi')
-    expect(todoElement).toHaveTextContent('wash dishes')
-    // expect(true).toBe(true);
-    expect(todoElement).not.toContainHTML('<strike>');
+test('Testing Parts of the Profile page', () =>{
+    const {getByText} = render(<Profile></Profile>);
+    const linkElement = getByText(/Last Name/i); 
+    expect(linkElement).toBeInTheDocument(); //tests if any line of text say "Last Name"
+    const profileElement = screen.getByTestId('save'); //gets the save button
+    expect(profileElement).toBeInTheDocument(); //test if the save but is in the DOM
+    expect(profileElement).toHaveTextContent('Save'); // does it say "Save"
+    expect(profileElement).not.toContainHTML('<h2>') //does it contain unessisary HTML tags
+    expect(profileElement).not.toBeDisabled() //tests that the save button is not disabled
 });
 
-test('There is some text somewhere in the profile page that reads First Name', () =>{
-    const {getByText} = render(<Profile></Profile>);
-    const linkElement = getByText(/First Name/i);
-    expect(linkElement).toBeInTheDocument();
-});
+// test('Testing Parts of the Home page', () =>{
+//     const home = {id: 1, title: 'notice button 1'}
+//     render(<Home part={home}></Home>);
+//     const HomeElement = screen.getByTestId('Home-1')
+//     expect(HomeElement).toBeInTheDocument();
+// })
 
-test('There is some text somewhere in the profile page that reads First Name', () =>{
-    const {getByText} = render(<Profile></Profile>);
-    const linkElement = getByText(/Last Name/i);
-    expect(linkElement).toBeInTheDocument();
-});
+
 
 

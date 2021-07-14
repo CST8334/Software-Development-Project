@@ -62,7 +62,7 @@ class ProfilePage extends React.Component {
             <input type="file" />
           </Photo>
         </Contain>
-        <Button>Save</Button>
+        <Button data-testid="save" >Save</Button>
       </Container>
     )
   }

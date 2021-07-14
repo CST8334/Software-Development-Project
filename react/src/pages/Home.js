@@ -6,6 +6,7 @@ import HomeBar from "../components/HomeBar"
 import "../index.css"
 
 //recat has setup test
+//the {part} argument is not needed but was tryed for testing
 function Home() {
     return (
         <Container>
@@ -32,7 +33,6 @@ function Home() {
                         <p>
                         <Button>Secondary</Button>
                         <a href="#">Dismiss</a>
-
                         </p>
                         </div>
                     </NoticeBars>
