@@ -56,12 +56,12 @@ const Products = () => {
     const resetButton = event => {
         setProductList([]);
     }
-    /*rendering products page*/
+    /*rendering companies page*/
     return (
 
         <Container>
             <header1>
-                <h1><b>Products</b></h1>
+                <h1><b>Companies</b></h1>
             </header1>
             <header2>
                 <div class="sort">
@@ -77,16 +77,7 @@ const Products = () => {
                 <input id="search" type="text" placeholder="Search.." />
 
             </header3>
-            <header4>
-                <div class="topnav">
-                    <Link to="/FormAddDocument"><button type="button">ADD DOCUMENT</button></Link>&nbsp;&nbsp;
-                    <button onClick={() => setIsOpen(true)}> Create Product </button>
-                    <div style={BUTTON_WRAPPER_STYLES}>
-                        <Modal addProduct={buttonClick} open={isOpen} onClose={() => setIsOpen(false)} />
-                        <button onClick={resetButton}>Clear</button>
-                    </div>
-                </div>
-            </header4>
+            
             <sidebar>
                 <div class="sidebarchild">
                     <div>
@@ -99,50 +90,20 @@ const Products = () => {
                             <option value="EXP">Expired</option>
                         </select>
                     </div>
-                    <div>
-                        <label id="label" for="country">Country</label>
-                        <br />
-                        <select id="country">
-                            <option value="USA">United States</option>
-                            <option value="BRA">Brazil</option>
-                            <option value="CAN">Canada</option>
-                            <option value="MEX">Mexico</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label id="label" for="body">Issuing Body</label>
-                        <br />
-                        <select id="body">
-                            <option value="Option 1">Option 1</option>
-                            <option value="Option 2">Option 2</option>
-                            <option value="Option 3">Option 3</option>
-                            <option value="Option 4">Option 4</option>
-                        </select>
-                    </div>
-                    <CheckBox>
-                        <label class="switch">
-                            <input type="checkbox" />
-                            <span class="slider round"></span>
-                        </label><label className="Switch">Show products whose documents have unread comments </label>
-                    </CheckBox>
+                    
                 </div>
             </sidebar>
             <main>
                 <MainGrid>
                     <mg1>
-                        <ProductsAdd />
-                        {productList}
-                    </mg1>
-                    <mg2>
                         <button>LOAD MORE</button>
-                    </mg2>
+                    </mg1>
                 </MainGrid>
             </main>
         </Container>
     )
 }
-/*styling products page*/
+/*styling companies page*/
 const Faq = styled.div`
     width: 58.5vw;
     margin: 20px;
@@ -472,5 +433,5 @@ const CheckBox = styled.div`
    }
 `
 
-export default Products
+export default Companies
 

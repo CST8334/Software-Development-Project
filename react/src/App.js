@@ -1,10 +1,11 @@
 import React, { Profiler } from 'react';
+import FormComponent from './components/FormComponent';
 import LoginFormComponent from './components/LoginFormComponent';
 import LoginPageComponent from './components/LoginPageComponent';
-import FormAddDocument from './components/FormAddDocument';
-import FormAddDetails from './components/FormAddDetails';
-import AddDates from './components/AddDates';
-import MoreInfo from './components/MoreInfo';
+import { FormAddDocument } from './components/FormAddDocument';
+import { FormAddDetails } from './components/FormAddDetails';
+import { FormAddDates } from './components/AddDates';
+import { MoreInfo } from './components/MoreInfo';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -19,8 +20,8 @@ import ForgotTwo from './pages/forgotTwo';
 //this is the component that uses the server response and with the react librarys
 //determains what will be shown to the user
 
-//component that does something when it loads and what it loads is 
-//the children arrgument refers to 
+//component that does something when it loads and what it loads is
+//the children arrgument refers to
 function PrivateRoute({ children, ...rest }) {
   return (
     <Route{...rest} render={() => {
@@ -34,9 +35,6 @@ function PrivateRoute({ children, ...rest }) {
 //this is the component that uses the server response and with the react librarys
 //determains what will be shown to the user
 function App() {
-    const homes = [ //added
-    { id: 1, title: 'noticebutton1'}, //added
-  ] //added
   return (
     <div className="App" style={{ height: '100%' }}>
       <MainContent>
@@ -75,7 +73,7 @@ function App() {
             <FormAddDocument />
           </Route>
           <Route path="/AddDates">
-            <AddDates />
+            <FormAddDates />
           </Route>
           <Route path="/MoreInfo">
             <MoreInfo />
@@ -87,7 +85,7 @@ function App() {
             <FormAddDocument />
           </Route>
           <Route path="/AddDates">
-            <AddDates />
+            <FormAddDates />
           </Route>
           <Route path="/MoreInfo">
             <MoreInfo />

@@ -1,14 +1,39 @@
 
 const { log } = require("./util");
-const { getUserByUsername, insertNewUser } = require("./mongo");
+const { insertNewProduct, getUserByUsername, insertNewUser } = require("./mongo");
 const { salt, hash, safeCompare } = require("./crypto");
 
 // setup the server itself
 const express = require("express");
 const server = express();
 
-server.use(express.json());
-server.use(express.urlencoded());
+server.use(express.json({ limit: "25mb" }));
+server.use(express.urlencoded({ limit: "25mb" }));
+
+const session = require("express-session");
+const MemoryStore = require("memorystore")(session);
+
+// trust the first proxy, useful for sessions
+server.set("trust proxy", 1);
+
+// configure session management
+server.use(session({
+    secret: "white-chocolate-macademia-nut",
+    resave: false,
+    saveUnitialized: true,
+    cookie: {
+        secure: true,
+        maxAge: 5400 // 1hr in seconds
+    },
+    store: new MemoryStore({
+        checkPeriod: 86400000 // 24 hr in seconds
+    })
+}));
+
+function authorizationMiddleware(request, response, next) {
+    // @TODO check auth.
+    next();
+}
 
 const path = require("path");
 
@@ -72,36 +97,35 @@ server.post("/register", async (request, response) => {
         return;
     }
 
-
-    if(!request.body.password || request.body.password.length === 0){
+    if (!request.body.password || request.body.password.length === 0) {
         response.status(400).json({
             code: -2,
             msg: "you must enter a password"
         });
         return;
     }
-    if(!request.body.password.match(/[A-z]/)){
+    if (!request.body.password.match(/[A-z]/)) {
         response.status(400).json({
             code: -3,
             msg: "your password must contain at least one capital letter"
         });
         return;
     }
-    if(!request.body.password.match(/[0-9]/)){
+    if (!request.body.password.match(/[0-9]/)) {
         response.status(400).json({
             code: -4,
             msg: "your password must contain at least one digit number"
         });
         return;
     }
-    if(!request.body.password.match(/[!@#$%^&*()_\-=+|<>`~]/)){
+    if (!request.body.password.match(/[!@#$%^&*()_\-=+|<>`~]/)) {
         response.status(400).json({
             code: -5,
             msg: "your password must contain at least one special character such as !@#$%^&*()_-=+|<>`~ "
         });
         return;
     }
-    if(request.body.password.length < 7){
+    if (request.body.password.length < 7) {
         response.status(400).json({
             code: -6,
             msg: "your password must have a length of at least 8 characters"
@@ -109,10 +133,8 @@ server.post("/register", async (request, response) => {
         return;
     }
 
-
     const salt_ = salt();
     const result = await insertNewUser(request.body.username, hash(request.body.password, salt_), salt_);
-
 
     response.status(200).json({
         code: 0,
@@ -120,7 +142,19 @@ server.post("/register", async (request, response) => {
     });
 });
 
-server.get("/", (request, response) => {
-    response.sendFile(path.join(__dirname, "/react/build/index.html"));
+server.post("/products", async (request, response) => {
+    const result = await insertNewProduct(request.body.name, request.body.blob);
+
+    log(result);
+
+    response.status(200).json({
+        code: 0,
+        msg: "OK"
+    });
+});
+
+server.get("/*", (request, response) => {
+    log(request.session.id);
+    response.status(200).sendFile(path.join(__dirname, "/react/build/index.html"));
 });
 
