@@ -55,13 +55,25 @@ function insertNewUser(uuid, username, hashedPassword, salt) {
     });
 }
 
-function insertNewProduct(uuid, model) {
+async function insertNewProduct(uuid, requestBody) {
     if (!uuid) {
         return Promise.reject("no uuid");
     }
 
+    const model = requestBody.model;
+
+    let owner;
+    if (requestBody.owner) {
+        owner = await findUserByUsername(requestBody.owner.name);
+    }
+
+    if (!owner) {
+        return Promise.reject("no owner associated with this product");
+    }
+
     return products.insertOne({
         uuid: uuid,
+        owner: owner.uuid,
         name: model.name,
         modelNumber: model.modelNumber,
         versionNumber: model.versionNumber,

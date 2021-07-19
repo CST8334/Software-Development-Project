@@ -76,6 +76,10 @@ server.post("/login", async (request, response) => {
             // there is a user with that username. check if the passwords match
             if (safeCompare(user.pwd, hash(creds[1], user.salt))) {
                 return response.status(200).json({
+                    me: {
+                        uuid: user.uuid,
+                        permissions: null
+                    },
                     code: 0,
                     msg: "Succesfully logged in."
                 });
