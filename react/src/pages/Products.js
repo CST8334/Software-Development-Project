@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from "axios";
 import styled from 'styled-components';
 import Modal from '../components/Modal'
 import ProductsAdd from '../components/ProductsAdd'
@@ -12,7 +13,6 @@ const BUTTON_WRAPPER_STYLES = {
 }
 /*returning a set of html which will render when button clicked*/
 const AddProduct = (props) => {
-    console.log(props);
     return (
         <Faq>
             <Toggle title="<Company Name>" data={props.data}>
@@ -48,10 +48,18 @@ const Products = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const [productList, setProductList] = useState([]);
-    const buttonClick = (event, state) => {
+    const buttonClick = async (event, state) => {
         setProductList(productList.concat(<AddProduct key={productList.length} data={state} />));
+
+        const result = await axios.post("/products", {
+            name: state.name,
+            modelNumber: state.model,
+            versionNumber: state.version
+        });
+
+        console.log(result);
+
         setIsOpen(false)
-        console.log(setProductList);
     }
     const resetButton = event => {
         setProductList([]);
@@ -270,7 +278,7 @@ const Container = styled.div`
     }
 
     header1{
-        
+
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 2;
@@ -280,11 +288,11 @@ const Container = styled.div`
             font-size: 30px;
             font-weight: 100;
         }
-        
-       
+
+
     }
     header2{
-        
+
         grid-column-start: 3;
         grid-column-end: 4;
         grid-row-start: 2;
@@ -296,17 +304,17 @@ const Container = styled.div`
         }
     }
     header3{
-        
+
         grid-column-start: 4;
         grid-column-end: 5;
         grid-row-start: 2;
         grid-row-end: 3;
         justify-self: end;
-        
-           
+
+
     }
     header4{
-        
+
         grid-column-start: 5;
         grid-column-end: 6;
         grid-row-start: 2;
@@ -318,7 +326,7 @@ const Container = styled.div`
                 width: 40vw;
             }
         }
-        
+
 
         button{
             width: 150px;
@@ -336,21 +344,21 @@ const Container = styled.div`
         grid-row-start: 3;
         grid-row-end: 4;
         align-self: start;
-        
+
       }
 
     sidebar{
-       
+
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 3;
         grid-row-end: 6;
 
         height: 70vh;
-       
+
 
       }
-      
+
     .sidebarchild{
         display: flex;
         flex-direction: column;
@@ -374,8 +382,8 @@ const Container = styled.div`
             width: 200px;
         }
     }
-      
-      
+
+
 `
 
 const MainGrid = styled.div`
@@ -401,7 +409,7 @@ const MainGrid = styled.div`
             height: 30px;
         }
     }
-   
+
 `
 const CheckBox = styled.div`
 .switch {
@@ -410,13 +418,13 @@ const CheckBox = styled.div`
     width: 50px;
     height: 20px;
   }
-  
-  .switch input { 
+
+  .switch input {
     opacity: 0;
     width: 0;
     height: 0;
   }
-  
+
   .slider {
     position: absolute;
     cursor: pointer;
@@ -428,7 +436,7 @@ const CheckBox = styled.div`
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   .slider:before {
     position: absolute;
     content: "";
@@ -440,26 +448,26 @@ const CheckBox = styled.div`
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   input:checked + .slider {
     background-color: #2196F3;
   }
-  
+
   input:focus + .slider {
     box-shadow: 0 0 1px #2196F3;
   }
-  
+
   input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
   }
-  
+
   /* Rounded sliders */
   .slider.round {
     border-radius: 34px;
   }
-  
+
   .slider.round:before {
     border-radius: 50%;
   }

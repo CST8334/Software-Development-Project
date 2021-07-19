@@ -3,6 +3,8 @@ const { log } = require("./util");
 const { insertNewProduct, getUserByUsername, insertNewUser } = require("./mongo");
 const { salt, hash, safeCompare } = require("./crypto");
 
+const { v4: uuidv4 } = require("uuid");
+
 // setup the server itself
 const express = require("express");
 const server = express();
@@ -35,12 +37,19 @@ function authorizationMiddleware(request, response, next) {
     next();
 }
 
+function loggingMiddleware(request, response, next) {
+    log(`${request.path} - ${JSON.stringify(request.body)}`);
+    next();
+}
+
 const path = require("path");
 
 const PORT = process.env.PORT || 5555;
 server.use(express.static(path.join(__dirname, "/react/build"))).listen(PORT, () => {
     log(`Listening on port: ${PORT}`);
 });
+
+server.use(loggingMiddleware);
 
 server.post("/login", async (request, response) => {
     const authorizationHeader = request.header("Authorization")
@@ -133,8 +142,9 @@ server.post("/register", async (request, response) => {
         return;
     }
 
+    const uuid = uuidv4();
     const salt_ = salt();
-    const result = await insertNewUser(request.body.username, hash(request.body.password, salt_), salt_);
+    const result = await insertNewUser(uuid, request.body.username, hash(request.body.password, salt_), salt_);
 
     response.status(200).json({
         code: 0,
@@ -143,7 +153,8 @@ server.post("/register", async (request, response) => {
 });
 
 server.post("/products", async (request, response) => {
-    const result = await insertNewProduct(request.body.name, request.body.blob);
+    const uuid = uuidv4();
+    const result = await insertNewProduct(uuid, request.body);
 
     log(result);
 
