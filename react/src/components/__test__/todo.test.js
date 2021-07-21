@@ -3,8 +3,9 @@ import { render, screen, cleanup } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import React from 'react';
 // import Canvas from 'react-canvas';
-// import LoginFormComponent from '../LoginFormComponent.js';
-// import LoginPageComponent from '../LoginPageComponent.js';
+import LoginFormComponent from '../LoginFormComponent.js';
+import LoginPageComponent from '../LoginPageComponent.js';
+import CreateAccount from '../../pages/CreateAccount.js';
 // import HomeChart from '../HomeChart.js';
 // import Home from '../../pages/Home.js';
 import Profile from '../../pages/Profile.js';
@@ -26,12 +27,11 @@ test('Testing Parts of the Profile page', () =>{
     expect(profileElement).not.toBeDisabled() //tests that the save button is not disabled
 });
 
-// test('Testing Parts of the Home page', () =>{
-//     const home = {id: 1, title: 'notice button 1'}
-//     render(<Home part={home}></Home>);
-//     const HomeElement = screen.getByTestId('Home-1')
-//     expect(HomeElement).toBeInTheDocument();
-// })
+test('Testing Parts of the Home page', () =>{
+    const {getByText} = render(<CreateAccount></CreateAccount>);
+    const linkElement = getByText(/Create Account/i); 
+    expect(linkElement).toBeInTheDocument();
+})
 
 
 
