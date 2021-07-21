@@ -46,20 +46,60 @@ function getUserByUsername(username) {
     return users.findOne({ username: username });
 }
 
-function insertNewUser(username, hashedPassword, salt) {
+function insertNewUser(uuid, username, hashedPassword, salt) {
     return users.insertOne({
+        uuid: uuid,
         username: username,
         pwd: hashedPassword,
         salt: salt
     });
 }
 
-function insertNewProduct(name, blob) {
+async function insertNewProduct(uuid, requestBody) {
+    if (!uuid) {
+        return Promise.reject("no uuid");
+    }
+
+    const model = requestBody.model;
+
+    let owner;
+    if (requestBody.owner) {
+        owner = await findUserByUsername(requestBody.owner.name);
+    }
+
+    if (!owner) {
+        return Promise.reject("no owner associated with this product");
+    }
+
     return products.insertOne({
-        name: name,
-        blob: blob
+        uuid: uuid,
+        owner: owner.uuid,
+        name: model.name,
+        modelNumber: model.modelNumber,
+        versionNumber: model.versionNumber,
+        documents: []
     });
 }
 
-module.exports = { getUserByUsername, insertNewUser, insertNewProduct };
+function addDocumentToProduct(uuid, document) {
+    const product = products.findOne({ uuid: uuid });
+
+    if (!product) {
+        return Promise.reject("no product with that uuid");
+    }
+
+    const documents = product.documents;
+    documents.push(document);
+
+    return products.updateOne({
+        uuid: uuid
+    },
+    {
+        $set: {
+            documents: documents
+        }
+    });
+}
+
+module.exports = { getUserByUsername, insertNewUser, insertNewProduct, addDocumentToProduct };
 
