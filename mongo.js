@@ -40,6 +40,7 @@ let products;
 
     const productsDb = client.db("products");
     products = productsDb.collection("products");
+
 })();
 
 function getUserByUsername(username) {
@@ -55,6 +56,10 @@ function insertNewUser(uuid, username, hashedPassword, salt) {
     });
 }
 
+function getAllProducts() {
+    return product.find({});
+}
+
 async function insertNewProduct(uuid, requestBody) {
     if (!uuid) {
         return Promise.reject("no uuid");
@@ -62,18 +67,19 @@ async function insertNewProduct(uuid, requestBody) {
 
     const model = requestBody.model;
 
-    let owner;
-    if (requestBody.owner) {
-        owner = await findUserByUsername(requestBody.owner.name);
-    }
 
-    if (!owner) {
-        return Promise.reject("no owner associated with this product");
-    }
+    // let owner;
+    // if (requestBody.owner) {
+    //     owner = await findUserByUsername(requestBody.owner.name);
+    // }
+
+    // if (!owner) {
+    //     return Promise.reject("no owner associated with this product");
+    // }
 
     return products.insertOne({
         uuid: uuid,
-        owner: owner.uuid,
+        ownerUUID: "0",
         name: model.name,
         modelNumber: model.modelNumber,
         versionNumber: model.versionNumber,
@@ -81,25 +87,28 @@ async function insertNewProduct(uuid, requestBody) {
     });
 }
 
-function addDocumentToProduct(uuid, document) {
-    const product = products.findOne({ uuid: uuid });
+async function addDocumentToProduct(uuid, document) {
+    const product = await products.findOne({ ownerUUID: "0" });
 
     if (!product) {
         return Promise.reject("no product with that uuid");
     }
 
     const documents = product.documents;
+    log(product);
     documents.push(document);
+    log(documents.length)
+    log(document.name)
 
     return products.updateOne({
-        uuid: uuid
-    },
-    {
+        ownerUUID: "0",
+    }, {
         $set: {
             documents: documents
         }
+
     });
 }
 
-module.exports = { getUserByUsername, insertNewUser, insertNewProduct, addDocumentToProduct };
+module.exports = { getUserByUsername, insertNewUser, insertNewProduct, addDocumentToProduct, getAllProducts };
 

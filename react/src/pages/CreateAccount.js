@@ -125,7 +125,7 @@ class CreateAccount extends React.Component {
                 symbol.classList.add("valid");
             } else {
                 symbol.classList.remove("valid");
-                symbol.classList.remove("invalid");
+                symbol.classList.add("invalid");
             }
         }
     }

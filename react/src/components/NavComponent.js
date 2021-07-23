@@ -18,6 +18,9 @@ const handleLogout = history => () => {
 const NavComponent = ({ history }) => {
   const { pathname } = useLocation();
 
+  const me = JSON.parse(window.localStorage.getItem("me"));
+  console.log(me);
+
   /*visual components for nav bar*/
   return (
     <StyledNav>
@@ -38,7 +41,7 @@ const NavComponent = ({ history }) => {
       </ul>
       <ul id="listTwo">
         <li>
-          <Link id="profile" to="/profile">Name</Link>
+          <Link id="profile" to="/profile">{me.name}</Link>
           <Line id="personLine" transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/profile' ? '3%' : '0%' }} />
           <img src={Person} alt="" id="person" />
         </li>
