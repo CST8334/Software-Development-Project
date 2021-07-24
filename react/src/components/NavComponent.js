@@ -6,14 +6,22 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import "../index.css";
 
+/*to log out user*/
+
 const handleLogout = history => () => {
   console.log('you have been loged out.');
   window.sessionStorage.removeItem('LoggedIn');
 }
 
+/*history of previous page location*/
+
 const NavComponent = ({ history }) => {
   const { pathname } = useLocation();
 
+  const me = JSON.parse(window.localStorage.getItem("me"));
+  console.log(me);
+
+  /*visual components for nav bar*/
   return (
     <StyledNav>
       <Link id="logo" to="/"><img src={Logo} alt="" /></Link>
@@ -26,20 +34,26 @@ const NavComponent = ({ history }) => {
           <Link to="/products">Products</Link>
           <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/products' ? '4%' : '0%' }} />
         </li>
+        <li>
+          <Link to="/companies">Companies</Link>
+          <Line transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/companies' ? '4%' : '0%' }} />
+        </li>
       </ul>
       <ul id="listTwo">
         <li>
-          <Link id="profile" to="/profile">Name</Link>
+          <Link id="profile" to="/profile">{me.name}</Link>
           <Line id="personLine" transition={{ duration: 0.75 }} initial={{ width: '0%' }} animate={{ width: pathname === '/profile' ? '3%' : '0%' }} />
           <img src={Person} alt="" id="person" />
         </li>
         <li>
-          <Link id="profile" to="/profile" onClick={handleLogout(history)}>LogOut</Link>
+          <Link id="profile" onClick={handleLogout(history)}>LogOut</Link>
         </li>
       </ul>
     </StyledNav>
   )
 }
+
+/*styling for nav bar*/
 
 const StyledNav = styled.nav`
     margin: auto;

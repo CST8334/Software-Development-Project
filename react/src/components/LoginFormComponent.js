@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import Logo from '../img/logo.png';
 import axios from "axios";
 import "../index.css";
+
 import { Link, Route, Redirect } from 'react-router-dom';
 
 class LoginFormComponent extends React.Component {
 
+    /*setting username and password varisbles*/
     constructor(props) {
         super(props);
 
@@ -19,6 +21,7 @@ class LoginFormComponent extends React.Component {
         this.testRegister = this.testRegister.bind(this);
     }
 
+    /*updating username*/
     updateUsername(event) {
         this.setState({ username: event.target.value });
     }
@@ -26,11 +29,11 @@ class LoginFormComponent extends React.Component {
     updateUsername(event) {
         this.setState({ username: event.target.value });
     }
-
+    /*updating password*/
     updatePassword(event) {
         this.setState({ password: event.target.value });
     }
-
+    /*checking database to see if user exists*/
     handleSubmit(event) {
         event.preventDefault();
         (async () => {
@@ -41,10 +44,14 @@ class LoginFormComponent extends React.Component {
                         password: this.state.password
                     }
                 });
+                /*if user matches to database, let into homepage*/
                 if (res.data.code === 0) {
                     window.sessionStorage.setItem("LoggedIn", true)
+                    window.localStorage.setItem("me", JSON.stringify(res.data.me));
+                    console.log(JSON.stringify(res.data));
                     window.location.href = '/home';
                 }
+                /*if user not in database, alert a wrong password*/
                 if (res.data.code === 99) {
                     console.log('wrong password')
                     alert(res.data.msg);
@@ -54,7 +61,7 @@ class LoginFormComponent extends React.Component {
             }
         })();
     }
-
+    /*Creating a new user*/
     testRegister(event) {
         event.preventDefault();
 
@@ -71,6 +78,7 @@ class LoginFormComponent extends React.Component {
         })();
     }
 
+    /*visual components for login page*/
     render() {
         return (
             <Container>
@@ -116,13 +124,7 @@ class LoginFormComponent extends React.Component {
     }
 }
 
-// const StyledEyeFill = styled(EyeFill)`
-//     position: absolute;
-//     right: 50px;
-//     top: 55%;
-//     width: 20px;
-//     cursor: pointer;
-// `
+/*styling login page*/
 
 const FlexRow = styled.div`
     display: flex;

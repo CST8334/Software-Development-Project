@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
+
+/*styling the model*/
 
 const Container = styled.div`
     position: fixed;
@@ -53,9 +55,15 @@ const BackButton = styled.div`
 
 
 
-export default function Modal({ open, children, onClose }) {
+export default function Modal({ open, children, onClose, addProduct }) {
+    const [state, setState] = useState({ name: '', model: '', version: '' });
     if (!open) return null
-
+    /*getting data passed through input fields to another js file*/
+    const cb = (event) => {
+        addProduct(event, state);
+        setState('');
+    }
+    /*visual components for Model*/
     return (
         <>
             <Overlay />
@@ -64,19 +72,19 @@ export default function Modal({ open, children, onClose }) {
                 <form>
                     <div>
                         <p>Product Name</p>
-                        <input id="input" type="text" />
+                        <input autocomplete="off" id="input" type="text" value={state.name} onChange={ev => setState({ ...state, name: ev.target.value })} />
                     </div>
                     <div>
                         <p>Model Name</p>
-                        <input id="input" type="text" />
+                        <input autocomplete="off" id="input" type="text" value={state.model} onChange={ev => setState({ ...state, model: ev.target.value })} />
                     </div>
                     <div>
                         <p>Product Version</p>
-                        <input id="input" type="text" />
+                        <input autocomplete="off" id="input" type="text" value={state.version} onChange={ev => setState({ ...state, version: ev.target.value })} />
                     </div>
                 </form>
                 <div className="buttons">
-                    <button type="button">Create</button>
+                    <button type="button" id="createBtn" onClick={cb}>Create</button>
                     <BackButton onClick={onClose}> Back </BackButton>
                     {children}
                 </div>

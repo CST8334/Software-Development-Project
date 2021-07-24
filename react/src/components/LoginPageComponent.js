@@ -5,6 +5,8 @@ import "../index.css";
 
 import LoginFormComponent from "./LoginFormComponent";
 
+/*setting login page username and password*/
+
 class LoginPageComponent extends React.Component {
     constructor(props) {
         super(props);

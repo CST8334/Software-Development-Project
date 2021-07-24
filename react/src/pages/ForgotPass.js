@@ -5,7 +5,7 @@ import axios from 'axios'
 import Logo from '../img/logo.png'
 
 export class ForgotPass extends Component {
-
+/*connecting to database to varify user*/
     handleSubmit = e => {
         e.preventDefault();
 
@@ -24,7 +24,7 @@ export class ForgotPass extends Component {
         )
     }
 
-
+/*render out forgot password page*/
     render() {
         return (
             <Container>
@@ -51,7 +51,7 @@ export class ForgotPass extends Component {
         )
     }
 }
-
+/*style the page*/
 const Container = styled.div`
     padding: 1rem;
     width: 35rem;

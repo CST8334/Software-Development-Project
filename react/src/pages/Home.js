@@ -1,20 +1,20 @@
 import React from 'react'
 import styled from 'styled-components';
 import HomeChart from '../components/HomeChart';
-import TabNav from '../components/TabNav';
 import HomeBar from "../components/HomeBar"
 import "../index.css"
 
 //recat has setup test
+//the {part} argument is not needed but was tryed for testing
 function Home() {
     return (
         <Container>
-            <label>Here are the highlights of your account</label>
+            <label id="title">Here are the highlights of your account</label>
             <Main>
                 <Port>
                     <HomeBar>
                         <HomeTab label="Compliance">
-                            <HomeChart/>
+                            <HomeChart />
                         </HomeTab>
                         <HomeTab label="Product">
                             <h3>this is product tab</h3>
@@ -25,35 +25,34 @@ function Home() {
                     </HomeBar>
                 </Port>
                 <Starboard>
-                    <label>What's New</label>
+                    <label id="new">What's New?</label>
                     <NoticeBars>
                         <label><h1>Expiry notice</h1></label>
                         <div>
                         <p>
                         <Button>Secondary</Button>
                         <a href="#">Dismiss</a>
-
                         </p>
                         </div>
                     </NoticeBars>
 
                     <NoticeBars>
-                    <label>New stuff</label>
+                        <label>New stuff</label>
                         <div>
-                        <p>
-                        <Button>Secondary</Button>
-                        <a href="#">Dismiss</a>
-                        </p>
+                            <p>
+                                <Button>Secondary</Button>
+                                <a href="#">Dismiss</a>
+                            </p>
                         </div>
                     </NoticeBars>
 
                     <NoticeBars>
-                    <label>Set a reminder</label>
+                        <label>Set a reminder</label>
                         <div>
-                        <p>
-                        <Button>Secondary</Button>
-                        <a href="#">Dismiss</a>
-                        </p>
+                            <p>
+                                <Button>Secondary</Button>
+                                <a href="#">Dismiss</a>
+                            </p>
                         </div>
                     </NoticeBars>
                 </Starboard>
@@ -68,21 +67,27 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    margin-top: 50px;
+    #title{
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    #new{
+        font-weight: bold;
+    }
 
     h1{
-        marginTop: '3em';
+        margin-top: '3em';
     }
     h2 {
         margin: '4em 0em 2em';
     }
     h3 {
-        marginTop: '2em';
+        margin-top: '2em';
         padding: '2em 0em';
     }
 
-    last {
-        marginBottom: '300px';
-    }
 `
 //The margins that make the split section for the middle of the page
 const Main = styled.div`

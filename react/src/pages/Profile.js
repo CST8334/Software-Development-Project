@@ -11,7 +11,7 @@ const country = [
   { value: 'Canada', label: 'Canada' },
   { value: 'US', label: 'United States' }
 ]
-
+/*rendering thr profile page*/
 class ProfilePage extends React.Component {
   render() {
     return (
@@ -62,12 +62,12 @@ class ProfilePage extends React.Component {
             <input type="file" />
           </Photo>
         </Contain>
-        <Button>Save</Button>
+        <Button data-testid="save" >Save</Button>
       </Container>
     )
   }
 }
-
+/*styling the profile page*/
 const Contain = styled.div`
   display: grid;
   grid-template-columns: auto auto;

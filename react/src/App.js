@@ -1,10 +1,11 @@
 import React, { Profiler } from 'react';
+import FormComponent from './components/FormComponent';
 import LoginFormComponent from './components/LoginFormComponent';
 import LoginPageComponent from './components/LoginPageComponent';
-import FormAddDocument from './components/FormAddDocument';
-import FormAddDetails from './components/FormAddDetails';
-import AddDates from './components/AddDates';
-import MoreInfo from './components/MoreInfo';
+import { FormAddDocument } from './components/FormAddDocument';
+import { FormAddDetails } from './components/FormAddDetails';
+import { FormAddDates } from './components/AddDates';
+import { MoreInfo } from './components/MoreInfo';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -15,12 +16,13 @@ import ProfilePage from './pages/Profile';
 import CreateAccount from './pages/CreateAccount';
 import ForgotPass from './pages/ForgotPass';
 import ForgotTwo from './pages/forgotTwo';
+import Companies from './pages/Companies';
 
 //this is the component that uses the server response and with the react librarys
 //determains what will be shown to the user
 
-//component that does something when it loads and what it loads is 
-//the children arrgument refers to 
+//component that does something when it loads and what it loads is
+//the children arrgument refers to
 function PrivateRoute({ children, ...rest }) {
   return (
     <Route{...rest} render={() => {
@@ -46,7 +48,7 @@ function App() {
           </Route>
           <Route path="/home" exact>
             <NavComponent />
-            <Home />
+            <Home/>
           </Route>
           <Route path="/products">
             <NavComponent />
@@ -72,7 +74,7 @@ function App() {
             <FormAddDocument />
           </Route>
           <Route path="/AddDates">
-            <AddDates />
+            <FormAddDates />
           </Route>
           <Route path="/MoreInfo">
             <MoreInfo />
@@ -84,10 +86,14 @@ function App() {
             <FormAddDocument />
           </Route>
           <Route path="/AddDates">
-            <AddDates />
+            <FormAddDates />
           </Route>
           <Route path="/MoreInfo">
             <MoreInfo />
+          </Route>
+          <Route path="/companies">
+            <NavComponent/>
+            <Companies/>
           </Route>
         </Switch>
       </MainContent>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from "axios";
 import styled from 'styled-components';
 import Modal from '../components/Modal'
 import ProductsAdd from '../components/ProductsAdd'
@@ -13,6 +12,7 @@ const BUTTON_WRAPPER_STYLES = {
 }
 /*returning a set of html which will render when button clicked*/
 const AddProduct = (props) => {
+    console.log(props);
     return (
         <Faq>
             <Toggle title="<Company Name>" data={props.data}>
@@ -44,34 +44,24 @@ const AddProduct = (props) => {
     )
 }
 /*getting text from input and replacing tags based on input*/
-const Products = () => {
+const Companies = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const [productList, setProductList] = useState([]);
-    const buttonClick = async (event, state) => {
+    const buttonClick = (event, state) => {
         setProductList(productList.concat(<AddProduct key={productList.length} data={state} />));
-
-        const result = await axios.post("/products", {
-            model: {
-                name: state.name,
-                modelNumber: state.model,
-                versionNumber: state.version
-            }
-        });
-
-        console.log(result);
-
         setIsOpen(false)
+        console.log(setProductList);
     }
     const resetButton = event => {
         setProductList([]);
     }
-    /*rendering products page*/
+    /*rendering companies page*/
     return (
 
         <Container>
             <header1>
-                <h1><b>Products</b></h1>
+                <h1><b>Companies</b></h1>
             </header1>
             <header2>
                 <div class="sort">
@@ -85,18 +75,22 @@ const Products = () => {
             </header2>
             <header3>
                 <input id="search" type="text" placeholder="Search.." />
-
+                <button id="invite">Invite a user</button>
+                {/* <Modal
+                    isOpen={isOpen}
+                    onRequestClose={toggleModal}
+                    contentLabel="My dialog"
+                >
+                    <label for="invite">Invite to Aetherwind</label>
+                    <br/>
+                    <input type="text" />
+                    <br/>
+                    <button onClick={toggleModal}>Add user</button>
+                    <br/>
+                    <button onClick={toggleModal}>Send invite</button>
+                </Modal> */}
             </header3>
-            <header4>
-                <div class="topnav">
-                    <Link to="/FormAddDocument"><button type="button">ADD DOCUMENT</button></Link>&nbsp;&nbsp;
-                    <button onClick={() => setIsOpen(true)}> Create Product </button>
-                    <div style={BUTTON_WRAPPER_STYLES}>
-                        <Modal addProduct={buttonClick} open={isOpen} onClose={() => setIsOpen(false)} />
-                        <button onClick={resetButton}>Clear</button>
-                    </div>
-                </div>
-            </header4>
+            
             <sidebar>
                 <div class="sidebarchild">
                     <div>
@@ -109,50 +103,20 @@ const Products = () => {
                             <option value="EXP">Expired</option>
                         </select>
                     </div>
-                    <div>
-                        <label id="label" for="country">Country</label>
-                        <br />
-                        <select id="country">
-                            <option value="USA">United States</option>
-                            <option value="BRA">Brazil</option>
-                            <option value="CAN">Canada</option>
-                            <option value="MEX">Mexico</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label id="label" for="body">Issuing Body</label>
-                        <br />
-                        <select id="body">
-                            <option value="Option 1">Option 1</option>
-                            <option value="Option 2">Option 2</option>
-                            <option value="Option 3">Option 3</option>
-                            <option value="Option 4">Option 4</option>
-                        </select>
-                    </div>
-                    <CheckBox>
-                        <label class="switch">
-                            <input type="checkbox" />
-                            <span class="slider round"></span>
-                        </label><label className="Switch">Show products whose documents have unread comments </label>
-                    </CheckBox>
+                    
                 </div>
             </sidebar>
             <main>
                 <MainGrid>
                     <mg1>
-                        <ProductsAdd />
-                        {productList}
-                    </mg1>
-                    <mg2>
                         <button>LOAD MORE</button>
-                    </mg2>
+                    </mg1>
                 </MainGrid>
             </main>
         </Container>
     )
 }
-/*styling products page*/
+/*styling companies page*/
 const Faq = styled.div`
     width: 58.5vw;
     margin: 20px;
@@ -253,6 +217,18 @@ const Container = styled.div`
     grid-template-rows: 20px auto 20px;
     grid-gap: 1rem;
 
+    header3{
+        display: flex;
+        #invite{
+            width: 150px;
+            height: 40px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+        }
+    }
+
     .sort{
         select{
             width: 150px;
@@ -280,7 +256,7 @@ const Container = styled.div`
     }
 
     header1{
-
+        
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 2;
@@ -290,11 +266,11 @@ const Container = styled.div`
             font-size: 30px;
             font-weight: 100;
         }
-
-
+        
+       
     }
     header2{
-
+        
         grid-column-start: 3;
         grid-column-end: 4;
         grid-row-start: 2;
@@ -306,17 +282,17 @@ const Container = styled.div`
         }
     }
     header3{
-
+        
         grid-column-start: 4;
         grid-column-end: 5;
         grid-row-start: 2;
         grid-row-end: 3;
         justify-self: end;
-
-
+        
+           
     }
     header4{
-
+        
         grid-column-start: 5;
         grid-column-end: 6;
         grid-row-start: 2;
@@ -328,16 +304,9 @@ const Container = styled.div`
                 width: 40vw;
             }
         }
+        
 
-
-        button{
-            width: 150px;
-            height: 40px;
-            background-color: #2196F3;
-            color: white;
-            border: none;
-            border-radius: 8px;
-        }
+        
     }
     main{
 
@@ -346,21 +315,21 @@ const Container = styled.div`
         grid-row-start: 3;
         grid-row-end: 4;
         align-self: start;
-
+        
       }
 
     sidebar{
-
+       
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 3;
         grid-row-end: 6;
 
         height: 70vh;
-
+       
 
       }
-
+      
     .sidebarchild{
         display: flex;
         flex-direction: column;
@@ -384,22 +353,17 @@ const Container = styled.div`
             width: 200px;
         }
     }
-
-
+      
+      
 `
 
 const MainGrid = styled.div`
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
     grid-template-rows: auto auto auto;
-    mg1{
-        grid-column-start: 1;
-        grid-column-end: 5;
-        grid-row-start: 1;
-        grid-row-end: 3;
-    }
+    
 
-    mg2{
+    mg1{
         grid-column-start: 3;
         grid-column-end: 4;
         grid-row-start: 3;
@@ -411,7 +375,7 @@ const MainGrid = styled.div`
             height: 30px;
         }
     }
-
+   
 `
 const CheckBox = styled.div`
 .switch {
@@ -420,13 +384,13 @@ const CheckBox = styled.div`
     width: 50px;
     height: 20px;
   }
-
-  .switch input {
+  
+  .switch input { 
     opacity: 0;
     width: 0;
     height: 0;
   }
-
+  
   .slider {
     position: absolute;
     cursor: pointer;
@@ -438,7 +402,7 @@ const CheckBox = styled.div`
     -webkit-transition: .4s;
     transition: .4s;
   }
-
+  
   .slider:before {
     position: absolute;
     content: "";
@@ -450,26 +414,26 @@ const CheckBox = styled.div`
     -webkit-transition: .4s;
     transition: .4s;
   }
-
+  
   input:checked + .slider {
     background-color: #2196F3;
   }
-
+  
   input:focus + .slider {
     box-shadow: 0 0 1px #2196F3;
   }
-
+  
   input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
   }
-
+  
   /* Rounded sliders */
   .slider.round {
     border-radius: 34px;
   }
-
+  
   .slider.round:before {
     border-radius: 50%;
   }
@@ -482,5 +446,5 @@ const CheckBox = styled.div`
    }
 `
 
-export default Products
+export default Companies
 
