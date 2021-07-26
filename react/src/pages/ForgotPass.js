@@ -110,6 +110,7 @@ const Form = styled.div`
     input[type=checkbox] {
         width: 20px;
     }
+    
 
     input[type=submit] {
         width: 90%;

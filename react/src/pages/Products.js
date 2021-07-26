@@ -52,9 +52,11 @@ const Products = () => {
         setProductList(productList.concat(<AddProduct key={productList.length} data={state} />));
 
         const result = await axios.post("/products", {
-            name: state.name,
-            modelNumber: state.model,
-            versionNumber: state.version
+            model: {
+                name: state.name,
+                modelNumber: state.model,
+                versionNumber: state.version
+            }
         });
 
         console.log(result);

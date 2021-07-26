@@ -47,6 +47,8 @@ class LoginFormComponent extends React.Component {
                 /*if user matches to database, let into homepage*/
                 if (res.data.code === 0) {
                     window.sessionStorage.setItem("LoggedIn", true)
+                    window.localStorage.setItem("me", JSON.stringify(res.data.me));
+                    console.log(JSON.stringify(res.data));
                     window.location.href = '/home';
                 }
                 /*if user not in database, alert a wrong password*/

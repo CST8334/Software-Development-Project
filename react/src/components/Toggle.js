@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'
 import { IoIosArrowForward } from 'react-icons/io'
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 import { Link } from 'react-router'
 import Modal from '../components/Modal'
 

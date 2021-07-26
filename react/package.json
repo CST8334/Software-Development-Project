@@ -1,9 +1,12 @@
 {
   "proxy": "http://127.0.0.1:5555",
   "name": "aetherwind-app",
+  "test": "react-scripts test",
+  "test:ci": "react-scripts test --testResultsProcessor ./node_modules/jest-junit",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@shelf/jest-mongodb": "^2.0.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",

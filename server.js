@@ -1,6 +1,6 @@
 
 const { log } = require("./util");
-const { insertNewProduct, getUserByUsername, insertNewUser } = require("./mongo");
+const { insertNewProduct, getUserByUsername, insertNewUser, addDocumentToProduct, getAllProducts } = require("./mongo");
 const { salt, hash, safeCompare } = require("./crypto");
 
 const { v4: uuidv4 } = require("uuid");
@@ -38,7 +38,7 @@ function authorizationMiddleware(request, response, next) {
 }
 
 function loggingMiddleware(request, response, next) {
-    log(`${request.path} - ${JSON.stringify(request.body)}`);
+    //log(`${request.path} - ${JSON.stringify(request.body)}`);
     next();
 }
 
@@ -78,7 +78,8 @@ server.post("/login", async (request, response) => {
                 return response.status(200).json({
                     me: {
                         uuid: user.uuid,
-                        permissions: null
+                        permissions: null,
+                        name: user.username
                     },
                     code: 0,
                     msg: "Succesfully logged in."
@@ -159,6 +160,29 @@ server.post("/register", async (request, response) => {
 server.post("/products", async (request, response) => {
     const uuid = uuidv4();
     const result = await insertNewProduct(uuid, request.body);
+
+    const allProducts = await getAllProducts();
+
+    if (!allProducts) {
+        return response.status(200).json({
+            code: -1,
+            msg: "No Product"
+        });
+    }
+
+    log(result);
+
+    response.status(200).json({
+        code: 0,
+        msg: "OK"
+    });
+});
+
+server.post("/documents", async (request, response) => {
+    log(request.body);
+
+    const uuid = uuidv4();
+    const result = await addDocumentToProduct(uuid, request.body);
 
     log(result);
 

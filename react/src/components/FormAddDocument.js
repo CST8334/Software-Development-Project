@@ -1,10 +1,10 @@
 import React from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Clip from '../img/clip.jpg';
 import {Link} from 'react-router-dom';
 import axios from 'axios'
+import styled from 'styled-components';
 import { FormComponent } from "./FormComponent.js";
 
 export class FormAddDocument extends FormComponent {
@@ -60,45 +60,94 @@ export class FormAddDocument extends FormComponent {
         //this gets the value out the state.
         const { value } = this.state;
 
-        // Below is a form using MuiThememProvider from material-ui.
-        return(
-  <MuiThemeProvider>
-  <React.Fragment>
-  <AppBar title="Step 1: Add a Document"/>
-  <div style={this.formSectionStyle}>
-    <h1 style={{marginBottom: "10px"}}>What are you Registering?</h1>
-    <div style={this.inputRowStyle}>
-      <label for="Certificate">
-        <input style={this.inputElementStyle} type="radio" value="Certificate" checked={value === "Certificate"} onChange={this.onChange}/>
-        Certificate
-      </label>
-      <label for="Report">
-        <input style={this.inputElementStyle} type="radio" value="Report" checked={value === "Report"} onChange={this.onChange}/>
-        Report
-      </label>
-    </div>
-    <div style={this.inputRowStyle}>
-      <label>Country:</label>
-      <select style={this.inputElementStyle}>
-        <option value="" disabled selected>Choose a Country...</option>
-        <option value="Canada">Canada</option>
-        <option value="USA">USA</option>
-      </select>
-    </div>
-    <div style={this.inputRowStyle}>
-      <img style={{height:"1.5em"}} src={Clip} alt="paperclip" id="paperclip"/><label>Attach Files pdf,docx,jpg. size limit 15mb.</label>
-      <input style={this.inputElementStyle} type="file" onChange={this.fileSelectedHandler}></input>
-    </div>
+        
+//Below is a form using MuiThememProvider from material-ui.
+return(
+    <Container>
+        <Top>
+    <Link id="arrow" to="/Products">➜</Link>
+                    <h1>Step 1: Add A Document</h1>
+                    </Top>
+           <br></br>
+           <Form>
+                    <h1>What are you Registering?</h1>
+                
+                    <input type="radio" value="Certificate" checked={value === "Certificate"} onChange={this.onChange}/>
+                    <label for="Certificate">Certificate</label>&nbsp;&nbsp;
+                    <input type="radio" value="Report"  checked={value === "Report"} onChange={this.onChange}/>
+                    <label for="Report">Report</label>
+                    
+                    
+                <br></br>
+                <br></br>
+                    <label>County</label>&nbsp;&nbsp;
+                    <select>
+                    <option value=""disabled selected> Choose a Country..</option>
+                    <option value="Canada">Canada</option> 
+                    <option value="USA">USA</option>
+                    </select>
+                    <br></br>
+                    <br></br>
+                       <img src={Clip} alt="paperclip" id="paperclip"/><label>Attach Files pdf,docx,jpg. size limit 15mb.</label>
+                    <br></br>         
+                    <br></br> 
+                     <input type="file" onChange={this.fileSelectedHandler} multiple></input> 
 
-    <div style={this.inputRowStyle}>
-      <RaisedButton style={this.inputElementStyle} onClick={this.fileUploadHandler} label="Attach" primary={true}/>
-      <Link style={this.inputElementStyle} to={{ pathname: "/Products", state: { formData: this.state } }}><RaisedButton label="Cancel" primary={true}></RaisedButton></Link>
-      <Link style={this.inputElementStyle} to={{ pathname: "/FormAddDetails", state: { formData: this.state } }}><RaisedButton label="Next" primary={true}></RaisedButton></Link>
-    </div>
-  </div>
-  </React.Fragment>
-  </MuiThemeProvider>
-        );
+                       <MuiThemeProvider>
+                    <React.Fragment>   
+                    <RaisedButton onClick={this.fileUploadHandler} label="Attach" primary={true}/>
+                    <br></br>
+                    <br></br> 
+                    <Link to="/Products"><RaisedButton label="Cancel" primary={true}></RaisedButton></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Link to="/FormAddDetails"><RaisedButton label="Next" primary={true}></RaisedButton></Link>
+                        
+                     </React.Fragment> 
+                    </MuiThemeProvider>  
+
+                    </Form>
+                    </Container>
+);
     }
 }
+const Container = styled.div`
+    padding: 1rem;
+    width: 35rem;
+    border-radius: 20px;
+    background: rgb(var(--aw-white));
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`
 
+const Top = styled.div`
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1{
+        font-size: 25px;
+        margin-top: 20px;
+    }
+
+    #arrow{
+        transform: rotate(180deg);
+        text-decoration: none;
+        color: black;
+        font-size: 30px;
+        margin-left: -30rem;
+    }
+`
+
+const Form = styled.div`
+    justify-content: center;
+    align-items: center;
+    
+}
+
+}
+`
+
+export default FormAddDocument;

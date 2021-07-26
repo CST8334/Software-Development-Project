@@ -84,7 +84,7 @@ export default function Modal({ open, children, onClose, addProduct }) {
                     </div>
                 </form>
                 <div className="buttons">
-                    <button type="button" onClick={cb}>Create</button>
+                    <button type="button" id="createBtn" onClick={cb}>Create</button>
                     <BackButton onClick={onClose}> Back </BackButton>
                     {children}
                 </div>

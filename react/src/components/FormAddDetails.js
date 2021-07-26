@@ -1,8 +1,8 @@
 import React from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router-dom'
+import styled from 'styled-components';
 import { FormComponent } from "./FormComponent.js";
 
 export class FormAddDetails extends FormComponent {
@@ -15,9 +15,13 @@ export class FormAddDetails extends FormComponent {
     // Below is a form with user input using MuiThemeProvider.
     render() {
         return(
-<MuiThemeProvider>
-<React.Fragment>
-<AppBar title="Step 2: Add Details"/>
+<Container>
+    <Top>
+    <Link id="arrow" to="/FormAddDocument">➜</Link>
+                    <h1>Step 2: Add Details</h1>
+                    </Top>
+                    <br></br>
+                    <Form>
 
 <div style={this.formSectionStyle}>
   <div style={this.inputRowStyle}>
@@ -55,16 +59,61 @@ export class FormAddDetails extends FormComponent {
       <option value="Rev.">Rev.</option>
     </select>
   </div>
-
+  <MuiThemeProvider>
+    <React.Fragment> 
   <div style={this.inputRowStyle}>
     <Link style={this.inputElementStyle} to={{ pathname: "/FormAddDocument", state: { formData: this.state } }}><RaisedButton label="Previous" primary={false}></RaisedButton></Link>
     <Link style={this.inputElementStyle} to={{ pathname: "/Products", state: { formData: this.state } }}><RaisedButton label="Cancel" primary={true}></RaisedButton></Link>
     <Link style={this.inputElementStyle} to={{ pathname: "/AddDates", state: { formData: this.state } }}><RaisedButton label="Next" primary={true}></RaisedButton></Link>
   </div>
-</div>
+
 </React.Fragment>
 </MuiThemeProvider>
+</div>
+</Form>
+</Container>
         );
     }
 }
+const Container = styled.div`
+    padding: 1rem;
+    width: 35rem;
+    border-radius: 20px;
+    background: rgb(var(--aw-white));
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`
 
+const Top = styled.div`
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1{
+        font-size: 25px;
+        margin-top: 20px;
+    }
+
+    #arrow{
+        transform: rotate(180deg);
+        text-decoration: none;
+        color: black;
+        font-size: 30px;
+        margin-left: -30rem;
+    }
+`
+
+const Form = styled.div`
+    justify-content: center;
+    align-items: center;
+    
+}
+
+}
+`
+
+//this exports the page
+export default FormAddDetails;
