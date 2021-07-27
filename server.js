@@ -1,6 +1,6 @@
 
 const { log } = require("./util");
-const { insertNewProduct, getUserByUsername, insertNewUser, addDocumentToProduct, getAllProducts } = require("./mongo");
+const { insertNewProduct, getUserByUsername, insertNewUser, addDocumentToProduct, getAllProducts, getProductsByOwnerId } = require("./mongo");
 const { salt, hash, safeCompare } = require("./crypto");
 
 const { v4: uuidv4 } = require("uuid");
@@ -179,17 +179,44 @@ server.post("/products", async (request, response) => {
 });
 
 server.post("/documents", async (request, response) => {
-    log(request.body);
 
     const uuid = uuidv4();
-    const result = await addDocumentToProduct(uuid, request.body);
 
-    log(result);
+    if (!request.body.productId) {
+        return response.status(400).json({
+            code: -1,
+            msg: "No productId found in request body"
+        });
+    }
+
+    if (!request.body.document) {
+        return response.status(400).json({
+            code: -2,
+            msg: "No document found in request body"
+        });
+    }
+
+    const result = await addDocumentToProduct(uuid, request.body.document, request.body.productId);
 
     response.status(200).json({
         code: 0,
         msg: "OK"
     });
+});
+
+server.post("/productsView", async (request, response) => {
+    if (!request.body.productOwnerId) {
+        return response.status(400).json({
+            code: -1,
+            msg: "You must provide a product owner ID"
+        });
+    }
+
+    const result = await getProductsByOwnerId(request.body.productOwnerId).toArray();
+    log(result.length)
+
+    return response.status(200).json(result)
+
 });
 
 server.get("/*", (request, response) => {

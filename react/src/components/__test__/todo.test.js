@@ -7,17 +7,6 @@ afterEach(() => {
     cleanup();
 });
 
-// test('Testing Parts of the Profile page', () => {
-//     const { getByText } = render(<Profile></Profile>);
-//     const linkElement = getByText(/Last Name/i);
-//     expect(linkElement).toBeInTheDocument(); //tests if any line of text say "Last Name"
-//     const profileElement = screen.getByTestId('save'); //gets the save button
-//     expect(profileElement).toBeInTheDocument(); //test if the save but is in the DOM
-//     expect(profileElement).toHaveTextContent('Save'); // does it say "Save"
-//     expect(profileElement).not.toContainHTML('<h2>') //does it contain unessisary HTML tags
-//     expect(profileElement).not.toBeDisabled() //tests that the save button is not disabled
-// });
-
 //adding mongo client to jest
 const { MongoClient } = require('mongodb');
 
@@ -126,7 +115,7 @@ describe('Upload Files', () => {
         const insertedDoc = await product.findOne({
             _id: "ObjectId(2222222)",
         });
-        console.log(insertedDoc, mockProductDoc);
+        console.log(mockProductDoc, insertedDoc);
         expect(insertedDoc.documents.length).toEqual(mockProductDoc.documents.length + 1);
     });
 });
