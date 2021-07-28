@@ -5,6 +5,7 @@ import Modal from '../components/Modal'
 import ProductsAdd from '../components/ProductsAdd'
 import { Link } from 'react-router-dom'
 import Toggle from '../components/Toggle';
+import createHistory from 'history/createBrowserHistory'
 
 /*couple of stlyes*/
 const BUTTON_WRAPPER_STYLES = {
@@ -49,25 +50,55 @@ const AddProduct = (props) => {
 const Products = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const [productList, setProductList] = useState([]);
-    const buttonClick = async (event, state) => {
-        setProductList(productList.concat(<AddProduct key={productList.length} data={state} />));
+    const [state, setState] = useState({ productList: [] });
+    const me = JSON.parse(localStorage.getItem("me"));
+    const [search, setSearch] = useState('');
 
+    function refreshProductList() {
+        axios.post("/productsView", {
+            productOwnerId: me.uuid
+        }).then(async response => {
+            await setState({ productList: response.data });
+            console.log(state)
+        });
+    }
+    const history = createHistory();
+
+    const buttonClick = async (event, state) => {
         const result = await axios.post("/products", {
             model: {
                 name: state.name,
                 modelNumber: state.model,
                 versionNumber: state.version
-            }
+            },
+            ownerUUID: me.uuid
         });
-
+        refreshProductList();
+        history.go(0)
         console.log(result);
 
         setIsOpen(false)
     }
+
+    React.useEffect(() => {
+        console.log("useEffect");
+        refreshProductList()
+    }, []);
+
     const resetButton = event => {
-        setProductList([]);
+        setState([]);
     }
+
+    const handleSearch = e => {
+        setSearch(e.target.value)
+    }
+
+    const filteredProducts = state.productList.filter(product =>
+        product.name.toLowerCase().includes(search.toLowerCase())
+    )
+
+    //refreshProductList()
+
     /*rendering products page*/
     return (
 
@@ -86,7 +117,7 @@ const Products = () => {
                 </div>
             </header2>
             <header3>
-                <input id="search" type="text" placeholder="Search.." />
+                <input id="search" type="text" placeholder="Search.." onChange={handleSearch} />
 
             </header3>
             <header4>
@@ -144,7 +175,11 @@ const Products = () => {
                 <MainGrid>
                     <mg1>
                         <ProductsAdd />
-                        {productList}
+                        <ul>
+                            {filteredProducts.map((product) => {
+                                return <AddProduct key={state.productList.length} data={product} />
+                            })}
+                        </ul>
                     </mg1>
                     <mg2>
                         <button>LOAD MORE</button>

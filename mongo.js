@@ -57,7 +57,7 @@ function insertNewUser(uuid, username, hashedPassword, salt) {
 }
 
 function getAllProducts() {
-    return product.find({});
+    return products.find({});
 }
 
 
@@ -68,19 +68,17 @@ async function insertNewProduct(uuid, requestBody) {
 
     const model = requestBody.model;
 
+    if (!requestBody.ownerUUID) {
+        //TODO: return error code
+    }
 
-    // let owner;
-    // if (requestBody.owner) {
-    //     owner = await findUserByUsername(requestBody.owner.name);
-    // }
-
-    // if (!owner) {
-    //     return Promise.reject("no owner associated with this product");
-    // }
+    if (!model) {
+        //TODO: return error code
+    }
 
     return products.insertOne({
         uuid: uuid,
-        ownerUUID: "0",
+        ownerUUID: requestBody.ownerUUID,
         name: model.name,
         modelNumber: model.modelNumber,
         versionNumber: model.versionNumber,
@@ -88,21 +86,19 @@ async function insertNewProduct(uuid, requestBody) {
     });
 }
 
-async function addDocumentToProduct(uuid, document) {
-    const product = await products.findOne({ ownerUUID: "0" });
+async function addDocumentToProduct(uuid, document, productUUID) {
+    const product = await products.findOne({ ownerUUID: productUUID });
 
     if (!product) {
         return Promise.reject("no product with that uuid");
     }
 
     const documents = product.documents;
-    log(product);
+    document.uuid = uuid;
     documents.push(document);
-    log(documents.length)
-    log(document.name)
 
     return products.updateOne({
-        ownerUUID: "0",
+        ownerUUID: productUUID,
     }, {
         $set: {
             documents: documents
@@ -111,5 +107,9 @@ async function addDocumentToProduct(uuid, document) {
     });
 }
 
-module.exports = { getUserByUsername, insertNewUser, insertNewProduct, addDocumentToProduct, getAllProducts };
+function getProductsByOwnerId(ownerId) {
+    return products.find({ ownerUUID: ownerId })
+}
+
+module.exports = { getUserByUsername, insertNewUser, insertNewProduct, addDocumentToProduct, getAllProducts, getProductsByOwnerId };
 
