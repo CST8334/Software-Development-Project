@@ -1,11 +1,11 @@
-import React, { Profiler } from 'react';
-import FormComponent from './components/FormComponent';
-import LoginFormComponent from './components/LoginFormComponent';
+import React from 'react';
 import LoginPageComponent from './components/LoginPageComponent';
 import { FormAddDocument } from './components/FormAddDocument';
 import { FormAddDetails } from './components/FormAddDetails';
 import { FormAddDates } from './components/AddDates';
 import { MoreInfo } from './components/MoreInfo';
+import Delete from './components/Delete';
+import ConfirmDelete from './components/ConfirmDelete';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -90,6 +90,12 @@ function App() {
           </Route>
           <Route path="/MoreInfo">
             <MoreInfo />
+          </Route>
+          <Route path="/Delete">
+            <Delete />
+          </Route>
+          <Route path="/ConfirmDelete">
+            <ConfirmDelete />
           </Route>
           <Route path="/companies">
             <NavComponent/>
