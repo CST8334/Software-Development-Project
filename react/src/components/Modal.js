@@ -57,11 +57,23 @@ const BackButton = styled.div`
 
 export default function Modal({ open, children, onClose, addProduct }) {
     const [state, setState] = useState({ name: '', model: '', version: '' });
-    if (!open) return null
+    if (!open) return null 
     /*getting data passed through input fields to another js file*/
+    /*Validates that the new product inputs are not empty.*/
     const cb = (event) => {
+        if(state.name.length === 0) {
+            console.log("name cant be null")
+        }
+        if(state.model.length === 0) {
+            console.log("model name cant be empty")
+        }
+        if(state.version.length === 0) {
+            console.log("Product Version cant be empty")
+        }
+        else{
         addProduct(event, state);
         setState('');
+        }
     }
     /*visual components for Model*/
     return (

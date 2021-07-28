@@ -9,7 +9,7 @@ import CreateAccount from '../../pages/CreateAccount.js';
 // import HomeChart from '../HomeChart.js';
 // import Home from '../../pages/Home.js';
 
-import { cleanup } from '@testing-library/react';
+// import { cleanup } from '@testing-library/react';
 import Profile from '../../pages/Profile.js';
 
 

@@ -60,6 +60,7 @@ function getAllProducts() {
     return product.find({});
 }
 
+
 async function insertNewProduct(uuid, requestBody) {
     if (!uuid) {
         return Promise.reject("no uuid");
