@@ -62,6 +62,7 @@ const Products = () => {
             console.log(state)
         });
     }
+
     const history = createHistory();
 
     const buttonClick = async (event, state) => {
@@ -85,8 +86,14 @@ const Products = () => {
         refreshProductList()
     }, []);
 
-    const resetButton = event => {
+    const resetButton = e => {
         setState([]);
+    }
+
+    function sortatz() {
+        console.log(state.productList)
+        state.productList.sort()
+        console.log(state.productList)
     }
 
     const handleSearch = e => {
@@ -114,6 +121,7 @@ const Products = () => {
                         <option value="1">Status</option>
                         <option value="2">Alphabetical</option>
                     </select>
+                    <button onClick={sortatz}>Sort A to Z</button>
                 </div>
             </header2>
             <header3>

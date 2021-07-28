@@ -55,11 +55,11 @@ describe('Upload Files', () => {
     });
 
 
-test('Testing Parts of the Home page', () =>{
-    const {getByText} = render(<CreateAccount></CreateAccount>);
-    const linkElement = getByText(/Create Account/i); 
-    expect(linkElement).toBeInTheDocument();
-})
+    test('Testing Parts of the Home page', () => {
+        const { getByText } = render(<CreateAccount></CreateAccount>);
+        const linkElement = getByText(/Create Account/i);
+        expect(linkElement).toBeInTheDocument();
+    })
 
     //testing to see if user is in database
     it('should insert into users collection', async () => {
