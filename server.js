@@ -157,24 +157,36 @@ server.post("/register", async (request, response) => {
     });
 });
 
+
 server.post("/products", async (request, response) => {
-    const uuid = uuidv4();
-    const result = await insertNewProduct(uuid, request.body);
+    console.log(request.body.model.name)
 
-    const allProducts = await getAllProducts();
-
-    if (!allProducts) {
-        return response.status(200).json({
+    if(!request.body.model.name || request.body.model.name.length === 0) {
+        return response.status(400).json({
             code: -1,
             msg: "No Product"
         });
     }
 
-    log(result);
+    if(!request.body.model.modelNumber || request.body.model.modelNumber.length === 0) {
+        return response.status(400).json({
+            code: -2,
+            msg: "No Product"
+        });
+    }
 
-    response.status(200).json({
+    if(!request.body.model.versionNumber || request.body.model.versionNumber.length === 0) {
+        return response.status(400).json({
+            code: -3,
+            msg: "No Product"
+        });
+    }
+
+    const uuid = uuidv4();
+    const result = await insertNewProduct(uuid, request.body);
+    return response.status(200).json({
         code: 0,
-        msg: "OK"
+        msg: "who cares"
     });
 });
 

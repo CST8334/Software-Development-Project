@@ -97,6 +97,11 @@ const Products = () => {
         product.name.toLowerCase().includes(search.toLowerCase())
     )
 
+    // this.state.productList.sort((a, b) => a.name > b.name ? 1:-1).map(
+    //     (item, i) => <div key={i}> {item.name} {item.modelNumber} {item.versionNumber} </div>
+    //     )
+
+
     //refreshProductList()
 
     /*rendering products page*/
