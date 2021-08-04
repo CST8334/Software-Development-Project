@@ -111,5 +111,9 @@ function getProductsByOwnerId(ownerId) {
     return products.find({ ownerUUID: ownerId })
 }
 
-module.exports = { getUserByUsername, insertNewUser, insertNewProduct, addDocumentToProduct, getAllProducts, getProductsByOwnerId };
+function deleteProductById(productUUID) {
+    return products.deleteOne({ uuid: productUUID })
+}
+
+module.exports = { getUserByUsername, insertNewUser, insertNewProduct, addDocumentToProduct, getAllProducts, getProductsByOwnerId, deleteProductById };
 

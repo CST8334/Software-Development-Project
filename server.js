@@ -1,6 +1,6 @@
 
 const { log } = require("./util");
-const { insertNewProduct, getUserByUsername, insertNewUser, addDocumentToProduct, getAllProducts, getProductsByOwnerId } = require("./mongo");
+const { insertNewProduct, getUserByUsername, insertNewUser, addDocumentToProduct, getAllProducts, getProductsByOwnerId, deleteProductById } = require("./mongo");
 const { salt, hash, safeCompare } = require("./crypto");
 
 const { v4: uuidv4 } = require("uuid");
@@ -217,6 +217,24 @@ server.post("/productsView", async (request, response) => {
 
     return response.status(200).json(result)
 
+});
+
+server.delete("/deleteproduct", async (request, response) => {
+    log(JSON.stringify(request.body))
+
+
+    if (!request.body.uuid) {
+        return response.status(400).json({
+            code: -1,
+            msg: "You must provide a product uuid"
+        })
+    }
+
+    const result = await deleteProductById(request.body.uuid);
+
+    log(result)
+
+    return response.status(200).json(result)
 });
 
 server.get("/*", (request, response) => {

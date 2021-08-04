@@ -6,6 +6,8 @@ import ProductsAdd from '../components/ProductsAdd'
 import { Link } from 'react-router-dom'
 import Toggle from '../components/Toggle';
 import createHistory from 'history/createBrowserHistory'
+import { IoIosArrowForward } from 'react-icons/io'
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 
 /*couple of stlyes*/
 const BUTTON_WRAPPER_STYLES = {
@@ -13,55 +15,61 @@ const BUTTON_WRAPPER_STYLES = {
     zIndex: 1
 }
 
+const me = JSON.parse(localStorage.getItem("me"));
 
-/*returning a set of html which will render when button clicked*/
-const AddProduct = (props) => {
-    return (
-        <Faq>
-            <Toggle title="<Company Name>" data={props.data}>
-                <div className="answer">
-                    <div className="title">
-                        <div className="first">
-                            <p>Certificate Name</p>
-                            <button id="expired">Expired</button>
-                        </div>
-                        <div className="second">
-                            <button id="one">Submit Request</button>
-                            <button id="two">⋮</button>
-                        </div>
-                    </div>
-                    <div className="parent">
-                        <div className="country">
-                            <p>Country</p>
-                            <p>Issuing Body</p>
-                        </div>
-                        <div className="exp">
-                            <p>Issued On:</p>
-                            <p>Renewal Start On:</p>
-                            <p>Exp Date:</p>
-                        </div>
-                    </div>
-                </div>
-            </Toggle>
-        </Faq>
-    )
+function getProductListFromBackend() {
+    return axios.post("/productsView", {
+        productOwnerId: me.uuid
+    });
 }
+
+function productDeletionCallback(response) { }
+
+function deleteProduct(productUUID) {
+    console.log(productUUID)
+    axios.delete("/deleteproduct", { data: { uuid: productUUID } }).then(response => {
+        productDeletionCallback(response)
+    })
+}
+
+const Faq = styled.div`
+    margin: 20px;
+    width: 50vw;
+    padding: 1px;
+    background: white;
+    border-radius: 2px;
+    box-shadow: 2px 5px 10px #dfdfdf;
+    cursor: pointer;
+    .answer{
+        height: 150px;
+        position: absolute;
+    }
+`
+
+const AddDelete = styled.div`
+    display: flex;
+    float: right;
+    margin-top: -50px;
+    margin-right: 50px;
+    #plus{
+        color: #2196f3;
+        margin-right: 10px;
+        font-size: 20px;
+    }
+    #minus{
+        color: #ff0000;
+        font-size: 20px;
+
+    }
+`
+
+
 /*getting text from input and replacing tags based on input*/
 const Products = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const [state, setState] = useState({ productList: [] });
-    const me = JSON.parse(localStorage.getItem("me"));
     const [search, setSearch] = useState('');
-
-    function refreshProductList() {
-        axios.post("/productsView", {
-            productOwnerId: me.uuid
-        }).then(async response => {
-            await setState({ productList: response.data });
-            console.log(state)
-        });
-    }
 
     const history = createHistory();
 
@@ -74,23 +82,22 @@ const Products = () => {
             },
             ownerUUID: me.uuid
         });
-        refreshProductList();
+        setState({ productList: (await getProductListFromBackend()).data });
         history.go(0)
         console.log(result);
 
         setIsOpen(false)
     }
 
-    React.useEffect(() => {
-        console.log("useEffect");
-        refreshProductList()
+    React.useEffect(async () => {
+        productDeletionCallback = async (response) => {
+            setState({ productList: (await getProductListFromBackend()).data })
+            history.go(0)
+        }
+        setState({ productList: (await getProductListFromBackend()).data })
     }, []);
 
-    const resetButton = e => {
-        setState([]);
-    }
-
-    function sortatz() {
+    async function sortatz() {
         console.log(state.productList)
         state.productList.sort()
         console.log(state.productList)
@@ -134,7 +141,6 @@ const Products = () => {
                     <button onClick={() => setIsOpen(true)}> Create Product </button>
                     <div style={BUTTON_WRAPPER_STYLES}>
                         <Modal addProduct={buttonClick} open={isOpen} onClose={() => setIsOpen(false)} />
-                        <button onClick={resetButton}>Clear</button>
                     </div>
                 </div>
             </header4>
@@ -197,98 +203,46 @@ const Products = () => {
         </Container>
     )
 }
-/*styling products page*/
-const Faq = styled.div`
-    width: 58.5vw;
-    margin: 20px;
-    padding: 1px;
-    background: white;
-    border-radius: 2px;
-    box-shadow: 2px 5px 10px #dfdfdf;
-    cursor: pointer;
-    .title{
-        .first, .second{
-            display: flex;
-            align-items: center;
-        }
-        .first{
-            display: flex;
-            justify-content: flex-start;
-            p{
-                margin-right: 35px;
-                margin-left: 10px;
-            }
-            #expired{
-                background: red;
-                height: 1rem;
-                width: 3rem;
-                border: none;
-                color: white;
-                border-radius: 20px;
-                font-size: 10px;
-            }
-        }
-        .second{
-            display: flex;
-            justify-content: flex-end;
-            margin-top: -35px;
-            #one{
-                background-color: #2196f3;
-                border: none;
-                margin-right: 20px;
-                border-radius: 5px;
-                width: 8vw;
-                color: white;
-                height: 40px;
-                cursor: pointer;
-            }
-            #two{
-                background: #d1d1d1;
-                color: black;
-                font-size: 25px;
-                font-weight: bold;
-                margin-right: 10px;
-                width: 30px;
-                height: 30px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-        }
-    }
-    .parent{
-        display: grid;
-        grid-template-columns: 297px 297px 297px;
-    }
-    .country{
-        display: flex;
-        width: 15vw;
-        justify-content: space-evenly;
-        align-items: flex-start;
-    }
-    .exp{
-        display: flex;
-        width: 25vw;
-        height: 70px;
-        justify-content: space-evenly;
-        background-color: #FFECEC;
-        border-radius: 8px;
-        align-items: flex-start;
-    }
 
-    .answer{
-        background-color: #f7f7f7;
-        height: 132px;
-        width: 58.5vw;
-        margin-left: -5rem;
-        margin-top: 50px;
-        position: absolute;
-        z-index: -1;
-        p{
-            padding: 1rem 0rem;
-        }
-    }
-`
+const AddProduct = (props) => {
+    return (
+        <>
+            <Faq>
+                <Toggle title="<Company Name>" data={props.data}>
+                    <div className="answer">
+                        <div className="title">
+                            <div className="first">
+                                <p>Certificate Name</p>
+                                <button id="expired">Expired</button>
+                            </div>
+                            <div className="second">
+                                <button id="one">Submit Request</button>
+                                <button id="two">⋮</button>
+                            </div>
+                        </div>
+                        <div className="parent">
+                            <div className="country">
+                                <p>Country</p>
+                                <p>Issuing Body</p>
+                            </div>
+                            <div className="exp">
+                                <p>Issued On:</p>
+                                <p>Renewal Start On:</p>
+                                <p>Exp Date:</p>
+                            </div>
+                        </div>
+                    </div>
+                </Toggle>
+            </Faq>
+            <AddDelete>
+                <Link to="/FormAddDocument"><AiOutlinePlusCircle id="plus" /></Link>
+                <AiOutlineMinusCircle id="minus" onClick={() => { console.log("hi2"); deleteProduct(props.data.uuid) }} />
+            </AddDelete>
+        </>
+    )
+}
+/*styling products page*/
+
 
 
 

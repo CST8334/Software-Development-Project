@@ -8,53 +8,52 @@ import Modal from '../components/Modal'
 /*this js file is for the products page acordian style */
 
 const Toggle = (props) => {
-    console.log(props);
+
     const [toggle, setToggle] = useState(false);
 
     /*components for toggle with some icons*/
     return (
-        <Container >
-            <div layout className="question" onClick={() => setToggle(!toggle)}>
-                <h4 layout>{props.data.name}</h4>
-                <p><IoIosArrowForward id="arrow" /></p>
-                <p>Documents Expired</p>
-                <p>Version <span>{props.data.version}</span></p>
-                <Link to="/FormAddDetails"><AiOutlinePlusCircle id="plus" /> Add Document</Link>
-                <a><AiOutlineMinusCircle id="minus" />Delete</a>
-                <div className={`${toggle ? 'answer-open' : 'answer'}`} >
-                    <div className="title">
-                        <div className="first">
-                            <p>Certificate Name</p>
-                            <button id="expired">Expired</button>
+        <>
+            <Container >
+                <div layout className="question" onClick={() => setToggle(!toggle)}>
+                    <h4 layout>{props.data.name}</h4>
+                    <p><IoIosArrowForward id="arrow" /></p>
+                    <p>Documents Expired</p>
+                    <p>Version <span>{props.data.version}</span></p>
+                    <Link to="/FormAddDocument"></Link>
+                    <a></a>
+                    <div className={`${toggle ? 'answer-open' : 'answer'}`} >
+                        <div className="title">
+                            <div className="first">
+                                <p>Certificate Name</p>
+                                <button id="expired">Expired</button>
+                            </div>
                         </div>
-                        <div className="second">
-                            <button id="one">Submit Request</button>
-                            <button id="two">⋮</button>
-                        </div>
-                    </div>
-                    <div className="parent">
-                        <div className="country">
-                            <p>Country</p>
-                            <p>Issuing Body</p>
-                        </div>
-                        <div className="exp">
-                            <p>Issued On:</p>
-                            <p>Renewal Start On:</p>
-                            <p>Exp Date:</p>
+                        <div className="parent">
+                            <div className="country">
+                                <p>Country</p>
+                                <p>Issuing Body</p>
+                            </div>
+                            <div className="exp">
+                                <p>Issued On:</p>
+                                <p>Renewal Start On:</p>
+                                <p>Exp Date:</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </Container >
+            </Container >
+        </>
     )
 }
 
 /*styled for toggle*/
 
 const Container = styled.div`
+    width: 100;
     .question{
         display: grid;
-        grid-template-columns: 1vw 10vw 15vw 15vw 8vw 6.5vw;
+        grid-template-columns: 7vw 5vw 15vw 20vw ;
         margin-top: 1rem;
         margin-left: 5rem;
         p{
@@ -81,7 +80,7 @@ const Container = styled.div`
             }
         }
         .title{
-        .first, .second{
+        .first{
             display: flex;
             align-items: center;
         }
@@ -102,33 +101,8 @@ const Container = styled.div`
                 font-size: 10px;
             }
         }
-        .second{
-            display: flex;
-            justify-content: flex-end;
-            #one{
-                background-color: #2196f3;
-                border: none;
-                margin-right: 20px;
-                border-radius: 5px;
-                width: 8vw;
-                color: white;
-                height: 40px;
-                cursor: pointer;
-            }
-            #two{
-                background: #d1d1d1;
-                color: black;
-                font-size: 25px;
-                font-weight: bold;
-                margin-right: 10px;
-                width: 30px;
-                height: 30px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-        }
     }
+
     .parent{
         display: grid;
         grid-template-columns: 297px 297px 297px;
@@ -150,20 +124,27 @@ const Container = styled.div`
     }
 
     .answer-open{
-        background-color: #f7f7f7;
         transform: scaleY(100%);
         transition: 0.4s transform ease-in-out;
+        display: flex;
+        margin-top: 20px;
+        .title{
+            display: flex;
+            margin-left: -300px;
+            .first{
+                justify-content: flex-start;
+            }
+            .second{
+                justify-content: flex-end;
+            }
+        }
     }
 
     .answer{
-        background-color: #f7f7f7;
         transform: scaleY(0);
         transition: 0.4s transform ease-in-out;
-        p{
-            padding: 1rem 0rem;
-        }
     }
-    }
+}
 `
 
 
