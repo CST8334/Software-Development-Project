@@ -101,7 +101,7 @@ function App() {
           <Route path="/Reset">
             <Reset />
           </Route>
-          <Route path="/companies">
+                   <Route path="/companies">
             <NavComponent/>
             <Companies/>
           </Route>

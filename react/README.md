@@ -86,6 +86,7 @@ __ server.js                        A powerful server for Node.js.
 __ util.js                          Functions to help update pages with javascript data.
 __ package-lock-json                Automatically created when npm changes node tree or package.json.
 
+
 ## Project Development and Project Status.
 
 Team Capital has built this website from scratch following mock-ups provided from our client.
