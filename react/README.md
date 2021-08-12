@@ -26,7 +26,7 @@ ____________________________________________________ src   source
 ______________________________________ components  Components folder that holds components.
 
 _______________________  _test_ Test folder that holds tests and testing setup.
-__  jest-mongodb-config.js       Setup for jest to run with mongodb.
+--  jest-mongodb-config.js       Setup for jest to run with mongodb.
 __  jest-config.js               Is used to configure Jest.
 __  todo.test.js                 Unit-Testing for testing the website's functions.
 
