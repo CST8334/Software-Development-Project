@@ -244,7 +244,7 @@ describe('Upload Files', () => {
 
     //testing DELETE a PRODUCT from product database
     it('should delete product from database', async () => {
-        const deleteProduct = db.collection('products');
+        const product = db.collection('products');
 
         const mockProduct = {
             _id: "ObjectId(333333)",
@@ -255,20 +255,54 @@ describe('Upload Files', () => {
             versionNumber: "31",
             documents: []
         }
-        await deleteProduct.insertOne(mockProduct);
+        await product.insertOne(mockProduct);
         //console.log(deleteProduct.length)
-        const deletedProduct = await deleteProduct.deleteOne({
+        var productSize = await product.countDocuments()
+        console.log(productSize);
+        const productDeleted = await product.deleteOne({
             _id: "ObjectId(333333)"
         })
         //console.log(deleteProduct.length)
-        expect(mockProduct.length + 1).toEqual(deletedProduct.length - 1)
+        var productSizeDeleted = await product.countDocuments()
+        console.log(productSizeDeleted);
+
+        expect(productSizeDeleted).toEqual(productSize - 1)
     });
 
-    //testing INSERT a document into PRODUCT
+    //testing READ a DOCUMENT into PRODUCT
+    it('should read a document into products collection', async () => {
+        const product = db.collection('products');
+        
+        const document = {
+            blob: [],
+            name: "testDoc"
+        }
+
+        const mockProductDoc = {
+            _id: "ObjectId(2222222)",
+            uuid: "000222",
+            owner: "0",
+            name: "testProductDoc",
+            modelNumber: "T-22",
+            versionNumber: "21",
+            documents: []
+        }
+
+        const afterDocs = mockProductDoc.documents.slice();
+        afterDocs.push(document);
+        await product.insertOne(mockProductDoc);
+        
+        const insertedDoc = await product.findOne({
+            _id: "ObjectId(2222222)",
+        });
+        //console.log(mockProductDoc, insertedDoc);
+        expect(mockProductDoc._id).toEqual(insertedDoc._id);
+    });
+
+    //testing INSERT a DOCUMENT into PRODUCT
     it('should insert documents into products collection', async () => {
         const product = db.collection('products');
-        const documents = product.documents;
-
+        
         const document = {
             blob: [],
             name: "testDoc"
@@ -301,6 +335,85 @@ describe('Upload Files', () => {
         //console.log(mockProductDoc, insertedDoc);
         expect(insertedDoc.documents.length).toEqual(mockProductDoc.documents.length + 1);
     });
+
+    //testing UPDATE a DOCUMENT into PRODUCT
+    it('should update documents into products collection', async () => {
+        const product = db.collection('products');
+        
+        const document = {
+            blob: [],
+            name: "testDoc"
+        }
+
+        const mockProductDoc = {
+            _id: "ObjectId(2222222)",
+            uuid: "000222",
+            owner: "0",
+            name: "testProductDoc",
+            modelNumber: "T-22",
+            versionNumber: "21",
+            documents: []
+        }
+
+        const afterDocs = mockProductDoc.documents;
+        afterDocs.push(document);
+        await product.insertOne(mockProductDoc);
+        const response = await product.updateOne({
+            _id: "ObjectId(2222222)",
+            documents: {$elemMatch: {
+                name:"testDoc"
+            }}
+        }, {
+            $set: {
+                "documents.$.name":"UnitTest"
+            }
+        }
+        );
+
+         const updatedDoc = await product.findOne({
+             _id: "ObjectId(2222222)",
+            documents: {$elemMatch: {
+            name:"UnitTest"
+            }}
+         });
+         
+        expect(updatedDoc.documents[0].name).toEqual("UnitTest");
+    });
+
+    //testing DELETE a DOCUMENT into PRODUCT
+    it('should delete a document into products collection', async () => {
+        const product = db.collection('products');
+        
+        //simulating a document to be added to the cloud
+        const document = {
+            blob: [],
+            name: "testDoc"
+        }
+
+        const mockProductDoc = {
+            _id: "ObjectId(2222222)",
+            uuid: "000222",
+            owner: "0",
+            name: "testProductDoc",
+            modelNumber: "T-22",
+            versionNumber: "21",
+            documents: []
+        }
+
+        var documentsSize = mockProductDoc.documents.length;
+        
+        const afterDocs = mockProductDoc.documents.slice();
+        afterDocs.push(document);
+
+        mockProductDoc.documents.cleanup;
+
+        var documentsSizeAdded = mockProductDoc.documents.length;
+        //await product.insertOne(mockProductDoc);
+        
+        //console.log(documentsSize, documentsSizeAdded);
+        expect(documentsSizeAdded).toEqual(documentsSize);
+    });
+
 });
 
 
