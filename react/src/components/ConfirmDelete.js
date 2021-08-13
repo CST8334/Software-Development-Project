@@ -4,10 +4,9 @@ import styled from 'styled-components';
 import { FormComponent } from "./FormComponent.js";
 import ReactDOM from 'react-dom';
 
-  
-
 export class ConfirmDelete extends FormComponent {
-    render() {
+render(){
+
         return(
             <Container>
             <Top>
@@ -15,13 +14,12 @@ export class ConfirmDelete extends FormComponent {
                             <h1><b>Are you sure ?</b></h1>
                             </Top>
                             <br></br>
-            
-            <Form>
+                        <Form>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style={{ color: 'red',fontSize: '1.5rem' }}><b> This action cannot be reversed.</b></label>
                 <br></br>
                 <br></br>
                 <Link id="products"to="/Delete"><StyledButton type="button" >Back</StyledButton></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Link id="deleteconfirm" to="/DeleteCofirm"><Button type="button">Delete</Button></Link>
+                <Button  type="button" >Delete</Button>
                 
                
 </Form>
@@ -29,13 +27,13 @@ export class ConfirmDelete extends FormComponent {
 </Container>
 
 
-
-
-
-
-        );
-    }
+        );  
 }
+}
+    
+    
+
+
 const Container = styled.div`
     padding: 1rem;
     width: 35rem;
@@ -46,6 +44,7 @@ const Container = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
 `
+        
 
 const Top = styled.div`
     margin-bottom: 20px;

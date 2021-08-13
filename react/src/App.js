@@ -6,6 +6,7 @@ import { FormAddDates } from './components/AddDates';
 import { MoreInfo } from './components/MoreInfo';
 import Delete from './components/Delete';
 import ConfirmDelete from './components/ConfirmDelete';
+import Reset from './components/Reset';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -97,7 +98,10 @@ function App() {
           <Route path="/ConfirmDelete">
             <ConfirmDelete />
           </Route>
-          <Route path="/companies">
+          <Route path="/Reset">
+            <Reset />
+          </Route>
+                   <Route path="/companies">
             <NavComponent/>
             <Companies/>
           </Route>
