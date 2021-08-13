@@ -15,6 +15,7 @@ import { render, screen, cleanup } from '@testing-library/react';
 
 afterEach(() => {
     cleanup();
+    
 });
 
 //adding mongo client to jest
@@ -58,10 +59,6 @@ describe('Upload Files', () => {
 
     //after jest is done, it will close the connection
     afterAll(async () => {
-        await connection.close();
-    });
-
-    beforeEach(async () => {
         await db.collection('users').deleteOne({
             _id: "ObjectId(1111111)",
         });
@@ -88,6 +85,11 @@ describe('Upload Files', () => {
         await db.collection('products').deleteOne({
             _id: "ObjectId(333333)"
         })
+        await connection.close();
+    });
+
+    beforeEach(async () => {
+       
     });
 
 
@@ -194,6 +196,10 @@ describe('Upload Files', () => {
             _id: "ObjectId(0000000)",
         });
         expect(insertedProduct._id).toEqual("ObjectId(0000000)");
+
+        await db.collection('products').deleteOne({
+            _id: "ObjectId(0000000)",
+        })
     });
 
     //testing to INSERT a PRODUCT into database
@@ -214,6 +220,10 @@ describe('Upload Files', () => {
             _id: "ObjectId(0000000)",
         });
         expect(insertedProduct).toEqual(mockProduct);
+
+        await db.collection('products').deleteOne({
+            _id: "ObjectId(0000000)",
+        })
     });
 
     //testing to UPDATE a PRODUCT in database
@@ -297,6 +307,9 @@ describe('Upload Files', () => {
         });
         //console.log(mockProductDoc, insertedDoc);
         expect(mockProductDoc._id).toEqual(insertedDoc._id);
+        await db.collection('products').deleteOne({
+            _id: "ObjectId(2222222)",
+        })
     });
 
     //testing INSERT a DOCUMENT into PRODUCT
@@ -334,6 +347,9 @@ describe('Upload Files', () => {
         });
         //console.log(mockProductDoc, insertedDoc);
         expect(insertedDoc.documents.length).toEqual(mockProductDoc.documents.length + 1);
+        await db.collection('products').deleteOne({
+            _id: "ObjectId(2222222)",
+        })
     });
 
     //testing UPDATE a DOCUMENT into PRODUCT
