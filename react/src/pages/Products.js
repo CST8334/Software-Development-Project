@@ -136,7 +136,7 @@ const Products = () => {
 
 
 
-    refreshProductList()
+    // refreshProductList()
 
     /*rendering products page*/
     return (

@@ -6,11 +6,18 @@ import "../index.css"
 
 //recat has setup test
 //the {part} argument is not needed but was tryed for testing
+//<Container> represents the area below the Navigator tab at the top
+//<Main> represents a box with a left and right column
+//<Port> means left of the main box <Starboard> is the right side of the box
+//<HomeBar> The tab bar that hold all the tabs
+//<HomeTab> The tabs for the tab bar
+//<HomeChart> The bar diagram for the left side of the main box
 function Home() {
     return (
+//Container represents the area below the Navigator tab at the top
         <Container>
             <label id="title">Here are the highlights of your account</label>
-            <Main>
+            <Main> 
                 <Port>
                     <HomeBar>
                         <HomeTab label="Compliance">
