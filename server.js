@@ -99,10 +99,10 @@ server.post("/login", async (request, response) => {
         msg: "Invalid authorization header."
     });
 });
-
+//these are new uaser validator these error messages will show up in the network tab under browser source inpection
 server.post("/register", async (request, response) => {
     const alreadyExistingUser = await getUserByUsername(request.body.username);
-
+    //checks that the username is not already taken
     if (alreadyExistingUser) {
         response.status(400).json({
             code: -1,
@@ -110,7 +110,7 @@ server.post("/register", async (request, response) => {
         });
         return;
     }
-
+    //checks if the new password is not empty
     if (!request.body.password || request.body.password.length === 0) {
         response.status(400).json({
             code: -2,
@@ -118,6 +118,7 @@ server.post("/register", async (request, response) => {
         });
         return;
     }
+    //checks if the new password contains at least one capital letter
     if (!request.body.password.match(/[A-z]/)) {
         response.status(400).json({
             code: -3,
@@ -125,6 +126,7 @@ server.post("/register", async (request, response) => {
         });
         return;
     }
+    //checks if the new password contains at least one digit character
     if (!request.body.password.match(/[0-9]/)) {
         response.status(400).json({
             code: -4,
@@ -132,6 +134,7 @@ server.post("/register", async (request, response) => {
         });
         return;
     }
+     //checks if the new password contains at least one special character
     if (!request.body.password.match(/[!@#$%^&*()_\-=+|<>`~]/)) {
         response.status(400).json({
             code: -5,
@@ -139,6 +142,7 @@ server.post("/register", async (request, response) => {
         });
         return;
     }
+     //checks if the new password is at least 8 characters long
     if (request.body.password.length < 7) {
         response.status(400).json({
             code: -6,
@@ -157,24 +161,36 @@ server.post("/register", async (request, response) => {
     });
 });
 
+//this varafiys the new product inputs. these error messages will show up in the network tab under browser source inpection
 server.post("/products", async (request, response) => {
-    const uuid = uuidv4();
-    const result = await insertNewProduct(uuid, request.body);
+    console.log(request.body.model.name)
 
-    const allProducts = await getAllProducts();
-
-    if (!allProducts) {
-        return response.status(200).json({
+    if(!request.body.model.name || request.body.model.name.length === 0) {
+        return response.status(400).json({
             code: -1,
             msg: "No Product"
         });
     }
 
-    log(result);
+    if(!request.body.model.modelNumber || request.body.model.modelNumber.length === 0) {
+        return response.status(400).json({
+            code: -2,
+            msg: "No Product"
+        });
+    }
 
-    response.status(200).json({
+    if(!request.body.model.versionNumber || request.body.model.versionNumber.length === 0) {
+        return response.status(400).json({
+            code: -3,
+            msg: "No Product"
+        });
+    }
+
+    const uuid = uuidv4();
+    const result = await insertNewProduct(uuid, request.body);
+    return response.status(200).json({
         code: 0,
-        msg: "OK"
+        msg: "who cares"
     });
 });
 

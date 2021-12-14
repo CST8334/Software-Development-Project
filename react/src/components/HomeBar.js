@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import HomeTab from './HomeTab'
 
+//HomeBar class that renders a tab bar and returns the home tabs upon click  
 class HomeBar extends Component {
     static propTypes = {
         children: PropTypes.instanceOf(Array).isRequired,

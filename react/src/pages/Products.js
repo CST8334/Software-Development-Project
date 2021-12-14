@@ -99,7 +99,10 @@ const Products = () => {
 
     async function sortatz() {
         console.log(state.productList)
-        state.productList.sort()
+        var dropList = document.getElementById("sort")
+        if(dropList)
+        state.productList.sort((a, b) => a.name > b.name ? 1:-1).map(
+        (item, i) =><div key={i}> {item.name} {item.modelNumber} {item.versionNumber} </div>)
         console.log(state.productList)
     }
 
@@ -111,7 +114,29 @@ const Products = () => {
         product.name.toLowerCase().includes(search.toLowerCase())
     )
 
-    //refreshProductList()
+    const [value, setValue] = useState("")
+    const handleSelect = (e) => {
+        console.log(e)
+        if(value="1"){
+            setValue(e).sort((a, b) => a.name > b.name ? 1:-1).map(
+                (item, i) =><div key={i}> {item.name} {item.modelNumber} {item.versionNumber} </div>)
+                console.log(state.productList)
+        }
+
+    } 
+
+    // const handleSelect2 = [].concat(this.state.productList)
+    //     .sort((a, b) => a.model.name > b.model.name ? 1 : -1)
+    //     .map((product, p) => <div key={p}> {product.model.name} {product.model.modelNumber} {product.model.versionNumber} </div>);
+
+    // const sortProducts = state.productList.sort((a, b) => a.name > b.name ? 1:-1).map(
+    //     (item, i) => 
+    //     <div key={i}> {item.name} {item.modelNumber} {item.versionNumber} </div>
+    //     )
+
+
+
+    // refreshProductList()
 
     /*rendering products page*/
     return (
@@ -123,8 +148,8 @@ const Products = () => {
             <header2>
                 <div class="sort">
                     <label>Sort by: </label>
-                    <select>
-                        <option value="" disabled selected>Choose..</option>
+                    <select id="sort" onSelect={handleSelect}>
+                        <option value="" >Choose..</option>
                         <option value="1">Status</option>
                         <option value="2">Alphabetical</option>
                     </select>
