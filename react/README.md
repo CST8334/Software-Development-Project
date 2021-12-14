@@ -121,13 +121,22 @@ The following is a list of what has been completed.
 
 Things that still need to be impletemented in the website/project are:
 
-1. Forgot password which will need a third party or maybe using nodemailer but either way you will need some kind of mail server to be able to send out emails.
+1. Forgot password which will need a third party or maybe using nodemailer but either way you will need some kind of mail server to be able to send out emails. 
+Keep in mind this will take some time.
 
-2. Invite A User this will also need to use some kind of mail server to be able to send out emails.
+2. Invite A User this will also need to use some kind of mail server to be able to send out emails. 
+Keep in mind this will also take some time.
 
 3. Companies page will need to be completed but should be similar to the products page.
+Once the products page is finished the companies page should not be too hard.
 
 4. Profile page needs to be able to upload a profile picture, and edit profile.
+
+5. The Products page still needs a bit work in the following areas.
+Currently you can delete a product, however you should now use the Delete.js and confirmDelete.js to delete a product.
+Team Capital has done most of the code for add a document, it should only take about 20 more lines of code to get it into working order for add a document. 
+For the products page the sort and the filters need some work as well because they are currently not working yet.
+
 
 ## Know Bugs Or Issues.
 Currently there are no known bugs.

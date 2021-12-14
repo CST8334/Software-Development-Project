@@ -2,11 +2,16 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { FormComponent } from "./FormComponent.js";
-import ReactDOM from 'react-dom';
 
-export class ConfirmDelete extends FormComponent {
-render(){
 
+
+    
+export class ConfirmDelete extends FormComponent{
+
+    
+   
+    render(){
+    
         return(
             <Container>
             <Top>
@@ -19,7 +24,7 @@ render(){
                 <br></br>
                 <br></br>
                 <Link id="products"to="/Delete"><StyledButton type="button" >Back</StyledButton></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Button  type="button" >Delete</Button>
+                <Button type="button" >Delete</Button>
                 
                
 </Form>
@@ -27,11 +32,10 @@ render(){
 </Container>
 
 
-        );  
+        );
 }
+
 }
-    
-    
 
 
 const Container = styled.div`
